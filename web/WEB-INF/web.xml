@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+    Copyright (c) 2011 Hércules S. S. José
+    
+
+    Este arquivo é parte do programa Imobiliária Web.
+
+    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+
+    modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
+
+    publicada pela Fundação do Software Livre (FSF); na versão 2.1 da 
+
+    Licença.
+    
+    
+    Este programa é distribuído na esperança que possa ser util, 
+
+    mas SEM NENHUMA GARANTIA; sem uma garantia implicita de ADEQUAÇÂO a qualquer
+
+    MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral Menor GNU em 
+    
+    português para maiores detalhes.
+    
+    
+    Você deve ter recebido uma cópia da Licença Pública Geral Menor GNU sob o 
+
+    nome de "LICENSE.TXT" junto com este programa, se não, acesse o site HSlife no 
+
+    endereco www.hslife.com.br ou escreva para a Fundação do Software Livre(FSF) Inc., 
+
+    51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
+    
+    
+    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+
+    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+
+    Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
+
+    Marco II - Nova Iguaçu, RJ, Brasil.
+
+ -->
+ 
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <context-param>
+    <param-name>org.richfaces.SKIN</param-name>
+    <param-value>classic</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+  </context-param>
+  <context-param>
+    <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+    <param-value>com.sun.facelets.FaceletViewHandler</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.CONFIG_FILES</param-name>
+    <param-value>/WEB-INF/faces-config.xml</param-value>
+  </context-param>
+  <filter>
+    <display-name>RichFaces Filter</display-name>
+    <filter-name>richfaces</filter-name>
+    <filter-class>org.ajax4jsf.Filter</filter-class>
+    <init-param>
+      <param-name>createTempFiles</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxRequestSize</param-name>
+      <param-value>1048576</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>richfaces</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
