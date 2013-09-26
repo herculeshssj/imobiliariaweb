@@ -94,10 +94,10 @@
 			<h:panelGrid columns="2" cellspacing="10">
 
                                         Login:
-                                        <h:inputText value="#{homeMB.usuario.login}"required="true" requiredMessage="Informe o seu login."/>
+                                        <h:inputText value="#{homeMB.usuario.login}" required="true" requiredMessage="Informe o seu login."/>
 
                                         Senha:
-                                        <h:inputSecret value="#{homeMB.usuario.senha}"required="true" requiredMessage="Informe a sua senha."/>
+                                        <h:inputSecret value="#{homeMB.usuario.senha}" required="true" requiredMessage="Informe a sua senha."/>
 
                                         <br/>
                                         <h:commandButton value="Entrar no Sistema" action="#{homeMB.login}" style="padding: 3px 10px;"/>
