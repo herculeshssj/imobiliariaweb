@@ -103,7 +103,7 @@
 					</h:panelGrid>
 				
 			
-			<h:commandButton value="Desmarcar" style="padding: 3px 10px;" rendered="#{grupoMB.canDelete }"
+			<h:commandButton value="Desmarcar" style="padding: 3px 10px;" rendered="#{agendaMB.canDelete }"
 				action="#{agendaMB.delete }"></h:commandButton>
 			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;"

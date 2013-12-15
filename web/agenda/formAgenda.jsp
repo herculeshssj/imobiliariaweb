@@ -130,7 +130,7 @@
 						
 					</h:panelGrid>
 			
-			<h:commandButton value="Agendar" style="padding: 3px 10px;" rendered="#{grupoMB.canAdd }"
+			<h:commandButton value="Agendar" style="padding: 3px 10px;" rendered="#{agendaMB.canAdd }"
 				action="#{agendaMB.add }"></h:commandButton>
 			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;"

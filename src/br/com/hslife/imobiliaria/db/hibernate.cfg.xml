@@ -65,17 +65,17 @@
 			padrão do PostgreSQL seja diferente altere a porta Informe também o
 			nome do banco de dados a ser utilizado
 		-->
-		<property name="hibernate.connection.url">jdbc:postgresql://hslifeserver.hslife.local:5432/imobiliaria</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/imobiliaria</property>
 
 
 		<!-- No lugar de 'root', informe o usuário do banco de dados -->
-		<property name="hibernate.connection.username">hslife</property>
+		<property name="hibernate.connection.username">imobiliaria</property>
 
 
 		<!--
 			No lugar de 'root' ou em branco, informe a senha do usuário do banco de dados
 		-->
-		<property name="hibernate.connection.password">linuxUser1234!</property>
+		<property name="hibernate.connection.password">1m0v3lw3b</property>
 
 
 		<!-- NÃO ALTERE ESTAS LINHAS -->

@@ -105,7 +105,7 @@
 					</h:panelGrid>
 				
 			
-			<h:commandButton value="Registrar" style="padding: 3px 10px;" rendered="#{grupoMB.canEdit }"
+			<h:commandButton value="Registrar" style="padding: 3px 10px;" rendered="#{agendaMB.canEdit }"
 				action="#{agendaMB.registrarVisita }"></h:commandButton>
 			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;"
