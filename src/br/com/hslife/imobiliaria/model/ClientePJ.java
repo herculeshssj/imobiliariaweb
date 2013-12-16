@@ -45,11 +45,14 @@
 package br.com.hslife.imobiliaria.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,9 +61,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="ClientePJ")
@@ -88,12 +88,12 @@ public class ClientePJ implements Serializable{
 	@Column(length=14, nullable=false)
 	String cnpj;
 	
-	@OneToMany
-	@Cascade(CascadeType.ALL)
-	List<Telefone> telefones;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	
-	@OneToOne
-	@Cascade(CascadeType.ALL)
+	Set<Telefone> telefones;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	
 	Endereco endereco;
 	
 	@Column
@@ -105,12 +105,12 @@ public class ClientePJ implements Serializable{
 	@OneToMany(mappedBy="locatarioPJ")
 	List<Contrato> contratos;
 	
-	@OneToMany
-	List<Socio> socios;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	Set<Socio> socios;
 	
 	public ClientePJ() {
 		ativo = true;
-		telefones = new ArrayList<Telefone>();
+		telefones = new HashSet<Telefone>();
 		endereco = new Endereco();
 	}
 
@@ -146,14 +146,6 @@ public class ClientePJ implements Serializable{
 		this.cnpj = cnpj;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
-	}
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -182,16 +174,23 @@ public class ClientePJ implements Serializable{
 		this.contratos = contratos;
 	}
 
-	public List<Socio> getSocios() {
-		return socios;
-	}
-
-	public void setSocios(List<Socio> socios) {
-		this.socios = socios;
-	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
 
+	public Set<Socio> getSocios() {
+		return socios;
+	}
+
+	public void setSocios(Set<Socio> socios) {
+		this.socios = socios;
+	}
+
+	public Set<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<Telefone> telefones) {
+		this.telefones = telefones;
+	}
 }
