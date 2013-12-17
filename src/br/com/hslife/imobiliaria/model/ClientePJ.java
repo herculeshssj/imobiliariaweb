@@ -111,6 +111,7 @@ public class ClientePJ implements Serializable{
 	public ClientePJ() {
 		ativo = true;
 		telefones = new HashSet<Telefone>();
+		socios = new HashSet<Socio>();
 		endereco = new Endereco();
 	}
 
