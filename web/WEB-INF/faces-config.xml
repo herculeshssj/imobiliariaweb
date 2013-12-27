@@ -483,6 +483,14 @@
 	<!-- Módulo Imóvel -->
 	
 	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>listView</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>	
 		<from-view-id>/imovel/listImovel.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>addView</from-outcome>

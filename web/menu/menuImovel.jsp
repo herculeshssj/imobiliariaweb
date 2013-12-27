@@ -76,7 +76,7 @@
 					&nbsp;	
 							
 					<img src="../images/icon_imovel.png" height="32" width="32"/>
-					<h:commandLink value="Imóveis" action="listImovel"></h:commandLink>
+					<h:commandLink value="Imóveis" action="#{imovelMB.startUp}"></h:commandLink>
 					&nbsp;	
 												
 			</h3>
