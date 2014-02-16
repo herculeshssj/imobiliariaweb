@@ -44,6 +44,7 @@
 
 package br.com.hslife.imobiliaria.logic.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.hslife.imobiliaria.dao.IAgendaDao;
@@ -78,8 +79,11 @@ public class AgendaLogic implements IAgenda {
 	@Override
 	public void remarcar(Agenda agenda) throws BusinessException {
 		// Verifica se existem agendamento equivalentes ao informado
-		if (buscar(agenda).size() != 1) {
+		if (buscar(agenda).size() > 1) {
 			throw new BusinessException("Existem agendamentos marcados com as informações fornecidas.");
+		}
+		if (agenda.getData().before(new Date())) {
+			throw new BusinessException("Não é possível remarcar com data anterior a data atual.");
 		}
 		try {
 			HibernateUtility.beginTransaction();
