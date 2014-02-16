@@ -53,7 +53,6 @@ import br.com.hslife.imobiliaria.exception.BusinessException;
 import br.com.hslife.imobiliaria.exception.ServiceException;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.ICorretor;
-import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.Corretor;
 import br.com.hslife.imobiliaria.model.Endereco;
 import br.com.hslife.imobiliaria.model.Imovel;
@@ -186,7 +185,7 @@ public class CorretorController extends GenericController {
 			listaTelefone = corretor.getTelefones();
 			// Instanciando a lista de imóveis e contratos para evitar NullPointerException
 			corretor.setImoveis(new ArrayList<Imovel>());
-			corretor.setContratos(new ArrayList<Contrato>());
+			//corretor.setContratos(new ArrayList<Contrato>());
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
 		}
