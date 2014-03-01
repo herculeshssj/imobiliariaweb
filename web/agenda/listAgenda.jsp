@@ -127,7 +127,7 @@
 					<f:facet name="header">
 						<h:outputText value="Desmarcar"></h:outputText>
 					</f:facet>
-					<h:panelGroup rendered="#{agendaoMB.canAdd }">
+					<h:panelGroup rendered="#{agendaMB.canAdd }">
 					<h:commandLink value="Desmarcar" action="#{agendaMB.deleteView }" rendered="#{!item.visitado }"/>
 					</h:panelGroup>					
 				</rich:column>				
