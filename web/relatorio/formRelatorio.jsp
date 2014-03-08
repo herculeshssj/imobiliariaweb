@@ -53,6 +53,12 @@
 <f:subview id="cabecalho">
 	<jsp:include page="../header.jsp"></jsp:include>
 </f:subview>
+
+	<style>
+		.rich-fileupload-list-overflow {
+			overflow: auto; overflow-y: hidden; overflow-x: auto;
+		} 
+	</style>
 	<h:form>
 		<div id="content">
 			
