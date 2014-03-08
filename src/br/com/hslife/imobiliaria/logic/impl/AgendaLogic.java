@@ -63,7 +63,23 @@ public class AgendaLogic implements IAgenda {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void agendar(Agenda agenda) throws BusinessException {
+		// Ajusta a data e hora da agenda para poder passar na validação
+		Calendar dataExtraida = Calendar.getInstance();
+		dataExtraida.set(agenda.getData().getYear() + 1900, agenda.getData().getMonth(), agenda.getData().getDate(), agenda.getHoraInicio(), 0, 0);		
+		agenda.setData(dataExtraida.getTime());
+		
+		// Verifica se existem agendamento equivalentes ao informado
+		if (buscar(agenda).size() > 0) {
+			throw new BusinessException("Existem agendamentos marcados com as informações fornecidas.");
+		}
+		if (agenda.getData().before(new Date())) {
+			throw new BusinessException("Não é possível marcar com data anterior a data atual.");
+		}
+		if (agenda.getHoraFim() < agenda.getHoraInicio()) {
+			throw new BusinessException("Hora de término não pode ser anterior a hora de início.");
+		}
 		try {
 			// Verifica se existem agendamento equivalentes ao informado
 			if (buscar(agenda).size() != 0) 
