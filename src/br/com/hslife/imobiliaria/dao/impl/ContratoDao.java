@@ -73,6 +73,10 @@ public class ContratoDao extends HibernateGenericDao implements IContratoDao {
 		parametros.put("numContrato", numContrato);
 		return queryList("contrato.buscarPorNumContrato", parametros);
 	}
+	
+	public List<Contrato> buscarTodosEmVigor() {
+		return queryList("contrato.buscarTodosEmVigor");
+	}
 
 	@Override
 	public void vigorarContrato(Long id) {

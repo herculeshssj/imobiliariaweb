@@ -144,6 +144,12 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>aluguelMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.AluguelController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 	<!-- ManagedBeans -->
 	
 	<!-- Converters -->
@@ -864,6 +870,62 @@
 	
 	<!-- Módulo Usuários -->
 	
+	<!-- Módulo Aluguel -->
+	
+	<navigation-rule>
+		<from-view-id>/aluguel/listAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/aluguel/formAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/aluguel/editAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrar</from-outcome>
+			<to-view-id>/aluguel/registrarAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/formAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/registrarAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/editAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Aluguel -->
+	
 	<!-- Login no sistema -->
 	
 	<navigation-rule>
@@ -943,7 +1005,11 @@
         <navigation-case>
             <from-outcome>listContrato</from-outcome>
             <to-view-id>/contrato/listContrato.jsp</to-view-id>
-        </navigation-case>        
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>listAluguel</from-outcome>
+            <to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+        </navigation-case>      
         <navigation-case>
             <from-outcome>formIndiceReajuste</from-outcome>
             <to-view-id>/contrato/formIndiceReajuste.jsp</to-view-id>

@@ -64,6 +64,7 @@ import javax.persistence.TemporalType;
 @Table(name="Contrato")
 @NamedQueries(value={
 		@NamedQuery(name="contrato.buscarPorNumContrato", query="from Contrato c where c.numContrato = :numContrato"),
+		@NamedQuery(name="contrato.buscarTodosEmVigor", query="from Contrato c where c.situacao = 2"),
 		@NamedQuery(name="contrato.vigorarContrato", query="update Contrato c set situacao = 2, dataVigoracao = :data where c.id = :id"),
 		@NamedQuery(name="contrato.renovarContrato", query="update Contrato c set situacao = 3, dataRenovacao = :data where c.id = :id"),
 		@NamedQuery(name="contrato.encerrarContrato", query="update Contrato c set situacao = 4, dataEncerramento = :data where c.id = :id"),

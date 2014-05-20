@@ -163,4 +163,9 @@ public class ContratoLogic implements IContrato {
 	public void vigorarEncerrarContratos() throws BusinessException {
 		dao.vigorarEncerrarContratos();		
 	}
+	
+	@Override
+	public List<Contrato> buscarTodosEmVigor() throws BusinessException {
+		return dao.buscarTodosEmVigor();
+	}
 }

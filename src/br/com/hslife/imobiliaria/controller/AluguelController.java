@@ -45,6 +45,7 @@
 package br.com.hslife.imobiliaria.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.model.ListDataModel;
@@ -55,6 +56,7 @@ import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IAluguel;
 import br.com.hslife.imobiliaria.model.Aluguel;
 import br.com.hslife.imobiliaria.model.Contrato;
+import br.com.hslife.imobiliaria.model.FormaPagamento;
 
 public class AluguelController extends GenericController {
 	
@@ -72,6 +74,7 @@ public class AluguelController extends GenericController {
 	// Armazena o id do objeto de modelo
 	Long idAluguel;
 	Long idContrato;
+	Long idFormaPagamento;
 	
 	/*** Construtor ***/	
 	
@@ -129,6 +132,7 @@ public class AluguelController extends GenericController {
 	public String add() {
 		String retorno = null;
 		try {
+			aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
 			logic.cadastrar(aluguel);
 			viewMessage("Registro cadastrado com sucesso!");
 			clearVariables();
@@ -154,6 +158,7 @@ public class AluguelController extends GenericController {
 	public String edit() {
 		String retorno = null;
 		try {
+			aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
 			logic.editar(aluguel);
 			viewMessage("Registro editado com sucesso!");
 			clearVariables();
@@ -170,15 +175,22 @@ public class AluguelController extends GenericController {
 		Aluguel a = (Aluguel) dadosModelo.getRowData();
 		try {
 			aluguel = logic.buscar(a.getId());
-
+			// Determina o valor dos juros e a multa por atraso
+			if (aluguel.getVencimento().before(new Date())) {
+				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);
+				aluguel.setMulta((aluguel.getValor() * aluguel.getContrato().getMulta()) / 100);
+			}
+			aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
 		}
-		return "registrarPagamento";
+		return "registrar";
 	}
 	
 	public String registrar() {		
 		try {
+			aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
+			aluguel.setFormaPagamento(LogicFactory.createFormaPagamentoLogic().buscar(idFormaPagamento));
 			logic.editar(aluguel);
 			viewMessage("Pagamento registrado com sucesso!");
 			clearVariables();
@@ -191,8 +203,22 @@ public class AluguelController extends GenericController {
 	public List<SelectItem> getListaContrato() {
 		List<SelectItem> lista = new ArrayList<SelectItem>();
 		try {
-			for (Contrato c : LogicFactory.createContratoLogic().buscarTodos()) {
+			for (Contrato c : LogicFactory.createContratoLogic().buscarTodosEmVigor()) {
 				lista.add(new SelectItem(c.getId(), "Contrato nº " + c.getNumContrato()));
+			}
+		} catch (BusinessException be) {
+			viewMessage("Erro ao carregar: " + be.getMessage(), "frmAluguel");
+		} catch (Exception e) {
+			viewMessage("Erro ao carregar: " + e.getMessage(), "frmAluguel");
+		}
+		return lista;
+	}
+	
+	public List<SelectItem> getListaFormaPagamento() {
+		List<SelectItem> lista = new ArrayList<SelectItem>();
+		try {
+			for (FormaPagamento f : LogicFactory.createFormaPagamentoLogic().buscarTodos()) {
+				lista.add(new SelectItem(f.getId(), f.getDescricao()));
 			}
 		} catch (BusinessException be) {
 			viewMessage("Erro ao carregar: " + be.getMessage(), "frmAluguel");
@@ -207,7 +233,7 @@ public class AluguelController extends GenericController {
 	 * do aluguel para calcular a multa e juros correspondentes.
 	 */
 	public void atualizaValorAluguel() {
-		// TODO implementar
+		aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
 	}
 	
 	/*** Métodos Getters e Setters ***/
@@ -250,5 +276,13 @@ public class AluguelController extends GenericController {
 
 	public void setIdContrato(Long idContrato) {
 		this.idContrato = idContrato;
+	}
+
+	public Long getIdFormaPagamento() {
+		return idFormaPagamento;
+	}
+
+	public void setIdFormaPagamento(Long idFormaPagamento) {
+		this.idFormaPagamento = idFormaPagamento;
 	}
 }

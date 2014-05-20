@@ -73,4 +73,5 @@ public interface IContrato {
 	
 	public void vigorarEncerrarContratos() throws BusinessException;
 	
+	public List<Contrato> buscarTodosEmVigor() throws BusinessException;
 }
