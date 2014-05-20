@@ -45,6 +45,7 @@
 package br.com.hslife.imobiliaria.factory;
 
 import br.com.hslife.imobiliaria.logic.impl.AgendaLogic;
+import br.com.hslife.imobiliaria.logic.impl.AluguelLogic;
 import br.com.hslife.imobiliaria.logic.impl.ClienteLogic;
 import br.com.hslife.imobiliaria.logic.impl.ClientePJLogic;
 import br.com.hslife.imobiliaria.logic.impl.ContratoLogic;
@@ -114,5 +115,9 @@ public class LogicFactory {
 	
 	public static FormaPagamentoLogic createFormaPagamentoLogic() {
 		return new FormaPagamentoLogic(DaoFactory.createFormaPagamentoDao());
+	}
+	
+	public static AluguelLogic createAluguelLogic() {
+		return new AluguelLogic(DaoFactory.createAluguelDao());
 	}
 }

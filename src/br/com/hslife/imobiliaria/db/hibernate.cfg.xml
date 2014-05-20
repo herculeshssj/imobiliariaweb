@@ -79,7 +79,8 @@
 
 
 		<!-- NÃO ALTERE ESTAS LINHAS -->
-		<mapping class="br.com.hslife.imobiliaria.model.Agenda" />				
+		<mapping class="br.com.hslife.imobiliaria.model.Agenda" />
+		<mapping class="br.com.hslife.imobiliaria.model.Aluguel" />				
 		<mapping class="br.com.hslife.imobiliaria.model.Contrato" />
 		<mapping class="br.com.hslife.imobiliaria.model.Corretor" />
 		<mapping class="br.com.hslife.imobiliaria.model.Cliente" />

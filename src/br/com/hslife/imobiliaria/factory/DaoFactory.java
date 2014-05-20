@@ -45,6 +45,7 @@
 package br.com.hslife.imobiliaria.factory;
 
 import br.com.hslife.imobiliaria.dao.IAgendaDao;
+import br.com.hslife.imobiliaria.dao.IAluguelDao;
 import br.com.hslife.imobiliaria.dao.IClienteDao;
 import br.com.hslife.imobiliaria.dao.IClientePJDao;
 import br.com.hslife.imobiliaria.dao.IContratoDao;
@@ -58,6 +59,7 @@ import br.com.hslife.imobiliaria.dao.IModeloContratoDao;
 import br.com.hslife.imobiliaria.dao.IRelatorioDao;
 import br.com.hslife.imobiliaria.dao.IUsuarioDao;
 import br.com.hslife.imobiliaria.dao.impl.AgendaDao;
+import br.com.hslife.imobiliaria.dao.impl.AluguelDao;
 import br.com.hslife.imobiliaria.dao.impl.ClienteDao;
 import br.com.hslife.imobiliaria.dao.impl.ClientePJDao;
 import br.com.hslife.imobiliaria.dao.impl.ContratoDao;
@@ -127,5 +129,9 @@ public class DaoFactory {
 	
 	public static IFormaPagamentoDao createFormaPagamentoDao() {
 		return new FormaPagamentoDao();
+	}
+	
+	public static IAluguelDao createAluguelDao() {
+		return new AluguelDao();
 	}
 }
