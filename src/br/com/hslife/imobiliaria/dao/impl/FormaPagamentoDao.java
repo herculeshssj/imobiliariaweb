@@ -1,4 +1,4 @@
-﻿/*** 
+/*** 
 
     Copyright (c) 2011, 2014 Hércules S. S. José
     
@@ -42,35 +42,9 @@
 
  ***/
 
--- Script de atualização das tabelas
+package br.com.hslife.imobiliaria.dao.impl;
 
-/*** Versão 2014.1 ***/
+import br.com.hslife.imobiliaria.dao.IFormaPagamentoDao;
 
--- Tabela formapagamento
-create table formapagamento (
-id bigserial not null,
-descricao varchar(50) not null,
-primary key(id)
-);
-
--- Tabela aluguel
-create table aluguel (
-id bigserial not null,
-periodo integer,
-ano integer,
-valor double precision,
-vencimento date,
-pagamento date,
-valorPago double precision,
-idContrato bigint,
-juros double precision,
-multa double precision,
-idFormaPagamento bigint,
-primary key(id)
-);
-
-alter table aluguel add constraint fk_formapagamento_aluguel foreign key (idFormaPagamento) references formapagamento(id);
-alter table aluguel add constraint fk_contrato_aluguel foreign key (idContrato) references contrato(id);
-
-insert into formapagamento (descricao) values ('Dinheiro');
-insert into formapagamento (descricao) values ('Cheque');
+public class FormaPagamentoDao extends HibernateGenericDao implements IFormaPagamentoDao { 
+}

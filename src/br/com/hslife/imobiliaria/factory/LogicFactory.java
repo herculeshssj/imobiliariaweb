@@ -1,11 +1,11 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -32,9 +32,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -49,6 +49,7 @@ import br.com.hslife.imobiliaria.logic.impl.ClienteLogic;
 import br.com.hslife.imobiliaria.logic.impl.ClientePJLogic;
 import br.com.hslife.imobiliaria.logic.impl.ContratoLogic;
 import br.com.hslife.imobiliaria.logic.impl.CorretorLogic;
+import br.com.hslife.imobiliaria.logic.impl.FormaPagamentoLogic;
 import br.com.hslife.imobiliaria.logic.impl.FuncionarioLogic;
 import br.com.hslife.imobiliaria.logic.impl.GrupoLogic;
 import br.com.hslife.imobiliaria.logic.impl.ImovelLogic;
@@ -109,5 +110,9 @@ public class LogicFactory {
 	
 	public static RelatorioLogic createRelatorioLogic() {
 		return new RelatorioLogic(DaoFactory.createRelatorioDao());
+	}
+	
+	public static FormaPagamentoLogic createFormaPagamentoLogic() {
+		return new FormaPagamentoLogic(DaoFactory.createFormaPagamentoDao());
 	}
 }
