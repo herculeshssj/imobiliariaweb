@@ -45,7 +45,6 @@
 package br.com.hslife.imobiliaria.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -374,7 +373,7 @@ public class ContratoController extends GenericController {
 			
 			// Passa os dados para o relatório e realiza a impressão do mesmo.
 			InputStream inputBytes = new ByteArrayInputStream(contrato.getModeloContrato().getDados());
-			ByteArrayOutputStream outputBytes =  new ByteArrayOutputStream();
+			//ByteArrayOutputStream outputBytes =  new ByteArrayOutputStream();
 			
 			JasperPrint impressao = JasperFillManager.fillReport(inputBytes, params, new JREmptyDataSource());
 			
