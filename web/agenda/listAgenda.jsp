@@ -60,8 +60,8 @@
 			
 			<rich:messages style="color: #000000; font-weight: bold;"></rich:messages>		
 
-			<h:commandButton value="Novo agendamento" style="padding: 3px 10px;" action="#{agendaMB.addView }" rendered="#{grupoMB.canAdd }"/>
-			<h:panelGroup rendered="#{grupoMB.canList }">
+			<h:commandButton value="Novo agendamento" style="padding: 3px 10px;" action="#{agendaMB.addView }" rendered="#{agendaMB.canAdd }"/>
+			<h:panelGroup rendered="#{agendaMB.canList }">
 			&nbsp; Informe uma data:
 			<h:inputText id="txtFindDate" value="#{agendaMB.findDate }" converterMessage="Formato de data inválido! Tente dd/mm/aaaa e somente números!">
 				<f:convertDateTime pattern="dd/MM/yyyy"/>				
@@ -117,7 +117,7 @@
 					<f:facet name="header">
 						<h:outputText value="Ver/Remarcar"></h:outputText>
 					</f:facet>
-					<h:panelGroup rendered="#{grupoMB.canView }">
+					<h:panelGroup rendered="#{agendaMB.canView }">
 					<h:commandLink value="Remarcar" action="#{agendaMB.editView }" rendered="#{!item.visitado }"/>					
 					<h:commandLink value="Ver" action="#{agendaMB.editView }" rendered="#{item.visitado }"/>
 					</h:panelGroup>						
@@ -127,7 +127,7 @@
 					<f:facet name="header">
 						<h:outputText value="Desmarcar"></h:outputText>
 					</f:facet>
-					<h:panelGroup rendered="#{grupoMB.canAdd }">
+					<h:panelGroup rendered="#{agendaMB.canAdd }">
 					<h:commandLink value="Desmarcar" action="#{agendaMB.deleteView }" rendered="#{!item.visitado }"/>
 					</h:panelGroup>					
 				</rich:column>				

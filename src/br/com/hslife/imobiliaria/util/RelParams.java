@@ -141,7 +141,7 @@ public class RelParams {
 			parametros.put("EMPRESA_UF", c.getLocatarioPJ().getEndereco().getUf());
 			parametros.put("EMPRESA_CEP", c.getLocatarioPJ().getEndereco().getCep());
 		
-			if (c.getLocatarioPJ().getSocios() != null && c.getLocatarioPJ().getSocios().size() >=1 ) {
+			/*if (c.getLocatarioPJ().getSocios() != null && c.getLocatarioPJ().getSocios().size() >=1 ) {
 				parametros.put("SOCIO_CPF", c.getLocatarioPJ().getSocios().get(0).getClientePF().getCpf());
 				parametros.put("SOCIO_CPFCONJUGE", c.getLocatarioPJ().getSocios().get(0).getClientePF().getCpfConjuge());
 				parametros.put("SOCIO_RG", c.getLocatarioPJ().getSocios().get(0).getClientePF().getRg());
@@ -176,7 +176,7 @@ public class RelParams {
 				parametros.put("SOCIO_UF", c.getLocatarioPJ().getSocios().get(0).getClientePF().getEndereco().getUf());
 				parametros.put("SOCIO_CEP", c.getLocatarioPJ().getSocios().get(0).getClientePF().getEndereco().getCep());
 				parametros.put("SOCIO_FUNCAO", c.getLocatarioPJ().getSocios().get(0).getFuncao());
-			}
+			}*/
 			
 		}
 		

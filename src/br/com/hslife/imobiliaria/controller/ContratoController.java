@@ -1,11 +1,11 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -32,9 +32,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -48,6 +48,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +64,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import br.com.hslife.imobiliaria.exception.BusinessException;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IContrato;
+import br.com.hslife.imobiliaria.model.Aluguel;
 import br.com.hslife.imobiliaria.model.Cliente;
 import br.com.hslife.imobiliaria.model.ClientePJ;
 import br.com.hslife.imobiliaria.model.Contrato;
@@ -106,6 +108,9 @@ public class ContratoController extends GenericController {
 	
 	// Nova situação do contrato
 	int novaSituacao;
+	
+	// Determina se os aluguéis serão gerados ou não
+	boolean gerarAlugueis;
 	
 	/*** Construtor ***/	
 	
@@ -271,7 +276,27 @@ public class ContratoController extends GenericController {
 				case 2 : logic.vigorarContrato(contrato.getId()); contrato.setSituacao(2); viewMessage("Contrato entrou em vigor com sucesso!"); break;
 				case 3 : logic.renovarContrato(contrato.getId()); contrato.setSituacao(3); viewMessage("Contrato foi renovado com sucesso!"); break;
 				case 4 : logic.encerrarContrato(contrato.getId()); contrato.setSituacao(4); viewMessage("Contrato foi encerrado com sucesso!");break;
-			}			
+			}
+			
+			if (gerarAlugueis) {
+				Aluguel aluguel;
+				int prazo = contrato.getPrazo();
+				int periodo = 1;
+				Calendar termino = Calendar.getInstance();
+		    	termino.setTime(contrato.getInicioContrato());
+		    	while (periodo <= prazo) {
+		    		aluguel = new Aluguel();
+		    		aluguel.setAno(termino.get(Calendar.YEAR));
+		    		aluguel.setContrato(contrato);
+		    		aluguel.setPeriodo(periodo);
+		    		aluguel.setValor(contrato.getValor());
+		    		aluguel.setVencimento(termino.getTime());
+		    		LogicFactory.createAluguelLogic().cadastrar(aluguel);
+		    		termino.add(Calendar.MONTH, 1);		    		
+		    		periodo++;
+		    	}
+			}
+			
 			clearVariables();
 		} catch (BusinessException be) {
 			viewMessage("Erro ao editar: " + be.getMessage(), componente);
@@ -533,6 +558,14 @@ public class ContratoController extends GenericController {
 
 	public void setIdContrato(Long idContrato) {
 		this.idContrato = idContrato;
+	}
+
+	public boolean isGerarAlugueis() {
+		return gerarAlugueis;
+	}
+
+	public void setGerarAlugueis(boolean gerarAlugueis) {
+		this.gerarAlugueis = gerarAlugueis;
 	}
 
 	/*

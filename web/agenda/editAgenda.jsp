@@ -134,7 +134,7 @@
 				
 			
 			<h:commandButton value="Remarcar" style="padding: 3px 10px;" disabled="#{agendaMB.agenda.visitado }"
-				action="#{agendaMB.edit }" rendered="#{grupoMB.canEdit }"></h:commandButton>
+				action="#{agendaMB.edit }" rendered="#{agendaMB.canEdit }"></h:commandButton>
 			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;"
 				immediate="true" action="#{agendaMB.cancelAction }"></h:commandButton>

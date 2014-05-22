@@ -1,11 +1,11 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -32,9 +32,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -51,6 +51,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.servlet.http.HttpSession;
 
+import br.com.hslife.imobiliaria.factory.LogicFactory;
+import br.com.hslife.imobiliaria.logic.IUsuario;
 import br.com.hslife.imobiliaria.model.Permissao;
 import br.com.hslife.imobiliaria.model.Usuario;
 
@@ -63,12 +65,18 @@ public abstract class GenericController {
 	
 	String componente;
 	
+	IUsuario usuarioLogic;
+	
 	boolean canAdd;
 	boolean canEdit;
 	boolean canDelete;
 	boolean canList;
 	boolean canView;
 	boolean onlyAdmin;
+	
+	public GenericController() {
+		usuarioLogic = LogicFactory.createUsuarioLogic();
+	}
 	
 	protected abstract void clearVariables();
 	
@@ -128,33 +136,39 @@ public abstract class GenericController {
 	}
 	
 	public boolean isAuthorized(String module, String action) {
-		// Resgata o usuário da sessão
-		Usuario u = (Usuario)getSession().getAttribute("usuarioLogado");
-		// Verifica se o usuário é ADMIN
-		if (u.getAdmin()) {
-			return true;
-		} else {
-			// Itera a lista de permissão do usuário a procura do módulo e ação desejados
-			for (Permissao p : u.getGrupo().getPermissoes()) {
-				// Verifica o módulo
-				if (p.getModulo().equalsIgnoreCase(module)) {
-					if (p.isAdd() && action.equalsIgnoreCase("add")) {
-						return true;
-					}
-					if (p.isEdit() && action.equalsIgnoreCase("edit")) {
-						return true;
-					}
-					if (p.isDelete() && action.equalsIgnoreCase("delete")) {
-						return true;
-					}
-					if (p.isView() && action.equalsIgnoreCase("view")) {
-						return true;
-					}
-					if (p.isList() && action.equalsIgnoreCase("list")) {
-						return true;
-					}
-				}				
+		try {
+			// Resgata o usuário da sessão
+			Usuario usuario = (Usuario)getSession().getAttribute("usuarioLogado");		
+			Usuario u = usuarioLogic.buscar(usuario.getId());
+			// Verifica se o usuário é ADMIN
+			if (u.getAdmin()) {
+				return true;
+			} else {
+				// Itera a lista de permissão do usuário a procura do módulo e ação desejados
+				for (Permissao p : u.getGrupo().getPermissoes()) {
+					// Verifica o módulo
+					if (p.getModulo().equalsIgnoreCase(module)) {
+						if (p.isAdd() && action.equalsIgnoreCase("add")) {
+							return true;
+						}
+						if (p.isEdit() && action.equalsIgnoreCase("edit")) {
+							return true;
+						}
+						if (p.isDelete() && action.equalsIgnoreCase("delete")) {
+							return true;
+						}
+						if (p.isView() && action.equalsIgnoreCase("view")) {
+							return true;
+						}
+						if (p.isList() && action.equalsIgnoreCase("list")) {
+							return true;
+						}
+					}				
+				}
 			}
+		} catch (Exception be) {
+			be.printStackTrace();
+			viewMessage("Erro ao processar permissões:" + be.getMessage());
 		}
 		return false;
 	}

@@ -92,7 +92,7 @@
 					</h:panelGrid>
 				
 			
-			<h:commandButton value="Pesquisar" style="padding: 3px 10px;" rendered="#{grupoMB.canList }"
+			<h:commandButton value="Pesquisar" style="padding: 3px 10px;" rendered="#{agendaMB.canList }"
 				action="#{agendaMB.search }"></h:commandButton>
 			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;"

@@ -191,7 +191,7 @@ public class Cliente implements Serializable{
 	@Transient
 	List<Imovel> imoveis;
 	
-	@Transient
+	@OneToMany(mappedBy="corretor")
 	List<Contrato> contratos;
 	
 	Boolean ativo;

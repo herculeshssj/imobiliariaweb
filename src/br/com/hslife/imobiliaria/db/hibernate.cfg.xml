@@ -2,12 +2,12 @@
 
 <!-- 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -34,9 +34,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -65,26 +65,28 @@
 			padrão do PostgreSQL seja diferente altere a porta Informe também o
 			nome do banco de dados a ser utilizado
 		-->
-		<property name="hibernate.connection.url">jdbc:postgresql://hslifeserver.hslife.local:5432/imobiliaria</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/imobiliaria</property>
 
 
 		<!-- No lugar de 'root', informe o usuário do banco de dados -->
-		<property name="hibernate.connection.username">hslife</property>
+		<property name="hibernate.connection.username">imobiliaria</property>
 
 
 		<!--
 			No lugar de 'root' ou em branco, informe a senha do usuário do banco de dados
 		-->
-		<property name="hibernate.connection.password">linuxUser1234!</property>
+		<property name="hibernate.connection.password">1m0v3lw3b</property>
 
 
 		<!-- NÃO ALTERE ESTAS LINHAS -->
-		<mapping class="br.com.hslife.imobiliaria.model.Agenda" />				
+		<mapping class="br.com.hslife.imobiliaria.model.Agenda" />
+		<mapping class="br.com.hslife.imobiliaria.model.Aluguel" />				
 		<mapping class="br.com.hslife.imobiliaria.model.Contrato" />
 		<mapping class="br.com.hslife.imobiliaria.model.Corretor" />
 		<mapping class="br.com.hslife.imobiliaria.model.Cliente" />
 		<mapping class="br.com.hslife.imobiliaria.model.ClientePJ" />
-		<mapping class="br.com.hslife.imobiliaria.model.Endereco" />				
+		<mapping class="br.com.hslife.imobiliaria.model.Endereco" />
+		<mapping class="br.com.hslife.imobiliaria.model.FormaPagamento" />				
 		<mapping class="br.com.hslife.imobiliaria.model.Foto" />
 		<mapping class="br.com.hslife.imobiliaria.model.Funcionario" />
 		<mapping class="br.com.hslife.imobiliaria.model.Grupo" />

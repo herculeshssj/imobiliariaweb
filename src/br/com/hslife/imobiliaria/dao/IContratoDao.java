@@ -52,6 +52,8 @@ public interface IContratoDao extends GenericDao {
 	
 	public List<Contrato> buscarPorNumContrato(String numContrato);
 	
+	public List<Contrato> buscarTodosEmVigor();
+	
 	public void vigorarContrato(Long id);
 	
 	public void renovarContrato(Long id);

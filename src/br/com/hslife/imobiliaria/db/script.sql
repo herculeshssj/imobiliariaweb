@@ -1,4 +1,4 @@
-/*** 
+﻿/*** 
 
     Copyright (c) 2011 Hércules S. S. José
     
@@ -45,6 +45,7 @@
 -- Script de criação das tabelas
 
 -- Apaga as constraints
+/*
 alter table Agenda drop constraint FK74C6082CC682C5D7;
 alter table Agenda drop constraint FK74C6082C2FC02E2F;
 alter table Cliente drop constraint FK96841DDA344DB4C5;
@@ -97,7 +98,7 @@ drop table Relatorio;
 drop table Socio;
 drop table Telefone;
 drop table Usuario;
-
+*/
 -- Criação das tabelas
 create table Agenda (id  bigserial not null, data date, emailCliente varchar(100) not null, horaFim int4, horaInicio int4, nomeCliente varchar(100) not null, observacao text, telefoneCliente varchar(50) not null, visitado bool, idCorretor int8 not null, idImovel int8 not null, primary key (id));
 create table Cliente (id  bigserial not null, ativo bool, cpf varchar(11) not null, cpfConjuge varchar(11), dataEmissao date, dataEmissaoConjuge date, dataNascimento date not null, dataNascimentoConjuge date, email varchar(100), estadoCivil varchar(30), filiacaoMae varchar(100), filiacaoMaeConjuge varchar(100), filiacaoPai varchar(100), filiacaoPaiConjuge varchar(100), genero varchar(1) not null, generoConjuge varchar(1), nacionalidade varchar(50), nacionalidadeConjuge varchar(50), naturalidade varchar(50), naturalidadeConjuge varchar(50), nome varchar(100) not null, nomeConjuge varchar(100), numPasta varchar(10), orgaoEmissor varchar(30), orgaoEmissorConjuge varchar(30), profissao varchar(50), profissaoConjuge varchar(50), rg varchar(15), rgConjuge varchar(15), tipoCliente varchar(255) not null, idEndereco int8, primary key (id));

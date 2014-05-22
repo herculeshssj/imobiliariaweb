@@ -52,7 +52,7 @@
 <html dir="ltr" lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<title>Real Administradora de Imóveis</title>
+<title>HSlife - ImobiliariaWeb</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -64,7 +64,7 @@
 
 								<div id="site-title">
 					<span>
-						<a href="http://hslife.com.br/imobiliaria/" title="Real Administradora de imóveis" rel="home">Real Administradora de Imóveis</a>
+						<a href="#" title="HSlife - ImobiliariaWeb" rel="home">HSlife</a>
 					</span>
 				</div>
 				                <div id="site-description">Seja bem vindo</div>
@@ -94,10 +94,10 @@
 			<h:panelGrid columns="2" cellspacing="10">
 
                                         Login:
-                                        <h:inputText value="#{homeMB.usuario.login}"required="true" requiredMessage="Informe o seu login."/>
+                                        <h:inputText value="#{homeMB.usuario.login}" required="true" requiredMessage="Informe o seu login."/>
 
                                         Senha:
-                                        <h:inputSecret value="#{homeMB.usuario.senha}"required="true" requiredMessage="Informe a sua senha."/>
+                                        <h:inputSecret value="#{homeMB.usuario.senha}" required="true" requiredMessage="Informe a sua senha."/>
 
                                         <br/>
                                         <h:commandButton value="Entrar no Sistema" action="#{homeMB.login}" style="padding: 3px 10px;"/>

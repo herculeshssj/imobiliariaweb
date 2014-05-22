@@ -78,7 +78,7 @@ public class ClientePJController extends GenericController {
 	// Listas
 	List<ClientePJ> listaClientePJ;
 	List<Telefone> listaTelefone;
-	List<Socio> listaSocio;
+	List<Socio> listaSocio = new ArrayList<Socio>();
 	
 	// Armazena o id do objeto de modelo
 	Long idClientePJ;
@@ -175,8 +175,8 @@ public class ClientePJController extends GenericController {
 	@Override
 	public String add() {
 		String retorno = null;		
-		clientePJ.setTelefones(listaTelefone);
-		clientePJ.setSocios(listaSocio);
+		clientePJ.getTelefones().addAll(listaTelefone);
+		clientePJ.getSocios().addAll(listaSocio);
 		try {
 			logic.cadastrar(clientePJ);
 			viewMessage("Registro cadastrado com sucesso!");
@@ -194,8 +194,8 @@ public class ClientePJController extends GenericController {
 		ClientePJ c = (ClientePJ) dadosModelo.getRowData();
 		try {
 			clientePJ = logic.buscar(c.getId());
-			listaTelefone = clientePJ.getTelefones();
-			listaSocio = clientePJ.getSocios();
+			listaTelefone.addAll(clientePJ.getTelefones());
+			listaSocio.addAll(clientePJ.getSocios());
 			carregaCombos();
 			clientePJ.setContratos(LogicFactory.createContratoLogic().buscar(new Contrato(clientePJ)));
 		} catch (BusinessException be) {
@@ -207,8 +207,8 @@ public class ClientePJController extends GenericController {
 	@Override
 	public String edit() {
 		String retorno = null;		
-		clientePJ.setTelefones(listaTelefone);
-		clientePJ.setSocios(listaSocio);
+		clientePJ.getTelefones().addAll(listaTelefone);
+		clientePJ.getSocios().addAll(listaSocio);
 		try {
 			logic.editar(clientePJ);
 			viewMessage("Registro editado com sucesso!");
@@ -296,6 +296,7 @@ public class ClientePJController extends GenericController {
 	}
 	
 	public void adicionarSocio() {
+		
 		// Itera a lista de sócios a procura do sócio informado
 		int count = 0;
 		for (int i = 0; i < listaSocio.size(); i++) {
@@ -420,14 +421,6 @@ public class ClientePJController extends GenericController {
 		this.socio = socio;
 	}
 
-	public List<Socio> getListaSocio() {
-		return listaSocio;
-	}
-
-	public void setListaSocio(List<Socio> listaSocio) {
-		this.listaSocio = listaSocio;
-	}
-
 	public Long getIdSocio() {
 		return idSocio;
 	}
@@ -442,5 +435,13 @@ public class ClientePJController extends GenericController {
 
 	public void setSocios(List<SelectItem> socios) {
 		this.socios = socios;
+	}
+
+	public List<Socio> getListaSocio() {
+		return listaSocio;
+	}
+
+	public void setListaSocio(List<Socio> listaSocio) {
+		this.listaSocio = listaSocio;
 	}
 }

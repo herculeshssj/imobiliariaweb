@@ -2,12 +2,12 @@
 
 <!-- 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -34,9 +34,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -135,6 +135,18 @@
 	<managed-bean>
 		<managed-bean-name>relatorioMB</managed-bean-name>
 		<managed-bean-class>br.com.hslife.imobiliaria.controller.RelatorioController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>formaPagamentoMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.FormaPagamentoController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>aluguelMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.AluguelController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
@@ -483,6 +495,14 @@
 	<!-- Módulo Imóvel -->
 	
 	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>listView</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>	
 		<from-view-id>/imovel/listImovel.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>addView</from-outcome>
@@ -850,6 +870,62 @@
 	
 	<!-- Módulo Usuários -->
 	
+	<!-- Módulo Aluguel -->
+	
+	<navigation-rule>
+		<from-view-id>/aluguel/listAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/aluguel/formAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/aluguel/editAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrar</from-outcome>
+			<to-view-id>/aluguel/registrarAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/formAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/registrarAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/editAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Aluguel -->
+	
 	<!-- Login no sistema -->
 	
 	<navigation-rule>
@@ -899,6 +975,10 @@
             <to-view-id>/menu/menuOpcao.jsp</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>menuAluguel</from-outcome>
+            <to-view-id>/menu/menuAluguel.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>listFuncionario</from-outcome>
             <to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
         </navigation-case>
@@ -925,10 +1005,18 @@
         <navigation-case>
             <from-outcome>listContrato</from-outcome>
             <to-view-id>/contrato/listContrato.jsp</to-view-id>
-        </navigation-case>        
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>listAluguel</from-outcome>
+            <to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+        </navigation-case>      
         <navigation-case>
             <from-outcome>formIndiceReajuste</from-outcome>
             <to-view-id>/contrato/formIndiceReajuste.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>formFormaPagamento</from-outcome>
+            <to-view-id>/aluguel/formFormaPagamento.jsp</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>formModeloContrato</from-outcome>

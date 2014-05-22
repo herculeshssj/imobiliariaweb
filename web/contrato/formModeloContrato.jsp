@@ -53,6 +53,12 @@
 <f:subview id="cabecalho">
 	<jsp:include page="../header.jsp"></jsp:include>
 </f:subview>
+
+	<style>
+		.rich-fileupload-list-overflow {
+			overflow: auto; overflow-y: hidden; overflow-x: auto;
+		} 
+	</style>
 	<h:form>
 		<div id="content">
 			
@@ -81,7 +87,7 @@
 						<h:inputText value="#{modeloContratoMB.modeloContrato.descricao }" size="50" maxlength="100" disabled="#{!modeloContratoMB.modeloContrato.ativo }"/>
 						
 						* Upload do modelo:
-						<rich:fileUpload id="txtUploadModelo" disabled="#{!modeloContratoMB.modeloContrato.ativo }" listWidth="500" listHeight="100" fileUploadListener="#{modeloContratoMB.carregaModelo }" acceptedTypes="jasper" maxFilesQuantity="1"/>													
+						<rich:fileUpload id="txtUploadModelo" disabled="#{!modeloContratoMB.modeloContrato.ativo }" listWidth="500" listHeight="90" fileUploadListener="#{modeloContratoMB.carregaModelo }" acceptedTypes="jasper" maxFilesQuantity="1"/>													
 																		
 						<h:commandButton value="Salvar" style="padding: 3px 10px;" action="#{modeloContratoMB.add }" disabled="#{!modeloContratoMB.modeloContrato.ativo }" rendered="#{modeloContratoMB.canAdd || modeloContratoMB.canEdit }"/>
 			

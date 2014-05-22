@@ -47,7 +47,9 @@ package br.com.hslife.imobiliaria.logic;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,7 +59,6 @@ import org.junit.Test;
 
 import br.com.hslife.imobiliaria.factory.DaoFactory;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
-import br.com.hslife.imobiliaria.logic.IClientePJ;
 import br.com.hslife.imobiliaria.model.Cliente;
 import br.com.hslife.imobiliaria.model.ClientePJ;
 import br.com.hslife.imobiliaria.model.Endereco;
@@ -110,14 +111,14 @@ public class ClientePJLogic {
 		List<Telefone> listaTelefones = new ArrayList<Telefone>();
 		listaTelefones.add(t);
 		
-		pj.setTelefones(listaTelefones);
+		pj.getTelefones().addAll(listaTelefones);
 		
 		Socio s = new Socio();
 		List<Cliente> listaClientePF = new ArrayList<Cliente>();
 		listaClientePF = DaoFactory.createClienteDao().buscarTodosAtivos();
 		s.setClientePF(listaClientePF.get(0));
 		s.setFuncao("Gerente");
-		List<Socio> socios = new ArrayList<Socio>();
+		Set<Socio> socios = new HashSet<Socio>();
 		socios.add(s);
 		
 		pj.setSocios(socios);
@@ -163,7 +164,7 @@ public class ClientePJLogic {
 		c.setNomeFantasia("Companhia de comercio exterior Ltda");
 		c.setRamoAtividade("Comercio exterior");
 		
-		listaTelefones = c.getTelefones();
+		listaTelefones.addAll(c.getTelefones());
 		
 		Telefone t = new Telefone();
 		t.setDdd("21");
@@ -172,7 +173,7 @@ public class ClientePJLogic {
 		
 		listaTelefones.add(t);
 		
-		c.setTelefones(listaTelefones);
+		c.getTelefones().addAll(listaTelefones);
 		
 		try {
 			logic.editar(c);

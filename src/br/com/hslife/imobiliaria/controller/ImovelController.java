@@ -256,6 +256,11 @@ public class ImovelController extends GenericController {
 	
 	/*** Métodos da classe ***/
 	
+	public String startUp() {
+		this.simpleSearch();
+		return "listView";
+	}
+	
 	private void carregaCombos() {
 		locadores = new ArrayList<SelectItem>();
 		tipoImoveis = new ArrayList<SelectItem>();
