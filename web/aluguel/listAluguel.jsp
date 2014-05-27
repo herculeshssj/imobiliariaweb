@@ -117,9 +117,10 @@
 				</rich:column>
 				<rich:column  style="text-align: center">
 					<f:facet name="header">
-						<h:outputText value="Registrar"></h:outputText>
+						<h:outputText value="Registrar/Recibo"></h:outputText>
 					</f:facet>					
 					<h:commandLink value="Registrar" action="#{aluguelMB.registrarView }" rendered="#{aluguelMB.canEdit and item.pagamento == null}"/>
+					<h:commandLink value="Recibo" action="#{aluguelMB.gerarRecibo }" rendered="#{aluguelMB.canView and item.pagamento != null}"/>
 				</rich:column>				
 			</rich:dataTable>
 			<rich:datascroller id="dsAluguel" for="tableAluguel"></rich:datascroller>

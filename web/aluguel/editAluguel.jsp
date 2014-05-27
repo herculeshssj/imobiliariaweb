@@ -106,12 +106,12 @@
 							</h:outputText>
 							
 							Juros:
-							<h:outputText value="#{aluguelMB.aluguel.valorPago }">
+							<h:outputText value="#{aluguelMB.aluguel.juros }">
 								<f:convertNumber type="currency" pattern="###.##"/>
 							</h:outputText>
 							
 							Multa:
-							<h:outputText value="#{aluguelMB.aluguel.valorPago }">
+							<h:outputText value="#{aluguelMB.aluguel.multa }">
 								<f:convertNumber type="currency" pattern="###.##"/>
 							</h:outputText>
 							
