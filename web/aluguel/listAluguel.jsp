@@ -70,6 +70,8 @@
 			</h:selectOneMenu>	
 			&nbsp;
 			<h:commandButton value="Pesquisar" style="padding: 3px 10px;" action="#{aluguelMB.simpleSearch }"></h:commandButton>
+			&nbsp;&nbsp;&nbsp;
+			<h:commandLink value="Mais opções de pesquisa" action="#{aluguelMB.searchView }"></h:commandLink>
 			</h:panelGroup>
 			<br /> <br/>
 			<rich:dataTable id="tableAluguel" width="100%" value="#{aluguelMB.dadosModelo }" var="item">
@@ -77,37 +79,49 @@
 					<f:facet name="header">
 						<h:outputText value="Período"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.periodo}"></h:outputText>
+					<h:outputText value="#{item.periodo}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.periodo}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.periodo}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Ano"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.ano}"></h:outputText>
+					<h:outputText value="#{item.ano}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.ano}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.ano}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Valor"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.valor}"></h:outputText>
+					<h:outputText value="#{item.valor}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.valor}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.valor}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Vencimento"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.vencimento}"></h:outputText>
+					<h:outputText value="#{item.vencimento}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.vencimento}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.vencimento}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Pagamento"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.pagamento}"></h:outputText>
+					<h:outputText value="#{item.pagamento}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.pagamento}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.pagamento}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Valor pago"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.valorPago}"></h:outputText>
+					<h:outputText value="#{item.valorPago}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.valorPago}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.valorPago}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
 				<rich:column  style="text-align: center">
 					<f:facet name="header">
