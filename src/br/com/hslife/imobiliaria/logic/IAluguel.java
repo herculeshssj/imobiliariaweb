@@ -57,6 +57,8 @@ public interface IAluguel {
 	
 	public List<Aluguel> buscarPorContrato(Long idContrato) throws BusinessException;
 	
-	public Aluguel buscar(Long id) throws BusinessException;	
+	public Aluguel buscar(Long id) throws BusinessException;
+	
+	public List<Aluguel> buscar(Aluguel aluguel) throws BusinessException;
 }
  

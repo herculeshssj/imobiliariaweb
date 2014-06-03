@@ -45,6 +45,7 @@
 package br.com.hslife.imobiliaria.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -114,6 +115,28 @@ public class Aluguel implements Serializable {
 		
 	}
 
+	/**
+	 * Retorna a quantidade de dias que o aluguel está atrasado
+	 * 
+	 * @return dias de atraso do aluguel
+	 */
+	public int getDiasAtrasados() {
+		if (this.pagamento == null) {
+			Date hoje = new Date();
+			if (this.vencimento.before(hoje)) {
+				Calendar temp = Calendar.getInstance();
+				temp.setTime(this.vencimento);
+				int diasAtraso = 0;
+				while (temp.getTime().before(hoje)) {
+					temp.add(Calendar.DAY_OF_YEAR, 1);
+					diasAtraso++;					
+				}
+				return diasAtraso;
+			}
+		} 
+		return 0;
+	}
+	
 	public Long getId() {
 		return id;
 	}
