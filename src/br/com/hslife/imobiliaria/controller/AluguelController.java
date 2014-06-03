@@ -44,19 +44,31 @@
 
 package br.com.hslife.imobiliaria.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.exception.BusinessException;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IAluguel;
 import br.com.hslife.imobiliaria.model.Aluguel;
 import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
+import br.com.hslife.imobiliaria.util.CurrencyWriter;
 
 public class AluguelController extends GenericController {
 	
@@ -198,6 +210,45 @@ public class AluguelController extends GenericController {
 			viewMessage("Erro ao registrar: " + be.getMessage(), "frmAluguel");
 		}
 		return super.edit();
+	}
+	
+	public void gerarRecibo() {
+		// Obtem a resposta da requisição
+		HttpServletResponse response = (HttpServletResponse) getContext().getExternalContext().getResponse();
+		
+		CurrencyWriter extenso = new CurrencyWriter();
+		
+		try {
+			// Entidade obtido do componente dataTable
+			Aluguel a = (Aluguel)dadosModelo.getRowData();
+			
+			// Definição dos valores para passar para o relatório			
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("id", a.getId());
+			params.put("valorpagoextenso", extenso.write(new BigDecimal(a.getValorPago())));
+			
+			// Obtém o caminho para o relatório
+			ServletContext servletContexto = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+			String caminhoRelOS = servletContexto.getRealPath("/jasper/recibo.jasper");
+			
+			// Passa os dados para o relatório e realiza a impressão do mesmo.			
+			JasperPrint impressao = JasperFillManager.fillReport(caminhoRelOS, params, HibernateUtility.getConnection());
+			
+			// Faz a conversão para PDF
+			byte[] dadosSaida = JasperExportManager.exportReportToPdf(impressao);
+			
+			// Complementa a resposta para exibir o relatório gerado
+			response.setHeader("Content-Disposition","attachment; filename=\"recibo.pdf\";");
+			response.setContentLength(dadosSaida.length);
+			ServletOutputStream output = response.getOutputStream();
+			output.write(dadosSaida, 0, dadosSaida.length);
+			getContext().responseComplete();
+
+			viewMessage("Recibo gerado com sucesso!", componente);
+		} catch (Exception e) {
+			viewMessage("Erro ao gerar o recibo: " + e.getMessage(), componente);
+			e.printStackTrace();
+		}
 	}
 	
 	public List<SelectItem> getListaContrato() {
