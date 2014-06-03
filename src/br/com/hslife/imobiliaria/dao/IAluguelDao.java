@@ -52,5 +52,7 @@ import br.com.hslife.imobiliaria.model.Aluguel;
 public interface IAluguelDao extends GenericDao {
 	
 	public List<Aluguel> buscarPorContrato(Long idContrato);
+	
+	public List<Aluguel> listByExample(Aluguel example);
 
 }

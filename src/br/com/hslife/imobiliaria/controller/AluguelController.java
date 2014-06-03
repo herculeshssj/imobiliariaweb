@@ -181,6 +181,25 @@ public class AluguelController extends GenericController {
 		return retorno;
 	}
 	
+	@Override
+	public String searchView() {
+		aluguel = new Aluguel();
+		return super.searchView();
+	}
+	
+	@Override
+	public String search() {
+		try {
+			if (idContrato != null && idContrato > 0)
+				aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
+			dadosModelo = new ListDataModel(logic.buscar(aluguel));
+			viewMessage("Busca realizada com sucesso!");
+		} catch (BusinessException be) {
+			viewMessage("Erro ao buscar: " +  be.getMessage(), componente);
+		}
+		return super.search();
+	}
+	
 	/*** Métodos da classe ***/
 	
 	public String registrarView() {
