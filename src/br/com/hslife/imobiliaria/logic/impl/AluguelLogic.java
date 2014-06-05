@@ -44,6 +44,9 @@
 
 package br.com.hslife.imobiliaria.logic.impl;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import br.com.hslife.imobiliaria.dao.IAluguelDao;
@@ -96,9 +99,60 @@ public class AluguelLogic implements IAluguel {
 		return dao.buscarPorContrato(idContrato);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Aluguel> buscar(Aluguel aluguel) throws BusinessException {
 		return dao.listByExample(aluguel);
+	}
+	
+	@Override
+	public List<Aluguel> buscarPorExemplo(Aluguel aluguel) {
+		List<Aluguel> resultado = new ArrayList<Aluguel>();
+		
+		Long idContrato = aluguel.getContrato() == null ? null : aluguel.getContrato().getId();
+		Date data = null;
+		Boolean pago = null;
+		if (aluguel.getSituacaoAluguel().equals("TODOS_PAGOS")) {
+			pago = true;
+		}
+		if (aluguel.getSituacaoAluguel().equals("TODOS_ATRASO")) {
+			pago = false;
+			data = new Date();
+		}
+		if (aluguel.getSituacaoAluguel().equals("ATRASO_10DIAS")) {
+			pago = false;
+			Calendar temp = Calendar.getInstance();
+			temp.add(Calendar.DAY_OF_YEAR, -10);
+			data = temp.getTime();
+			for (Aluguel a : dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
+				if (a.getDiasAtrasados() > 10 && a.getDiasAtrasados() <= 20) {
+					resultado.add(a);
+				}
+			}
+		} else 
+		if (aluguel.getSituacaoAluguel().equals("ATRASO_20DIAS")) {
+			pago = false;
+			Calendar temp = Calendar.getInstance();
+			temp.add(Calendar.DAY_OF_YEAR, -20);
+			data = temp.getTime();
+			for (Aluguel a : dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
+				if (a.getDiasAtrasados() > 20 && a.getDiasAtrasados() <= 30) {
+					resultado.add(a);
+				}
+			}
+		} else
+		if (aluguel.getSituacaoAluguel().equals("ATRASO_30DIAS")) {
+			pago = false;
+			Calendar temp = Calendar.getInstance();
+			temp.add(Calendar.DAY_OF_YEAR, -30);
+			data = temp.getTime();
+			for (Aluguel a : dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
+				if (a.getDiasAtrasados() > 30) {
+					resultado.add(a);
+				}
+			}
+		} else {
+			resultado = dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago);
+		}
+		return resultado;
 	}
 }

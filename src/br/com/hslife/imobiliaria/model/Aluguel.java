@@ -60,6 +60,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="aluguel")
@@ -78,10 +79,10 @@ public class Aluguel implements Serializable {
 	private Long id;
 	
 	@Column
-	private int periodo;
+	private Integer periodo;
 	
 	@Column
-	private int ano;
+	private Integer ano;
 	
 	@Column
 	@Temporal(TemporalType.DATE)
@@ -111,6 +112,9 @@ public class Aluguel implements Serializable {
 	@JoinColumn(name="idFormaPagamento")
 	private FormaPagamento formaPagamento;
 	
+	@Transient
+	private String situacaoAluguel;
+	
 	public Aluguel() {
 		
 	}
@@ -136,7 +140,7 @@ public class Aluguel implements Serializable {
 		} 
 		return 0;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -145,19 +149,19 @@ public class Aluguel implements Serializable {
 		this.id = id;
 	}
 
-	public int getPeriodo() {
+	public Integer getPeriodo() {
 		return periodo;
 	}
 
-	public void setPeriodo(int periodo) {
+	public void setPeriodo(Integer periodo) {
 		this.periodo = periodo;
 	}
 
-	public int getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 
@@ -223,5 +227,13 @@ public class Aluguel implements Serializable {
 
 	public void setFormaPagamento(FormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+	public String getSituacaoAluguel() {
+		return situacaoAluguel;
+	}
+
+	public void setSituacaoAluguel(String situacaoAluguel) {
+		this.situacaoAluguel = situacaoAluguel;
 	}
 }
