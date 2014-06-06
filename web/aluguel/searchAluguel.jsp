@@ -66,14 +66,24 @@
 							<h:outputText value="Dados do aluguel"></h:outputText>
 						</f:facet>
 						
-						Contrato:
-						<h:inputText value="#{aluguelMB.idContrato }"/>
+						Nº do Contrato:
+						<h:inputText value="#{aluguelMB.numContrato }" maxlength="10"/>
 						
 						Período:
 						<h:inputText value="#{aluguelMB.aluguel.periodo }"/>
 						
 						Ano:
 						<h:inputText value="#{aluguelMB.aluguel.ano }"/>
+						
+						Aluguéis:
+						<h:selectOneMenu value="#{aluguelMB.situacaoAluguel }">
+							<f:selectItem itemLabel="Todos" itemValue="TODOS"/>
+							<f:selectItem itemLabel="Todos pagos" itemValue="TODOS_PAGOS"/>
+							<f:selectItem itemLabel="Todos em atraso" itemValue="TODOS_ATRASO"/>
+							<f:selectItem itemLabel="Atraso mais 10 dias" itemValue="ATRASO_10DIAS"/>
+							<f:selectItem itemLabel="Atraso mais 20 dias" itemValue="ATRASO_20DIAS"/>
+							<f:selectItem itemLabel="Atraso mais 30 dias" itemValue="ATRASO_30DIAS"/>
+						</h:selectOneMenu>
 						
 					</h:panelGrid>
 		

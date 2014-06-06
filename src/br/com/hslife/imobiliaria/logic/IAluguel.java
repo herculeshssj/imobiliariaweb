@@ -60,5 +60,7 @@ public interface IAluguel {
 	public Aluguel buscar(Long id) throws BusinessException;
 	
 	public List<Aluguel> buscar(Aluguel aluguel) throws BusinessException;
+	
+	public List<Aluguel> buscarPorExemplo(Aluguel aluguel);
 }
  

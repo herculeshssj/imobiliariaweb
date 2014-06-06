@@ -88,6 +88,12 @@ public class AluguelController extends GenericController {
 	Long idContrato;
 	Long idFormaPagamento;
 	
+	// Armazena a situação do aluguel para a pesquisa
+	String situacaoAluguel;
+	Integer periodo;
+	Integer ano;
+	String numContrato;
+	
 	/*** Construtor ***/	
 	
 	public AluguelController() {
@@ -111,6 +117,8 @@ public class AluguelController extends GenericController {
 		listaAluguel = new ArrayList<Aluguel>();
 		idAluguel = null;
 		idContrato = null;
+		ano = null;
+		periodo = null;
 		dadosModelo = new ListDataModel(listaAluguel);
 	}
 
@@ -118,8 +126,12 @@ public class AluguelController extends GenericController {
 	public void simpleSearch() {		
 		try {
 			if (idContrato != null) {
-				dadosModelo = new ListDataModel(logic.buscarPorContrato(idContrato));
+				aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
 			}
+			aluguel.setSituacaoAluguel(situacaoAluguel);
+			aluguel.setPeriodo(null);
+			aluguel.setAno(null);
+			dadosModelo = new ListDataModel(logic.buscarPorExemplo(aluguel));
 			viewMessage("Busca realizada com sucesso!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
@@ -190,12 +202,18 @@ public class AluguelController extends GenericController {
 	@Override
 	public String search() {
 		try {
-			if (idContrato != null && idContrato > 0)
-				aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
-			dadosModelo = new ListDataModel(logic.buscar(aluguel));
+			if (numContrato != null && !numContrato.trim().isEmpty()) {
+				aluguel.setContrato(LogicFactory.createContratoLogic().buscarPorNumContrato(numContrato).get(0));
+			}
+			aluguel.setSituacaoAluguel(situacaoAluguel);
+			aluguel.setPeriodo(aluguel.getPeriodo() == 0 ? null : aluguel.getPeriodo());
+			aluguel.setAno(aluguel.getAno() == 0 ? null : aluguel.getAno());
+			dadosModelo = new ListDataModel(logic.buscarPorExemplo(aluguel));
 			viewMessage("Busca realizada com sucesso!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), componente);
+		} catch (IndexOutOfBoundsException in) {
+			viewMessage("Erro ao buscar: Contrato nº " +  numContrato + " não foi localizado!", componente);
 		}
 		return super.search();
 	}
@@ -354,5 +372,37 @@ public class AluguelController extends GenericController {
 
 	public void setIdFormaPagamento(Long idFormaPagamento) {
 		this.idFormaPagamento = idFormaPagamento;
+	}
+
+	public String getSituacaoAluguel() {
+		return situacaoAluguel;
+	}
+
+	public void setSituacaoAluguel(String situacaoAluguel) {
+		this.situacaoAluguel = situacaoAluguel;
+	}
+
+	public Integer getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(Integer periodo) {
+		this.periodo = periodo;
+	}
+
+	public Integer getAno() {
+		return ano;
+	}
+
+	public void setAno(Integer ano) {
+		this.ano = ano;
+	}
+
+	public String getNumContrato() {
+		return numContrato;
+	}
+
+	public void setNumContrato(String numContrato) {
+		this.numContrato = numContrato;
 	}
 }

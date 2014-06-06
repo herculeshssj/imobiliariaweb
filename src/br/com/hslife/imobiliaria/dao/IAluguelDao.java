@@ -44,6 +44,7 @@
 
 package br.com.hslife.imobiliaria.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.hslife.imobiliaria.model.Aluguel;
@@ -54,5 +55,7 @@ public interface IAluguelDao extends GenericDao {
 	public List<Aluguel> buscarPorContrato(Long idContrato);
 	
 	public List<Aluguel> listByExample(Aluguel example);
+	
+	public List<Aluguel> listByContratoOrPeriodoOrAnoBeforeDataAndPago(Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago);
 
 }

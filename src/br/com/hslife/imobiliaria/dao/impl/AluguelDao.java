@@ -45,6 +45,7 @@
 package br.com.hslife.imobiliaria.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,32 @@ public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
 		}
 		if (example.getAno() > 0) {
 			criterios.add(Restrictions.eq("ano", example.getAno()));
+		}
+		return listByCriteria(Aluguel.class, criterios);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aluguel> listByContratoOrPeriodoOrAnoBeforeDataAndPago(Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago) {
+		List<Criterion> criterios = new ArrayList<Criterion>();
+		if (idContrato != null) {
+			criterios.add(Restrictions.eq("contrato.id", idContrato));
+		}
+		if (periodo != null) {
+			criterios.add(Restrictions.eq("periodo", periodo));
+		}
+		if (ano != null) {
+			criterios.add(Restrictions.eq("ano", ano));
+		}
+		if (data != null) {
+			criterios.add(Restrictions.le("vencimento", data));
+		}
+		if (pago != null) {
+			if (pago) {
+				criterios.add(Restrictions.isNotNull("pagamento"));
+			} else {
+				criterios.add(Restrictions.isNull("pagamento"));
+			}				
 		}
 		return listByCriteria(Aluguel.class, criterios);
 	}
