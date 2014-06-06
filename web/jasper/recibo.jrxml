@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recibo" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="42" bottomMargin="42">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="valorpagoextenso" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select
+a.id,
+a.valorpago,
+cl.nome,
+i.tipoimovel,
+e.tipologradouro || ' ' || e.logradouro || ' ' || e.numero || ' ' || e.complemento || ' ' || e.bairro || ',  ' || e.cidade || ' - ' || e.uf as endereco,
+a.periodo || ' / ' || a.ano as periodo
+from
+aluguel a
+inner join contrato c on c.id = a.idcontrato
+inner join cliente cl on cl.id = c.idlocatario
+inner join imovel i on i.id = c.idimovel
+inner join endereco e on e.id = i.idendereco
+where
+a.id = $P{id};]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="valorpago" class="java.lang.Double"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="tipoimovel" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="periodo" class="java.lang.String"/>
+	<detail>
+		<band height="316" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="511" height="316"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="306" y="6" width="100" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="80" y="61" width="414" height="35"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="137" y="100" width="357" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="46" y="119" width="448" height="35"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="136" y="158" width="100" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="145" y="6" width="100" height="16" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="98" y="42" width="396" height="15" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="69" y="5" width="75" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO Nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="148" y="5" width="94" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="309" y="5" width="94" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorpago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="42" width="80" height="15"/>
+				<textElement/>
+				<text><![CDATA[Recebi(emos) de]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="101" y="42" width="390" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="61" width="62" height="15"/>
+				<textElement/>
+				<text><![CDATA[a quantia de]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="83" y="61" width="408" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{valorpagoextenso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="100" width="116" height="15"/>
+				<textElement/>
+				<text><![CDATA[proveniente de aluguel de ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="100" width="351" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoimovel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="119" width="28" height="15"/>
+				<textElement/>
+				<text><![CDATA[sito à]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="49" y="119" width="442" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="158" width="117" height="16"/>
+				<textElement/>
+				<text><![CDATA[Referente ao mês/período]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="158" width="94" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="178" width="62" height="16"/>
+				<textElement/>
+				<text><![CDATA[aluguel com]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="80" y="178" width="29" height="16" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="145" y="178" width="29" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="120" y="178" width="25" height="16"/>
+				<textElement/>
+				<text><![CDATA[sem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="178" width="40" height="16"/>
+				<textElement/>
+				<text><![CDATA[Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="198" width="177" height="16"/>
+				<textElement/>
+				<text><![CDATA[e para clareza firmo(amos) o presente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="231" width="71" height="14"/>
+				<textElement/>
+				<text><![CDATA[Rio de Janeiro,]]></text>
+			</staticText>
+			<textField pattern="dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
+				<reportElement x="316" y="231" width="178" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="245" y="287" width="249" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="80" y="176" width="29" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

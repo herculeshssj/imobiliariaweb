@@ -1,0 +1,1044 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- 
+
+    Copyright (c) 2011, 2014 Hércules S. S. José
+    
+
+    Este arquivo é parte do programa ImobiliáriaWeb.
+
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
+
+    modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
+
+    publicada pela Fundação do Software Livre (FSF); na versão 2.1 da 
+
+    Licença.
+    
+    
+    Este programa é distribuído na esperança que possa ser util, 
+
+    mas SEM NENHUMA GARANTIA; sem uma garantia implicita de ADEQUAÇÂO a qualquer
+
+    MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral Menor GNU em 
+    
+    português para maiores detalhes.
+    
+    
+    Você deve ter recebido uma cópia da Licença Pública Geral Menor GNU sob o 
+
+    nome de "LICENSE.TXT" junto com este programa, se não, acesse o site HSlife no 
+
+    endereco www.hslife.com.br ou escreva para a Fundação do Software Livre(FSF) Inc., 
+
+    51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
+    
+    
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
+
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+
+    Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
+
+    Marco II - Nova Iguaçu, RJ, Brasil.
+
+ -->
+ 
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+	<application>
+		<view-handler>org.ajax4jsf.application.AjaxViewHandler</view-handler>
+		<message-bundle>message</message-bundle>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+		</locale-config>
+	</application>
+
+	<!-- ManagedBeans -->
+	
+	<managed-bean>
+		<managed-bean-name>clienteMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.ClienteController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>clientePJMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.ClientePJController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>funcionarioMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.FuncionarioController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>imovelMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.ImovelController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>agendaMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.AgendaController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>contratoMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.ContratoController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>homeMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.HomeController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>indiceReajusteMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.IndiceReajusteController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modeloContratoMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.ModeloContratoController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>corretorMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.CorretorController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>grupoMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.GrupoController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>usuarioMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.UsuarioController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>relatorioMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.RelatorioController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>formaPagamentoMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.FormaPagamentoController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>aluguelMB</managed-bean-name>
+		<managed-bean-class>br.com.hslife.imobiliaria.controller.AluguelController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<!-- ManagedBeans -->
+	
+	<!-- Converters -->
+
+	<converter>
+		<converter-id>cpfconverter</converter-id>
+		<converter-class>br.com.hslife.imobiliaria.controller.converter.CpfConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>cnpjconverter</converter-id>
+		<converter-class>br.com.hslife.imobiliaria.controller.converter.CnpjConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>telefoneconverter</converter-id>
+		<converter-class>br.com.hslife.imobiliaria.controller.converter.TelefoneConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>simnaoconverter</converter-id>
+		<converter-class>br.com.hslife.imobiliaria.controller.converter.SimNaoConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>situacaocontratoconverter</converter-id>
+		<converter-class>br.com.hslife.imobiliaria.controller.converter.SituacaoContratoConverter</converter-class>
+	</converter>
+	
+	<!-- Converters -->
+	
+	<!-- Validators -->
+
+	<validator>
+		<validator-id>emailvalidator</validator-id>
+		<validator-class>br.com.hslife.imobiliaria.controller.validator.EmailValidator</validator-class>
+	</validator>
+	<validator>
+		<validator-id>cpfvalidator</validator-id>
+		<validator-class>br.com.hslife.imobiliaria.controller.validator.CpfValidator</validator-class>
+	</validator>
+	<validator>
+		<validator-id>cnpjvalidator</validator-id>
+		<validator-class>br.com.hslife.imobiliaria.controller.validator.CnpjValidator</validator-class>
+	</validator>
+	<validator>
+		<validator-id>cepvalidator</validator-id>
+		<validator-class>br.com.hslife.imobiliaria.controller.validator.CepValidator</validator-class>
+	</validator>
+	
+	<!-- Validators -->
+	
+	
+	<lifecycle>
+        <phase-listener>br.com.hslife.imobiliaria.controller.listener.SessaoListener</phase-listener>
+    </lifecycle>
+		
+	<!-- Módulo Cliente -->
+	
+	<navigation-rule>
+		<from-view-id>/cliente/listCliente.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/cliente/formCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/cliente/editCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/cliente/confirmCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/cliente/searchCliente.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/cliente/formCliente.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/cliente/confirmCliente.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/cliente/editCliente.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/cliente/searchCliente.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/cliente/listCliente.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Pessoa Cliente -->
+	
+	 	<!-- Módulo Cliente PJ -->
+	
+	<navigation-rule>
+		<from-view-id>/clientepj/listClientePJ.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/clientepj/formClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/clientepj/editClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/clientepj/confirmClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/clientepj/searchClientePJ.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/clientepj/formClientePJ.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/clientepj/confirmClientePJ.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/clientepj/editClientePJ.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/clientepj/searchClientePJ.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Pessoa Cliente PJ-->
+	 
+	<!-- Módulo Funcionário -->
+	
+	<navigation-rule>
+		<from-view-id>/funcionario/listFuncionario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/funcionario/formFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/funcionario/editFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/funcionario/confirmFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/funcionario/searchFuncionario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/funcionario/formFuncionario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/funcionario/confirmFuncionario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/funcionario/editFuncionario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/funcionario/searchFuncionario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Funcionário -->
+
+
+	<!-- Módulo Corretor -->
+	
+	<navigation-rule>
+		<from-view-id>/corretor/listCorretor.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/corretor/formCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/corretor/editCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/corretor/confirmCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/corretor/searchCorretor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/corretor/formCorretor.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/corretor/confirmCorretor.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/corretor/editCorretor.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/corretor/searchCorretor.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/corretor/listCorretor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Corretor -->
+
+	<!-- Módulo Imóvel -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>listView</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>	
+		<from-view-id>/imovel/listImovel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/imovel/formImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/imovel/editImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/imovel/confirmImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/imovel/searchImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/imovel/formImovel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/imovel/confirmImovel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/imovel/editImovel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/imovel/searchImovel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/imovel/listImovel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Imóvel -->	
+	
+	<!-- Módulo Agenda -->
+	
+	<navigation-rule>
+		<from-view-id>/agenda/listAgenda.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/agenda/formAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/agenda/editAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/agenda/confirmAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/agenda/searchAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registerView</from-outcome>
+			<to-view-id>/agenda/registerAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/agenda/formAgenda.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/agenda/confirmAgenda.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/agenda/registerAgenda.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/agenda/searchAgenda.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/agenda/editAgenda.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/agenda/listAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/menu/home.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/agenda/editAgenda.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Agenda -->
+	
+	
+	<!-- Módulo Contrato -->
+	
+	<navigation-rule>
+		<from-view-id>/contrato/listContrato.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/contrato/formContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/contrato/editContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/contrato/searchContrato.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/contrato/formContrato.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/contrato/confirmContrato.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelConfirm</from-outcome>
+			<to-view-id>/contrato/editContrato.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/contrato/editContrato.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>vigorar</from-outcome>
+			<to-view-id>/contrato/confirmContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>renovar</from-outcome>
+			<to-view-id>/contrato/confirmContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>encerrar</from-outcome>
+			<to-view-id>/contrato/confirmContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/contrato/searchContrato.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/contrato/listContrato.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/home.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/contrato/editContrato.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Contrato -->
+
+	
+	<!-- Módulo Grupos e Permissões -->
+	
+	<navigation-rule>
+		<from-view-id>/grupo/listGrupo.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/grupo/formGrupo.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/grupo/editGrupo.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/grupo/confirmGrupo.jsp</to-view-id>
+		</navigation-case>		
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/grupo/formGrupo.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/grupo/listGrupo.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/grupo/listGrupo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/grupo/confirmGrupo.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/grupo/listGrupo.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/grupo/listGrupo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/grupo/editGrupo.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/grupo/listGrupo.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/grupo/listGrupo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Grupos e Permissões -->
+	
+	<!-- Módulo Usuários -->
+	
+	<navigation-rule>
+		<from-view-id>/usuario/listUsuario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/usuario/formUsuario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/usuario/editUsuario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleteView</from-outcome>
+			<to-view-id>/usuario/confirmUsuario.jsp</to-view-id>
+		</navigation-case>		
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/usuario/formUsuario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/usuario/listUsuario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/usuario/listUsuario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/usuario/confirmUsuario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/usuario/listUsuario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/usuario/listUsuario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/usuario/editUsuario.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/usuario/listUsuario.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/usuario/listUsuario.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Usuários -->
+	
+	<!-- Módulo Aluguel -->
+	
+	<navigation-rule>
+		<from-view-id>/aluguel/listAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>addView</from-outcome>
+			<to-view-id>/aluguel/formAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editView</from-outcome>
+			<to-view-id>/aluguel/editAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrar</from-outcome>
+			<to-view-id>/aluguel/registrarAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/formAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/registrarAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/editAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Aluguel -->
+	
+	<!-- Login no sistema -->
+	
+	<navigation-rule>
+        <from-view-id>/menu/login.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>loginSucesso</from-outcome>
+            <to-view-id>/menu/home.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>logoutSucesso</from-outcome>
+            <to-view-id>/menu/login.jsp</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+	<!-- Login no sistema -->
+	
+	<!-- Menu da parte administrativa -->
+	<navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>menuHome</from-outcome>
+            <to-view-id>/menu/home.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>menuContrato</from-outcome>
+            <to-view-id>/menu/menuContrato.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>menuFuncionario</from-outcome>
+            <to-view-id>/menu/menuFuncionario.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>menuImovel</from-outcome>
+            <to-view-id>/menu/menuImovel.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>menuRelatorio</from-outcome>
+            <to-view-id>/menu/menuRelatorio.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>menuOpcao</from-outcome>
+            <to-view-id>/menu/menuOpcao.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>menuAluguel</from-outcome>
+            <to-view-id>/menu/menuAluguel.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listFuncionario</from-outcome>
+            <to-view-id>/funcionario/listFuncionario.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listCliente</from-outcome>
+            <to-view-id>/cliente/listCliente.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listClientePJ</from-outcome>
+            <to-view-id>/clientepj/listClientePJ.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listCorretor</from-outcome>
+            <to-view-id>/corretor/listCorretor.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listImovel</from-outcome>
+            <to-view-id>/imovel/listImovel.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listAgenda</from-outcome>
+            <to-view-id>/agenda/listAgenda.jsp</to-view-id>
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>listContrato</from-outcome>
+            <to-view-id>/contrato/listContrato.jsp</to-view-id>
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>listAluguel</from-outcome>
+            <to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+        </navigation-case>      
+        <navigation-case>
+            <from-outcome>formIndiceReajuste</from-outcome>
+            <to-view-id>/contrato/formIndiceReajuste.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>formFormaPagamento</from-outcome>
+            <to-view-id>/aluguel/formFormaPagamento.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>formModeloContrato</from-outcome>
+            <to-view-id>/contrato/formModeloContrato.jsp</to-view-id>
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>listGrupo</from-outcome>
+            <to-view-id>/grupo/listGrupo.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listUsuario</from-outcome>
+            <to-view-id>/usuario/listUsuario.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listRelatorio</from-outcome>
+            <to-view-id>/relatorio/formRelatorio.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listSenha</from-outcome>
+            <to-view-id>/usuario/formSenha.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+	<!-- Menu da parte administrativa -->
+	
+</faces-config>
