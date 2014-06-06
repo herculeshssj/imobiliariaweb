@@ -95,4 +95,10 @@ public class AluguelLogic implements IAluguel {
 	public List<Aluguel> buscarPorContrato(Long idContrato) throws BusinessException {
 		return dao.buscarPorContrato(idContrato);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aluguel> buscar(Aluguel aluguel) throws BusinessException {
+		return dao.listByExample(aluguel);
+	}
 }

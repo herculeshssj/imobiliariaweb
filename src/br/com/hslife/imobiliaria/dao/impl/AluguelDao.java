@@ -44,9 +44,13 @@
 
 package br.com.hslife.imobiliaria.dao.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.hslife.imobiliaria.dao.IAluguelDao;
 import br.com.hslife.imobiliaria.model.Aluguel;
@@ -59,5 +63,20 @@ public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idContrato", idContrato);
 		return queryList("aluguel.buscarPorContrato", params);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Aluguel> listByExample(Aluguel example) {
+		List<Criterion> criterios = new ArrayList<Criterion>();
+		if (example.getContrato() != null) {
+			criterios.add(Restrictions.eq("contrato.id", example.getContrato().getId()));
+		}
+		if (example.getPeriodo() > 0) {
+			criterios.add(Restrictions.eq("periodo", example.getPeriodo()));
+		}
+		if (example.getAno() > 0) {
+			criterios.add(Restrictions.eq("ano", example.getAno()));
+		}
+		return listByCriteria(Aluguel.class, criterios);
 	}
 }

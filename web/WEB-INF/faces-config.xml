@@ -883,6 +883,10 @@
 			<to-view-id>/aluguel/editAluguel.jsp</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/aluguel/searchAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>registrar</from-outcome>
 			<to-view-id>/aluguel/registrarAluguel.jsp</to-view-id>
 		</navigation-case>
@@ -916,6 +920,18 @@
 		<from-view-id>/aluguel/editAluguel.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>edit</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/aluguel/searchAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
 			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
 		</navigation-case>
 		<navigation-case>
