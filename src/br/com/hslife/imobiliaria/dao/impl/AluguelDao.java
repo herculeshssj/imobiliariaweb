@@ -50,10 +50,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.hslife.imobiliaria.dao.IAluguelDao;
+import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.model.Aluguel;
 
 public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
@@ -105,5 +107,57 @@ public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
 			}				
 		}
 		return listByCriteria(Aluguel.class, criterios);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aluguel> listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(String nomeLocatario, Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago) {
+		StringBuilder hql = new StringBuilder("FROM Aluguel a WHERE");
+		if (nomeLocatario != null && !nomeLocatario.trim().isEmpty()) {
+			hql.append(" a.contrato.locatario.nome LIKE '%" + nomeLocatario +"%'");
+		}
+		if (idContrato != null) {
+			hql.append(" a.contrato.id = :idContrato");
+			
+		}
+		if (periodo != null) {
+			hql.append(" a.periodo = :periodo");
+		}
+		if (ano != null) {
+			hql.append(" a.ano = :ano");
+		}
+		if (data != null) {
+			hql.append(" a.vencimento <= :vencimento");
+		}
+		if (pago != null) {
+			hql.append(" a.pago = :pago");				
+		}
+		
+		Query query;
+		if (hql.toString().equalsIgnoreCase("FROM Aluguel a WHERE")) {
+			query = HibernateUtility.getSession().createQuery("FROM Aluguel a");
+			return query.list();
+		} else {
+			query = HibernateUtility.getSession().createQuery(hql.toString());
+		}
+		
+		
+		if (idContrato != null) {
+			query.setLong("idContrato", idContrato);			
+		}
+		if (periodo != null) {
+			query.setInteger("periodo", periodo);
+		}
+		if (ano != null) {
+			query.setInteger("ano", ano);
+		}
+		if (data != null) {
+			query.setDate("vencimento", data);
+		}
+		if (pago != null) {
+			query.setBoolean("pago", pago);				
+		}
+		
+		return query.list();
 	}
 }

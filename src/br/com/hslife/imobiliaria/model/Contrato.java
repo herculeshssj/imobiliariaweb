@@ -155,7 +155,7 @@ public class Contrato implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="idLocatario", nullable=true)
-	Cliente locatario;
+	private Cliente locatario;
 	
 	@ManyToOne
 	@JoinColumn(name="idLocatarioPJ", nullable=true)

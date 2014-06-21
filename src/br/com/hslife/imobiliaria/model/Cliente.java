@@ -119,7 +119,7 @@ public class Cliente implements Serializable{
 	Date dataEmissaoConjuge;
 	
 	@Column(length=100, nullable=false)
-	String nome;
+	private String nome;
 	
 	@Column(length=100)
 	String nomeConjuge;

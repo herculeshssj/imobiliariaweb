@@ -69,6 +69,9 @@
 						Nº do Contrato:
 						<h:inputText value="#{aluguelMB.numContrato }" maxlength="10"/>
 						
+						Nome do locatário:
+						<h:inputText value="#{aluguelMB.aluguel.nomeLocatario }"/>
+						
 						Período:
 						<h:inputText value="#{aluguelMB.aluguel.periodo }"/>
 						

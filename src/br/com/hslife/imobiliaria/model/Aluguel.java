@@ -115,6 +115,9 @@ public class Aluguel implements Serializable {
 	@Transient
 	private String situacaoAluguel;
 	
+	@Transient
+	private String nomeLocatario;
+	
 	public Aluguel() {
 		
 	}
@@ -235,5 +238,13 @@ public class Aluguel implements Serializable {
 
 	public void setSituacaoAluguel(String situacaoAluguel) {
 		this.situacaoAluguel = situacaoAluguel;
+	}
+
+	public String getNomeLocatario() {
+		return nomeLocatario;
+	}
+
+	public void setNomeLocatario(String nomeLocatario) {
+		this.nomeLocatario = nomeLocatario;
 	}
 }

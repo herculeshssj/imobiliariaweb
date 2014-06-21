@@ -119,6 +119,7 @@ public class AluguelController extends GenericController {
 		idContrato = null;
 		ano = null;
 		periodo = null;
+		numContrato = null;
 		dadosModelo = new ListDataModel(listaAluguel);
 	}
 
