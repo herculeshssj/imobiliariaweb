@@ -48,7 +48,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+
 import br.com.hslife.imobiliaria.dao.IClientePJDao;
+import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.model.ClientePJ;
 import br.com.hslife.imobiliaria.model.Socio;
 
@@ -88,4 +91,8 @@ public class ClientePJDao extends HibernateGenericDao implements IClientePJDao {
 		return queryList("clientePJ.buscarTodosAtivos");
 	}
 
+	@Override
+	public List<ClientePJ> list(Class clazz) {
+		return HibernateUtility.getSession().createCriteria(clazz).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+	}
 }
