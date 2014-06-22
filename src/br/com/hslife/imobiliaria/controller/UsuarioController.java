@@ -122,7 +122,7 @@ public class UsuarioController extends GenericController {
 			if (findValue == null || findValue.isEmpty()) {
 				dadosModelo = new ListDataModel(logic.buscarTodos());
 			} else {
-				dadosModelo = new ListDataModel(logic.buscar(usuario));
+				dadosModelo = new ListDataModel(logic.buscarTodosPorLogin(usuario.getLogin()));
 			}
 			viewMessage("Busca realizada com sucesso!");
 			usuario.setLogin("");

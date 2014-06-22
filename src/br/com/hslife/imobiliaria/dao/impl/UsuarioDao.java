@@ -45,9 +45,15 @@
 package br.com.hslife.imobiliaria.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
 import br.com.hslife.imobiliaria.dao.IUsuarioDao;
+import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.model.Usuario;
 
 public class UsuarioDao extends HibernateGenericDao implements IUsuarioDao {
@@ -57,6 +63,12 @@ public class UsuarioDao extends HibernateGenericDao implements IUsuarioDao {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		parametros.put("login", login);
 		return (Usuario) queryUnique("usuario.buscarPorLogin", parametros);
+	}
+	
+	public List<Usuario> findAllByLogin(String login) {
+		Criteria criteria = HibernateUtility.getSession().createCriteria(Usuario.class);
+		criteria.add(Restrictions.ilike("login", login, MatchMode.ANYWHERE));
+		return criteria.list();
 	}
 	
 }
