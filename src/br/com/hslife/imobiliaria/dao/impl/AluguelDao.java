@@ -50,8 +50,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.hslife.imobiliaria.dao.IAluguelDao;
@@ -112,52 +113,32 @@ public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Aluguel> listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(String nomeLocatario, Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago) {
-		StringBuilder hql = new StringBuilder("FROM Aluguel a WHERE");
+		Criteria criteria = HibernateUtility.getSession()
+				.createCriteria(Aluguel.class, "aluguel")
+				.createAlias("aluguel.contrato", "contrato")
+				.createAlias("contrato.locatario", "locatario");
 		if (nomeLocatario != null && !nomeLocatario.trim().isEmpty()) {
-			hql.append(" a.contrato.locatario.nome LIKE '%" + nomeLocatario +"%'");
+			criteria.add(Restrictions.ilike("locatario.nome", nomeLocatario, MatchMode.ANYWHERE));
 		}
 		if (idContrato != null) {
-			hql.append(" a.contrato.id = :idContrato");
-			
+			criteria.add(Restrictions.eq("contrato.id", idContrato));
 		}
 		if (periodo != null) {
-			hql.append(" a.periodo = :periodo");
+			criteria.add(Restrictions.eq("aluguel.periodo", periodo));
 		}
 		if (ano != null) {
-			hql.append(" a.ano = :ano");
+			criteria.add(Restrictions.eq("aluguel.ano", ano));
 		}
 		if (data != null) {
-			hql.append(" a.vencimento <= :vencimento");
+			criteria.add(Restrictions.le("aluguel.vencimento", data));
 		}
 		if (pago != null) {
-			hql.append(" a.pago = :pago");				
+			if (pago) {
+				criteria.add(Restrictions.isNotNull("aluguel.pagamento"));
+			} else {
+				criteria.add(Restrictions.isNull("aluguel.pagamento"));
+			}				
 		}
-		
-		Query query;
-		if (hql.toString().equalsIgnoreCase("FROM Aluguel a WHERE")) {
-			query = HibernateUtility.getSession().createQuery("FROM Aluguel a");
-			return query.list();
-		} else {
-			query = HibernateUtility.getSession().createQuery(hql.toString());
-		}
-		
-		
-		if (idContrato != null) {
-			query.setLong("idContrato", idContrato);			
-		}
-		if (periodo != null) {
-			query.setInteger("periodo", periodo);
-		}
-		if (ano != null) {
-			query.setInteger("ano", ano);
-		}
-		if (data != null) {
-			query.setDate("vencimento", data);
-		}
-		if (pago != null) {
-			query.setBoolean("pago", pago);				
-		}
-		
-		return query.list();
+		return criteria.list();
 	}
 }
