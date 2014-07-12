@@ -50,10 +50,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.hslife.imobiliaria.dao.IAluguelDao;
+import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.model.Aluguel;
 
 public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
@@ -105,5 +108,37 @@ public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
 			}				
 		}
 		return listByCriteria(Aluguel.class, criterios);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aluguel> listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(String nomeLocatario, Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago) {
+		Criteria criteria = HibernateUtility.getSession()
+				.createCriteria(Aluguel.class, "aluguel")
+				.createAlias("aluguel.contrato", "contrato")
+				.createAlias("contrato.locatario", "locatario");
+		if (nomeLocatario != null && !nomeLocatario.trim().isEmpty()) {
+			criteria.add(Restrictions.ilike("locatario.nome", nomeLocatario, MatchMode.ANYWHERE));
+		}
+		if (idContrato != null) {
+			criteria.add(Restrictions.eq("contrato.id", idContrato));
+		}
+		if (periodo != null) {
+			criteria.add(Restrictions.eq("aluguel.periodo", periodo));
+		}
+		if (ano != null) {
+			criteria.add(Restrictions.eq("aluguel.ano", ano));
+		}
+		if (data != null) {
+			criteria.add(Restrictions.le("aluguel.vencimento", data));
+		}
+		if (pago != null) {
+			if (pago) {
+				criteria.add(Restrictions.isNotNull("aluguel.pagamento"));
+			} else {
+				criteria.add(Restrictions.isNull("aluguel.pagamento"));
+			}				
+		}
+		return criteria.list();
 	}
 }

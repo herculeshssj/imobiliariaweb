@@ -111,4 +111,10 @@ public class GrupoLogic implements IGrupo {
 	public List<Grupo> buscarTodos() throws BusinessException {
 		return dao.list(Grupo.class);
 	}
+	
+	@Override
+	public List<Grupo> buscarPorDescricao(String descricao)
+			throws BusinessException {
+		return dao.findByDescricao(descricao);
+	}
 }

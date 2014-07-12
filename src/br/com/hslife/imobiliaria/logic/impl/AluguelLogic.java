@@ -123,7 +123,7 @@ public class AluguelLogic implements IAluguel {
 			Calendar temp = Calendar.getInstance();
 			temp.add(Calendar.DAY_OF_YEAR, -10);
 			data = temp.getTime();
-			for (Aluguel a : dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
+			for (Aluguel a : dao.listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(aluguel.getNomeLocatario(), idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
 				if (a.getDiasAtrasados() > 10 && a.getDiasAtrasados() <= 20) {
 					resultado.add(a);
 				}
@@ -134,7 +134,7 @@ public class AluguelLogic implements IAluguel {
 			Calendar temp = Calendar.getInstance();
 			temp.add(Calendar.DAY_OF_YEAR, -20);
 			data = temp.getTime();
-			for (Aluguel a : dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
+			for (Aluguel a : dao.listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(aluguel.getNomeLocatario(), idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
 				if (a.getDiasAtrasados() > 20 && a.getDiasAtrasados() <= 30) {
 					resultado.add(a);
 				}
@@ -145,13 +145,13 @@ public class AluguelLogic implements IAluguel {
 			Calendar temp = Calendar.getInstance();
 			temp.add(Calendar.DAY_OF_YEAR, -30);
 			data = temp.getTime();
-			for (Aluguel a : dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
+			for (Aluguel a : dao.listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(aluguel.getNomeLocatario(), idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago)) {
 				if (a.getDiasAtrasados() > 30) {
 					resultado.add(a);
 				}
 			}
 		} else {
-			resultado = dao.listByContratoOrPeriodoOrAnoBeforeDataAndPago(idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago);
+			resultado = dao.listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(aluguel.getNomeLocatario(), idContrato, aluguel.getPeriodo(), aluguel.getAno(), data, pago);
 		}
 		return resultado;
 	}

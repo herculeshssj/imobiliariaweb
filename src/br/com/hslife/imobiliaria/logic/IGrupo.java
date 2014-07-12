@@ -63,5 +63,5 @@ public interface IGrupo {
 	
 	public List<Grupo> buscarTodos() throws BusinessException;
 	
-
+	public List<Grupo> buscarPorDescricao(String descricao) throws BusinessException;
 }

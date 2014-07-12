@@ -57,5 +57,7 @@ public interface IAluguelDao extends GenericDao {
 	public List<Aluguel> listByExample(Aluguel example);
 	
 	public List<Aluguel> listByContratoOrPeriodoOrAnoBeforeDataAndPago(Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago);
+	
+	public List<Aluguel> listByNomeLocatarioOrContratoOrPeriodoOrAnoBeforeDataAndPago(String nomeLocatario, Long idContrato, Integer periodo, Integer ano, Date data, Boolean pago);
 
 }

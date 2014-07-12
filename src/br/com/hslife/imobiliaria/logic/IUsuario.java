@@ -65,4 +65,5 @@ public interface IUsuario {
 	
 	public Usuario buscarPorLogin(String login) throws BusinessException;
 
+	public List<Usuario> buscarTodosPorLogin(String login) throws BusinessException;
 }

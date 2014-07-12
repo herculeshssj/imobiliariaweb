@@ -45,9 +45,15 @@
 package br.com.hslife.imobiliaria.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
 import br.com.hslife.imobiliaria.dao.IGrupoDao;
+import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.model.Grupo;
 
 public class GrupoDao extends HibernateGenericDao implements IGrupoDao {
@@ -78,4 +84,9 @@ public class GrupoDao extends HibernateGenericDao implements IGrupoDao {
 		super.delete(objeto);
 	}
 
+	public List<Grupo> findByDescricao(String descricao) {
+		Criteria criteria = HibernateUtility.getSession().createCriteria(Grupo.class);
+		criteria.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
+		return criteria.list();
+	}
 }

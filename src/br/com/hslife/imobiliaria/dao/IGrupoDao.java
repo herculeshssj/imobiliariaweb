@@ -44,9 +44,13 @@
 
 package br.com.hslife.imobiliaria.dao;
 
+import java.util.List;
+
+import br.com.hslife.imobiliaria.model.Grupo;
+
 
 public interface IGrupoDao extends GenericDao {
 	
-
+	public List<Grupo> findByDescricao(String descricao);
 
 }

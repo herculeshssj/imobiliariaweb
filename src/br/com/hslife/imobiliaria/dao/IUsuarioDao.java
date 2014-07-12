@@ -44,6 +44,8 @@
 
 package br.com.hslife.imobiliaria.dao;
 
+import java.util.List;
+
 import br.com.hslife.imobiliaria.model.Usuario;
 
 
@@ -51,5 +53,5 @@ public interface IUsuarioDao extends GenericDao {
 	
 	public Usuario buscarPorLogin(String login);
 
-
+	public List<Usuario> findAllByLogin(String login);
 }

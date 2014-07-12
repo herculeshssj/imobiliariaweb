@@ -124,7 +124,10 @@ public class UsuarioLogic implements IUsuario {
 		return dao.buscarPorLogin(login);
 	}
 
-	
+	@Override
+	public List<Usuario> buscarTodosPorLogin(String login) throws BusinessException {
+		return dao.findAllByLogin(login);
+	}
 	
 	/*
 	Map<String, Object> criterio;

@@ -114,7 +114,7 @@ public class GrupoController extends GenericController {
 			if (findValue == null || findValue.isEmpty()) {
 				dadosModelo = new ListDataModel(logic.buscarTodos());
 			} else {
-				dadosModelo = new ListDataModel(logic.buscar(grupo));
+				dadosModelo = new ListDataModel(logic.buscarPorDescricao(grupo.getDescricao()));
 			}							
 			viewMessage("Busca realizada com sucesso!");
 			grupo.setDescricao("");
