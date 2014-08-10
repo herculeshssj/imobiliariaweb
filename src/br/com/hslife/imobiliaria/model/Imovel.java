@@ -50,6 +50,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,6 +64,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="Imovel")
@@ -100,7 +103,8 @@ public class Imovel implements Serializable {
 	@JoinColumn(name="idLocador", nullable=false)
 	Cliente locador;
 	
-	@OneToMany(mappedBy="imovel")
+	@OneToMany(mappedBy="imovel", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	List<Contrato> contratos;
 	
 	@Column

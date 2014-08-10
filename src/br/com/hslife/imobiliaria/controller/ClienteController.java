@@ -54,9 +54,7 @@ import br.com.hslife.imobiliaria.exception.ServiceException;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.ICliente;
 import br.com.hslife.imobiliaria.model.Cliente;
-import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.Endereco;
-import br.com.hslife.imobiliaria.model.Imovel;
 import br.com.hslife.imobiliaria.model.Telefone;
 import br.com.hslife.imobiliaria.service.CEPService;
 
@@ -192,8 +190,8 @@ public class ClienteController extends GenericController {
 			listaTelefone = cliente.getTelefones();
 			resgataTipoCliente();
 			// Instanciando a lista de imóveis e contratos para evitar NullPointerException
-			cliente.setImoveis(LogicFactory.createImovelLogic().buscar(new Imovel(cliente)));
-			cliente.setContratos(LogicFactory.createContratoLogic().buscar(new Contrato(cliente)));
+			//cliente.setImoveis(LogicFactory.createImovelLogic().buscar(new Imovel(cliente)));
+			//cliente.setContratos(LogicFactory.createContratoLogic().buscar(new Contrato(cliente)));
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
 		}

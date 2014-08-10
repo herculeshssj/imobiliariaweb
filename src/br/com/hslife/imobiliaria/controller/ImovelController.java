@@ -204,7 +204,7 @@ public class ImovelController extends GenericController {
 			idLocador = imovel.getLocador().getId();
 			contaArquivos = 20 - listaFoto.size();
 			carregaCombos();
-			imovel.setContratos(LogicFactory.createContratoLogic().buscar(new Contrato(imovel.getLocador())));		
+			//imovel.setContratos(LogicFactory.createContratoLogic().buscar(new Contrato(imovel.getLocador())));		
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
 		}

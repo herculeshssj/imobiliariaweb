@@ -65,10 +65,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="Cliente")
@@ -188,10 +189,12 @@ public class Cliente implements Serializable{
 	@Column(nullable=false)
 	String tipoCliente; // cliente,locador,locatario,fiador,responsavel,procurador
 	
-	@Transient
+	@OneToMany(mappedBy="locador", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	List<Imovel> imoveis;
 	
-	@OneToMany(mappedBy="corretor")
+	@OneToMany(mappedBy="corretor", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	List<Contrato> contratos;
 	
 	Boolean ativo;
