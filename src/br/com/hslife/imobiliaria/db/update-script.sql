@@ -74,3 +74,27 @@ alter table aluguel add constraint fk_contrato_aluguel foreign key (idContrato) 
 
 insert into formapagamento (descricao) values ('Dinheiro');
 insert into formapagamento (descricao) values ('Cheque');
+
+-- Alteração do dono das tabelas
+alter table Agenda owner to imobiliaria;
+alter table Cliente owner to imobiliaria;
+alter table ClientePJ owner to imobiliaria;
+alter table ClientePJ_Socio owner to imobiliaria;
+alter table ClientePJ_Telefone owner to imobiliaria;
+alter table Cliente_Telefone owner to imobiliaria;
+alter table Contrato owner to imobiliaria;
+alter table Corretor owner to imobiliaria;
+alter table Endereco owner to imobiliaria;
+alter table Foto owner to imobiliaria;
+alter table Funcionario owner to imobiliaria;
+alter table Grupo owner to imobiliaria;
+alter table Grupo_Permissao owner to imobiliaria;
+alter table Imovel owner to imobiliaria;
+alter table Imovel_Foto owner to imobiliaria;
+alter table IndiceReajuste owner to imobiliaria;
+alter table ModeloContrato owner to imobiliaria;
+alter table Permissao owner to imobiliaria;
+alter table Relatorio owner to imobiliaria;
+alter table Socio owner to imobiliaria;
+alter table Telefone owner to imobiliaria;
+alter table Usuario owner to imobiliaria;
