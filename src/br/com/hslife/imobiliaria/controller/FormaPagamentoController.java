@@ -85,11 +85,11 @@ public class FormaPagamentoController extends GenericController {
 		//logic = LogicFactory.createFormaPagamentoLogic();
 		
 		// Define as permissões para este controller
-		canAdd = true;//isAuthorized("formaPagamento", "add");
-		canEdit = true;//isAuthorized("formaPagamento", "edit");
-		canDelete = true;//isAuthorized("formaPagamento", "delete");
-		canList = true;//isAuthorized("formaPagamento", "list");
-		canView = true;//isAuthorized("formaPagamento", "view");
+		canAdd = isAuthorized("formaPagamento", "add");
+		canEdit = isAuthorized("formaPagamento", "edit");
+		canDelete = isAuthorized("formaPagamento", "delete");
+		canList = isAuthorized("formaPagamento", "list");
+		canView = isAuthorized("formaPagamento", "view");
 	}
 	
 	/*** Métodos abstratos de AbstractController ***/
