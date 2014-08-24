@@ -49,11 +49,16 @@ import java.util.List;
 
 import javax.faces.model.ListDataModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import br.com.hslife.imobiliaria.exception.BusinessException;
-import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IFormaPagamento;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
 
+@Component("formaPagamentoMB")
+@Scope("session")
 public class FormaPagamentoController extends GenericController {
 	
 	/*** Atributos da classe ***/
@@ -62,6 +67,7 @@ public class FormaPagamentoController extends GenericController {
 	FormaPagamento formaPagamento;
 	
 	// Lógica de negócio
+	@Autowired
 	IFormaPagamento logic;
 	
 	// Listas
@@ -75,14 +81,14 @@ public class FormaPagamentoController extends GenericController {
 	public FormaPagamentoController() {
 		this.formaPagamento = new FormaPagamento();
 		this.listaFormaPagamento = new ArrayList<FormaPagamento>();
-		logic = LogicFactory.createFormaPagamentoLogic();
+		//logic = LogicFactory.createFormaPagamentoLogic();
 		
 		// Define as permissões para este controller
-		canAdd = isAuthorized("formaPagamento", "add");
-		canEdit = isAuthorized("formaPagamento", "edit");
-		canDelete = isAuthorized("formaPagamento", "delete");
-		canList = isAuthorized("formaPagamento", "list");
-		canView = isAuthorized("formaPagamento", "view");
+		canAdd = true;//isAuthorized("formaPagamento", "add");
+		canEdit = true;//isAuthorized("formaPagamento", "edit");
+		canDelete = true;//isAuthorized("formaPagamento", "delete");
+		canList = true;//isAuthorized("formaPagamento", "list");
+		canView = true;//isAuthorized("formaPagamento", "view");
 	}
 	
 	/*** Métodos abstratos de AbstractController ***/
@@ -97,7 +103,7 @@ public class FormaPagamentoController extends GenericController {
 
 	@Override
 	public void simpleSearch() {		
-		try {
+		try {			
 			formaPagamento.setDescricao(findValue);
 			if (findValue == null || findValue.isEmpty()) {
 				dadosModelo = new ListDataModel(logic.buscarTodos());

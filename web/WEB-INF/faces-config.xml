@@ -51,6 +51,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
 
 	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 		<view-handler>org.ajax4jsf.application.AjaxViewHandler</view-handler>
 		<message-bundle>message</message-bundle>
 		<locale-config>
@@ -138,11 +139,13 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<!-- 
 	<managed-bean>
 		<managed-bean-name>formaPagamentoMB</managed-bean-name>
 		<managed-bean-class>br.com.hslife.imobiliaria.controller.FormaPagamentoController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	-->
 	
 	<managed-bean>
 		<managed-bean-name>aluguelMB</managed-bean-name>

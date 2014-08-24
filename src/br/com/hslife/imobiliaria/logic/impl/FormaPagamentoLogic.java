@@ -46,16 +46,21 @@ package br.com.hslife.imobiliaria.logic.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import br.com.hslife.imobiliaria.dao.IFormaPagamentoDao;
 import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.exception.BusinessException;
 import br.com.hslife.imobiliaria.logic.IFormaPagamento;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
 
+@Component
 public class FormaPagamentoLogic implements IFormaPagamento {
 	
 	IFormaPagamentoDao dao;
 	
+	@Autowired
 	public FormaPagamentoLogic(IFormaPagamentoDao dao) {
 		this.dao = dao;		
 	}
@@ -86,7 +91,7 @@ public class FormaPagamentoLogic implements IFormaPagamento {
 
 	@Override
 	public FormaPagamento buscar(Long id) throws BusinessException {
-		return (FormaPagamento) dao.getById(id, FormaPagamento.class);		
+		return (FormaPagamento)dao.getById(id, FormaPagamento.class);
 	}
 
 	@SuppressWarnings("unchecked")
