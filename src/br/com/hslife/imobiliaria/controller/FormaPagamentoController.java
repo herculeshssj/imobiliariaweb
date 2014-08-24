@@ -54,7 +54,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import br.com.hslife.imobiliaria.exception.BusinessException;
-import br.com.hslife.imobiliaria.logic.IFormaPagamento;
+import br.com.hslife.imobiliaria.facade.IFormaPagamentoBusiness;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
 
 @Component("formaPagamentoMB")
@@ -68,7 +68,8 @@ public class FormaPagamentoController extends GenericController {
 	
 	// Lógica de negócio
 	@Autowired
-	IFormaPagamento logic;
+	//IFormaPagamento logic;
+	IFormaPagamentoBusiness logic;
 	
 	// Listas
 	List<FormaPagamento> listaFormaPagamento;
@@ -108,7 +109,7 @@ public class FormaPagamentoController extends GenericController {
 			if (findValue == null || findValue.isEmpty()) {
 				dadosModelo = new ListDataModel(logic.buscarTodos());
 			} else {
-				dadosModelo = new ListDataModel(logic.buscar(formaPagamento));
+				dadosModelo = new ListDataModel(logic.buscarPorDescricao(findValue));
 			}							
 			viewMessage("Busca realizada com sucesso!");
 			formaPagamento.setDescricao("");
@@ -129,13 +130,13 @@ public class FormaPagamentoController extends GenericController {
 	public String add() {		
 		try {
 			if (formaPagamento.getId() != null && formaPagamento.getId() > 0) 
-				logic.editar(formaPagamento);
+				logic.alterar(formaPagamento);
 			else 
 				logic.cadastrar(formaPagamento);
 			viewMessage("Registro cadastrado com sucesso!");
 			clearVariables();
 		} catch (BusinessException be) {
-			viewMessage("Erro ao salvar: " + be.getMessage(), "frmIndiceReajuste");			
+			viewMessage("Erro ao salvar: " + be.getMessage(), "frmFormaPagamento");			
 		}
 		return null;
 	}
@@ -144,7 +145,7 @@ public class FormaPagamentoController extends GenericController {
 	public String editView() {
 		FormaPagamento c = (FormaPagamento) dadosModelo.getRowData();
 		try {
-			formaPagamento = logic.buscar(c.getId());
+			formaPagamento = logic.buscarPorID(c.getId());
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage(), "frmFormaPagamento");
 		}
@@ -154,11 +155,11 @@ public class FormaPagamentoController extends GenericController {
 	@Override
 	public String edit() {
 		try {
-			logic.editar(formaPagamento);
+			logic.alterar(formaPagamento);
 			viewMessage("Registro editado com sucesso!");
 			clearVariables();			
 		} catch (BusinessException be) {
-			viewMessage("Erro ao editar: " + be.getMessage(), "frmIndiceReajuste");
+			viewMessage("Erro ao editar: " + be.getMessage(), "frmFormaPagamento");
 		}
 		return null;
 	}
@@ -177,14 +178,6 @@ public class FormaPagamentoController extends GenericController {
 		this.formaPagamento = formaPagamento;
 	}
 
-	public IFormaPagamento getLogic() {
-		return logic;
-	}
-
-	public void setLogic(IFormaPagamento logic) {
-		this.logic = logic;
-	}
-
 	public List<FormaPagamento> getListaFormaPagamento() {
 		return listaFormaPagamento;
 	}
@@ -199,5 +192,13 @@ public class FormaPagamentoController extends GenericController {
 
 	public void setIdFormaPagamento(Long idFormaPagamento) {
 		this.idFormaPagamento = idFormaPagamento;
+	}
+
+	public IFormaPagamentoBusiness getLogic() {
+		return logic;
+	}
+
+	public void setLogic(IFormaPagamentoBusiness logic) {
+		this.logic = logic;
 	}
 }
