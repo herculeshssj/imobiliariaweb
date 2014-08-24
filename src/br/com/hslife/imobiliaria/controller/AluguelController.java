@@ -195,6 +195,20 @@ public class AluguelController extends GenericController {
 	}
 	
 	@Override
+	public String delete() {
+		String retorno = null;
+		try {
+			logic.excluir(aluguel);
+			viewMessage("Registro excluído com sucesso!");
+			clearVariables();
+			retorno = super.delete();
+		} catch (BusinessException be) {
+			viewMessage("Erro ao excluir: " + be.getMessage(), "frmAluguel");
+		}
+		return retorno;
+	}
+	
+	@Override
 	public String searchView() {
 		aluguel = new Aluguel();
 		return super.searchView();

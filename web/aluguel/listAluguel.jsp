@@ -85,7 +85,7 @@
 			<h:commandLink value="Mais opções de pesquisa" action="#{aluguelMB.searchView }"></h:commandLink>
 			</h:panelGroup>
 			<br /> <br/>
-			<rich:dataTable id="tableAluguel" width="100%" value="#{aluguelMB.dadosModelo }" var="item">
+			<rich:dataTable id="tableAluguel" width="100%" value="#{aluguelMB.dadosModelo }" var="item" rows="15">
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Período"></h:outputText>

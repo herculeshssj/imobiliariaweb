@@ -88,12 +88,10 @@ public class ClientePJ implements Serializable{
 	@Column(length=14, nullable=false)
 	String cnpj;
 	
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)	
 	Set<Telefone> telefones;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	
+	@OneToOne(cascade=CascadeType.ALL)	
 	Endereco endereco;
 	
 	@Column

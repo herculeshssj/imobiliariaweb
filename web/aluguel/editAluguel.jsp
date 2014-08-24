@@ -128,6 +128,8 @@
 					
 			<h:commandButton value="Editar" style="padding: 3px 10px;" action="#{aluguelMB.edit }" disabled="#{aluguelMB.aluguel.pagamento != null }" rendered="#{aluguelMB.canEdit }"/>
 			&nbsp;&nbsp;
+			<h:commandButton value="Excluir" style="padding: 3px 10px;" action="#{aluguelMB.delete }" rendered="#{aluguelMB.canDelete and aluguelMB.aluguel.pagamento == null }"/>
+			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;" action="#{aluguelMB.cancelAction }" immediate="true"></h:commandButton>
 
 			<div style="clear: both;"></div>

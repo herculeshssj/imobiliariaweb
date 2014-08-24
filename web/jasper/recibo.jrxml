@@ -29,12 +29,12 @@ a.id = $P{id};]]>
 	<field name="endereco" class="java.lang.String"/>
 	<field name="periodo" class="java.lang.String"/>
 	<detail>
-		<band height="316" splitType="Stretch">
+		<band height="758" splitType="Stretch">
 			<rectangle radius="10">
 				<reportElement x="0" y="0" width="511" height="316"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="306" y="6" width="100" height="16"/>
+				<reportElement x="264" y="6" width="100" height="16"/>
 				<graphicElement>
 					<pen lineWidth="0.75"/>
 				</graphicElement>
@@ -90,7 +90,7 @@ a.id = $P{id};]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="309" y="5" width="94" height="18"/>
+				<reportElement x="267" y="5" width="94" height="18"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -169,12 +169,12 @@ a.id = $P{id};]]>
 				<text><![CDATA[sem]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="184" y="178" width="40" height="16"/>
+				<reportElement x="184" y="178" width="52" height="16"/>
 				<textElement/>
 				<text><![CDATA[Contrato]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="18" y="198" width="177" height="16"/>
+				<reportElement x="18" y="198" width="218" height="16"/>
 				<textElement/>
 				<text><![CDATA[e para clareza firmo(amos) o presente.]]></text>
 			</staticText>
@@ -197,6 +197,190 @@ a.id = $P{id};]]>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[VIA DA IMOBILIÁRIA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="333" width="510" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<rectangle radius="10">
+				<reportElement x="0" y="351" width="511" height="316"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="264" y="357" width="100" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="80" y="412" width="414" height="35"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="137" y="451" width="357" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="46" y="470" width="448" height="35"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="136" y="509" width="100" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="145" y="357" width="100" height="16" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="98" y="393" width="396" height="15" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="69" y="356" width="75" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO Nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="148" y="356" width="94" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="267" y="356" width="94" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorpago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="393" width="80" height="15"/>
+				<textElement/>
+				<text><![CDATA[Recebi(emos) de]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="101" y="393" width="390" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="412" width="62" height="15"/>
+				<textElement/>
+				<text><![CDATA[a quantia de]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="83" y="412" width="408" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{valorpagoextenso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="451" width="116" height="15"/>
+				<textElement/>
+				<text><![CDATA[proveniente de aluguel de ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="451" width="351" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoimovel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="470" width="28" height="15"/>
+				<textElement/>
+				<text><![CDATA[sito à]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="49" y="470" width="442" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="509" width="117" height="16"/>
+				<textElement/>
+				<text><![CDATA[Referente ao mês/período]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="509" width="94" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="529" width="62" height="16"/>
+				<textElement/>
+				<text><![CDATA[aluguel com]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="80" y="529" width="29" height="16" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="145" y="529" width="29" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="120" y="529" width="25" height="16"/>
+				<textElement/>
+				<text><![CDATA[sem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="529" width="52" height="16"/>
+				<textElement/>
+				<text><![CDATA[Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="549" width="218" height="16"/>
+				<textElement/>
+				<text><![CDATA[e para clareza firmo(amos) o presente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="582" width="71" height="14"/>
+				<textElement/>
+				<text><![CDATA[Rio de Janeiro,]]></text>
+			</staticText>
+			<textField pattern="dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
+				<reportElement x="316" y="582" width="178" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="245" y="638" width="249" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="80" y="527" width="29" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="357" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[VIA DO CLIENTE]]></text>
 			</staticText>
 		</band>
 	</detail>

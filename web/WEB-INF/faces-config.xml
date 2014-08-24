@@ -926,6 +926,10 @@
 			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>delete</from-outcome>
+			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>cancelAction</from-outcome>
 			<to-view-id>/aluguel/listAluguel.jsp</to-view-id>
 		</navigation-case>
