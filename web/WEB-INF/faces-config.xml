@@ -949,6 +949,30 @@
 	
 	<!-- Módulo Aluguel -->
 	
+	<!-- Módulo Aluguel - Histórico -->
+	
+	<navigation-rule>
+		<from-view-id>/aluguel/listHistoricoAluguel.jsp</from-view-id>		
+		<navigation-case>
+			<from-outcome>searchView</from-outcome>
+			<to-view-id>/aluguel/searchHistoricoAluguel.jsp</to-view-id>
+		</navigation-case>		
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/aluguel/searchHistoricoAluguel.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/aluguel/listHistoricoAluguel.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelAction</from-outcome>
+			<to-view-id>/aluguel/listHistoricoAluguel.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Módulo Aluguel - Histórico -->
+	
 	<!-- Login no sistema -->
 	
 	<navigation-rule>
@@ -1032,6 +1056,10 @@
         <navigation-case>
             <from-outcome>listAluguel</from-outcome>
             <to-view-id>/aluguel/listAluguel.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listHistoricoAluguel</from-outcome>
+            <to-view-id>/aluguel/listHistoricoAluguel.jsp</to-view-id>
         </navigation-case>      
         <navigation-case>
             <from-outcome>formIndiceReajuste</from-outcome>
