@@ -53,6 +53,7 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.hslife.imobiliaria.dao.IAluguelDao;
@@ -139,6 +140,7 @@ public class AluguelDao extends HibernateGenericDao implements IAluguelDao {
 				criteria.add(Restrictions.isNull("aluguel.pagamento"));
 			}				
 		}
+		criteria.addOrder(Order.asc("aluguel.vencimento"));
 		return criteria.list();
 	}
 }

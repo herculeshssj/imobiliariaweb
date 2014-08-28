@@ -61,7 +61,7 @@
 			
 			<rich:messages style="color: #000000; font-weight: bold;"></rich:messages>
 			
-			<h:commandButton value="Imprimir" style="padding: 3px 10px;" rendered="#{aluguelMB.canView }"/>
+			<h:commandButton value="Imprimir" style="padding: 3px 10px;" action="#{aluguelMB.imprimir }" rendered="#{aluguelMB.canView }"/>
 			<h:panelGroup rendered="#{aluguelMB.canList }">
 			&nbsp; 
 			Contrato:

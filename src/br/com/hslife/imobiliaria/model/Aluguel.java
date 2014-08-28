@@ -140,7 +140,16 @@ public class Aluguel implements Serializable {
 				}
 				return diasAtraso;
 			}
-		} 
+		} else {
+			Calendar temp = Calendar.getInstance();
+			temp.setTime(this.vencimento);
+			int diasAtraso = 0;
+			while (temp.getTime().before(this.pagamento)) {
+				temp.add(Calendar.DAY_OF_YEAR, 1);
+				diasAtraso++;
+			}
+			return diasAtraso;
+		}
 		return 0;
 	}
 
