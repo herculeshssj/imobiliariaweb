@@ -1,6 +1,6 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
     Este arquivo é parte do programa Imobiliária Web.
@@ -51,30 +51,14 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.hslife.imobiliaria.dao.GenericDao;
 import br.com.hslife.imobiliaria.db.HibernateUtility;
 
-@Transactional
 public class HibernateGenericDao implements GenericDao {
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public Session getSession() {
-		return this.sessionFactory.getCurrentSession();
-	}
-	
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 	@Override
 	public void save(final Object objeto) {

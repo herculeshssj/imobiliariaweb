@@ -44,18 +44,8 @@
 
 package br.com.hslife.imobiliaria.dao.impl;
 
-import java.io.Serializable;
-
-import org.springframework.stereotype.Repository;
-
 import br.com.hslife.imobiliaria.dao.IFormaPagamentoDao;
 
-@Repository
-public class FormaPagamentoDao extends HibernateGenericDao implements IFormaPagamentoDao {
+public class FormaPagamentoDao extends HibernateGenericDao implements IFormaPagamentoDao { 
 	
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Object getById(Serializable id, Class clazz) {
-		return getSession().get(clazz, id);
-	}
 }
