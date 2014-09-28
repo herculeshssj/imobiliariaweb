@@ -57,11 +57,11 @@
 	<h:form>
 		<div id="content">
 			
-			<h2>Aluguéis</h2>
+			<h2>Histórico de Aluguéis</h2>
 			
 			<rich:messages style="color: #000000; font-weight: bold;"></rich:messages>
 			
-			<h:commandButton value="Novo aluguel" style="padding: 3px 10px;" action="#{aluguelMB.addView }" rendered="#{aluguelMB.canAdd }"/>
+			<h:commandButton value="Imprimir" style="padding: 3px 10px;" action="#{aluguelMB.imprimir }" rendered="#{aluguelMB.canView }"/>
 			<h:panelGroup rendered="#{aluguelMB.canList }">
 			&nbsp; 
 			Contrato:
@@ -140,18 +140,14 @@
 					<h:outputText value="#{item.valorPago}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
 					<h:outputText value="#{item.valorPago}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>
-				<rich:column  style="text-align: center">
+				<rich:column style="text-align: center">
 					<f:facet name="header">
-						<h:outputText value="Ver/Editar"></h:outputText>
-					</f:facet>					
-					<h:commandLink value="Ver/Editar" action="#{aluguelMB.editView }" rendered="#{aluguelMB.canView }"/>
-				</rich:column>
-				<rich:column  style="text-align: center">
-					<f:facet name="header">
-						<h:outputText value="Registrar/Recibo"></h:outputText>
-					</f:facet>					
-					<h:commandLink value="Registrar" action="#{aluguelMB.registrarView }" rendered="#{aluguelMB.canEdit and item.pagamento == null}"/>
-					<h:commandLink value="Recibo" action="#{aluguelMB.gerarRecibo }" rendered="#{aluguelMB.canView and item.pagamento != null}"/>
+						<h:outputText value="Dias de atraso"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{item.diasAtrasados}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
+					<h:outputText value="#{item.diasAtrasados}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
+					<h:outputText value="#{item.diasAtrasados}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
+					<h:outputText value="#{item.diasAtrasados}" rendered="#{item.diasAtrasados <= 10}"/>
 				</rich:column>				
 			</rich:dataTable>
 			<rich:datascroller id="dsAluguel" for="tableAluguel"></rich:datascroller>

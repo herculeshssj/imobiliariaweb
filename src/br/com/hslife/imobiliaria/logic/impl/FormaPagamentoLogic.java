@@ -100,4 +100,5 @@ public class FormaPagamentoLogic implements IFormaPagamento {
 	public List<FormaPagamento> buscarTodos() throws BusinessException {
 		return dao.list(FormaPagamento.class);
 	}
+	
 }

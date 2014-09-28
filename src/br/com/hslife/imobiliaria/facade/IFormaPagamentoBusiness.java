@@ -42,10 +42,17 @@
 
  ***/
 
-package br.com.hslife.imobiliaria.dao.impl;
+package br.com.hslife.imobiliaria.facade;
 
-import br.com.hslife.imobiliaria.dao.IFormaPagamentoDao;
+import java.util.List;
 
-public class FormaPagamentoDao extends HibernateGenericDao implements IFormaPagamentoDao { 
+import br.com.hslife.imobiliaria.exception.BusinessException;
+import br.com.hslife.imobiliaria.model.FormaPagamento;
+
+public interface IFormaPagamentoBusiness extends ICRUDBusiness<FormaPagamento>{
+
+	public List<FormaPagamento> buscarTodos() throws BusinessException;
+	
+	public List<FormaPagamento> buscarPorDescricao(String descricao) throws BusinessException;
 	
 }

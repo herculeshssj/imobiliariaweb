@@ -61,6 +61,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.exception.BusinessException;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
@@ -68,6 +69,7 @@ import br.com.hslife.imobiliaria.logic.IAluguel;
 import br.com.hslife.imobiliaria.model.Aluguel;
 import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
+import br.com.hslife.imobiliaria.model.HistoricoAluguel;
 import br.com.hslife.imobiliaria.util.CurrencyWriter;
 
 public class AluguelController extends GenericController {
@@ -195,6 +197,20 @@ public class AluguelController extends GenericController {
 	}
 	
 	@Override
+	public String delete() {
+		String retorno = null;
+		try {
+			logic.excluir(aluguel);
+			viewMessage("Registro excluído com sucesso!");
+			clearVariables();
+			retorno = super.delete();
+		} catch (BusinessException be) {
+			viewMessage("Erro ao excluir: " + be.getMessage(), "frmAluguel");
+		}
+		return retorno;
+	}
+	
+	@Override
 	public String searchView() {
 		aluguel = new Aluguel();
 		return super.searchView();
@@ -227,8 +243,8 @@ public class AluguelController extends GenericController {
 			aluguel = logic.buscar(a.getId());
 			// Determina o valor dos juros e a multa por atraso
 			if (aluguel.getVencimento().before(new Date())) {
-				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);
 				aluguel.setMulta((aluguel.getValor() * aluguel.getContrato().getMulta()) / 100);
+				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);				
 			}
 			aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
 		} catch (BusinessException be) {
@@ -285,6 +301,50 @@ public class AluguelController extends GenericController {
 			viewMessage("Recibo gerado com sucesso!", componente);
 		} catch (Exception e) {
 			viewMessage("Erro ao gerar o recibo: " + e.getMessage(), componente);
+			e.printStackTrace();
+		}
+	}
+	
+	public void imprimir() {
+		// Obtem a resposta da requisição
+		HttpServletResponse response = (HttpServletResponse) getContext().getExternalContext().getResponse();
+		
+		try {
+			List<HistoricoAluguel> historicos = new ArrayList<HistoricoAluguel>();
+			HistoricoAluguel ha;
+			for (Aluguel a : logic.buscarPorExemplo(aluguel)) {
+				ha = new HistoricoAluguel();
+				ha.setAno(a.getAno());
+				ha.setPeriodo(a.getPeriodo());
+				ha.setVencimento(a.getVencimento());
+				ha.setPagamento(a.getPagamento());
+				ha.setDiasAtraso(a.getDiasAtrasados());
+				historicos.add(ha);
+			}
+			
+			// Definição dos valores para passar para o relatório			
+			Map<String, Object> params = new HashMap<String, Object>();
+			
+			// Obtém o caminho para o relatório
+			ServletContext servletContexto = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+			String caminhoRelOS = servletContexto.getRealPath("/jasper/historicoaluguel.jasper");
+			
+			// Passa os dados para o relatório e realiza a impressão do mesmo.			
+			JasperPrint impressao = JasperFillManager.fillReport(caminhoRelOS, params, new JRBeanCollectionDataSource(historicos));
+			
+			// Faz a conversão para PDF
+			byte[] dadosSaida = JasperExportManager.exportReportToPdf(impressao);
+			
+			// Complementa a resposta para exibir o relatório gerado
+			response.setHeader("Content-Disposition","attachment; filename=\"historicoaluguel.pdf\";");
+			response.setContentLength(dadosSaida.length);
+			ServletOutputStream output = response.getOutputStream();
+			output.write(dadosSaida, 0, dadosSaida.length);
+			getContext().responseComplete();
+
+			viewMessage("Relatório gerado com sucesso!", componente);
+		} catch (Exception e) {
+			viewMessage("Erro ao gerar o relatório: " + e.getMessage(), componente);
 			e.printStackTrace();
 		}
 	}

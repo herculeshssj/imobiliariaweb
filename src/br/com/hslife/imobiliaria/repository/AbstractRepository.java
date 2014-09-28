@@ -1,4 +1,4 @@
-<!-- 
+/*** 
 
     Copyright (c) 2011, 2014 Hércules S. S. José
     
@@ -40,47 +40,29 @@
 
     Marco II - Nova Iguaçu, RJ, Brasil.
 
- -->
+ ***/
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+package br.com.hslife.imobiliaria.repository;
 
-<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<%@ taglib prefix="rich" uri="http://richfaces.org/rich"%>
-<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-<f:view>
-
-<f:subview id="cabecalho">
-	<jsp:include page="../header.jsp"></jsp:include>
-</f:subview>
-
-<div id="content">
+public abstract class AbstractRepository {
 	
-		<h:form>
-		<rich:messages></rich:messages>
-		
-		<h3>				
-					<img src="../images/icon_aluguel.png" height="32" width="32"/>
-					<h:commandLink value="Aluguéis" action="listAluguel"></h:commandLink>
-					&nbsp;	
-					
-					<img src="../images/icon_formapagamento.png" height="32" width="32"/>
-					<h:commandLink value="Formas de Pagamento" action="formFormaPagamento"></h:commandLink>
-					&nbsp;
-					
-					<img src="../images/icon_historicoaluguel.png" height="32" width="32"/>
-					<h:commandLink value="Histórico" action="listHistoricoAluguel"></h:commandLink>
-					&nbsp;							
-											
-			</h3>	
-		
-		</h:form>
-	</f:view>
-
-	<div style="clear: both;"></div>
-
-</div>
-
-<jsp:include page="../footer.jsp"></jsp:include>
+	@Autowired
+	protected SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	protected Session getSession() {
+		return this.sessionFactory.getCurrentSession();
+	}
+	
+	protected Query getQuery(String hql) {
+		return getSession().createQuery(hql);
+	}
+}

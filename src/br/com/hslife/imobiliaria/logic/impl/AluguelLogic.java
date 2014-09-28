@@ -88,6 +88,19 @@ public class AluguelLogic implements IAluguel {
 		}	
 
 	}
+	
+	@Override
+	public void excluir(Aluguel aluguel) throws BusinessException {
+		try {
+			HibernateUtility.beginTransaction();
+			dao.delete(aluguel);
+			HibernateUtility.commitTransaction();
+		} catch (Exception e) {
+			HibernateUtility.rollbackTransaction();
+			throw new BusinessException(e);
+		}	
+
+	}
 
 	@Override
 	public Aluguel buscar(Long id) throws BusinessException {

@@ -49,11 +49,16 @@ import java.util.List;
 
 import javax.faces.model.ListDataModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import br.com.hslife.imobiliaria.exception.BusinessException;
-import br.com.hslife.imobiliaria.factory.LogicFactory;
-import br.com.hslife.imobiliaria.logic.IFormaPagamento;
+import br.com.hslife.imobiliaria.facade.IFormaPagamentoBusiness;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
 
+@Component("formaPagamentoMB")
+@Scope("session")
 public class FormaPagamentoController extends GenericController {
 	
 	/*** Atributos da classe ***/
@@ -62,7 +67,9 @@ public class FormaPagamentoController extends GenericController {
 	FormaPagamento formaPagamento;
 	
 	// Lógica de negócio
-	IFormaPagamento logic;
+	@Autowired
+	//IFormaPagamento logic;
+	IFormaPagamentoBusiness logic;
 	
 	// Listas
 	List<FormaPagamento> listaFormaPagamento;
@@ -75,7 +82,7 @@ public class FormaPagamentoController extends GenericController {
 	public FormaPagamentoController() {
 		this.formaPagamento = new FormaPagamento();
 		this.listaFormaPagamento = new ArrayList<FormaPagamento>();
-		logic = LogicFactory.createFormaPagamentoLogic();
+		//logic = LogicFactory.createFormaPagamentoLogic();
 		
 		// Define as permissões para este controller
 		canAdd = isAuthorized("formaPagamento", "add");
@@ -97,12 +104,12 @@ public class FormaPagamentoController extends GenericController {
 
 	@Override
 	public void simpleSearch() {		
-		try {
+		try {			
 			formaPagamento.setDescricao(findValue);
 			if (findValue == null || findValue.isEmpty()) {
 				dadosModelo = new ListDataModel(logic.buscarTodos());
 			} else {
-				dadosModelo = new ListDataModel(logic.buscar(formaPagamento));
+				dadosModelo = new ListDataModel(logic.buscarPorDescricao(findValue));
 			}							
 			viewMessage("Busca realizada com sucesso!");
 			formaPagamento.setDescricao("");
@@ -123,13 +130,13 @@ public class FormaPagamentoController extends GenericController {
 	public String add() {		
 		try {
 			if (formaPagamento.getId() != null && formaPagamento.getId() > 0) 
-				logic.editar(formaPagamento);
+				logic.alterar(formaPagamento);
 			else 
 				logic.cadastrar(formaPagamento);
 			viewMessage("Registro cadastrado com sucesso!");
 			clearVariables();
 		} catch (BusinessException be) {
-			viewMessage("Erro ao salvar: " + be.getMessage(), "frmIndiceReajuste");			
+			viewMessage("Erro ao salvar: " + be.getMessage(), "frmFormaPagamento");			
 		}
 		return null;
 	}
@@ -138,7 +145,7 @@ public class FormaPagamentoController extends GenericController {
 	public String editView() {
 		FormaPagamento c = (FormaPagamento) dadosModelo.getRowData();
 		try {
-			formaPagamento = logic.buscar(c.getId());
+			formaPagamento = logic.buscarPorID(c.getId());
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage(), "frmFormaPagamento");
 		}
@@ -148,11 +155,11 @@ public class FormaPagamentoController extends GenericController {
 	@Override
 	public String edit() {
 		try {
-			logic.editar(formaPagamento);
+			logic.alterar(formaPagamento);
 			viewMessage("Registro editado com sucesso!");
 			clearVariables();			
 		} catch (BusinessException be) {
-			viewMessage("Erro ao editar: " + be.getMessage(), "frmIndiceReajuste");
+			viewMessage("Erro ao editar: " + be.getMessage(), "frmFormaPagamento");
 		}
 		return null;
 	}
@@ -171,14 +178,6 @@ public class FormaPagamentoController extends GenericController {
 		this.formaPagamento = formaPagamento;
 	}
 
-	public IFormaPagamento getLogic() {
-		return logic;
-	}
-
-	public void setLogic(IFormaPagamento logic) {
-		this.logic = logic;
-	}
-
 	public List<FormaPagamento> getListaFormaPagamento() {
 		return listaFormaPagamento;
 	}
@@ -193,5 +192,13 @@ public class FormaPagamentoController extends GenericController {
 
 	public void setIdFormaPagamento(Long idFormaPagamento) {
 		this.idFormaPagamento = idFormaPagamento;
+	}
+
+	public IFormaPagamentoBusiness getLogic() {
+		return logic;
+	}
+
+	public void setLogic(IFormaPagamentoBusiness logic) {
+		this.logic = logic;
 	}
 }

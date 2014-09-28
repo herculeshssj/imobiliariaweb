@@ -55,6 +55,8 @@ public interface IAluguel {
 	
 	public void editar(Aluguel aluguel) throws BusinessException;
 	
+	public void excluir(Aluguel aluguel) throws BusinessException;
+	
 	public List<Aluguel> buscarPorContrato(Long idContrato) throws BusinessException;
 	
 	public Aluguel buscar(Long id) throws BusinessException;
