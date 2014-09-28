@@ -13,4 +13,3 @@ Compatível com servidor Tomcat e GlassFish.
 Página do projeto: http://hslife.com.br/projects/imobiliariaweb
 
 Informações de contato: contato@hslife.com.br
-=============================================
