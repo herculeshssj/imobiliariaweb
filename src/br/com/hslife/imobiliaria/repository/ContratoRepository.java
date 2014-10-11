@@ -42,31 +42,24 @@
 
  ***/
 
-/*
-select * from imovel;
-select * from contrato;
+package br.com.hslife.imobiliaria.repository;
 
-select * from cliente;
-select * from corretor;
+import java.util.List;
 
-select * from modelocontrato;
+import org.springframework.stereotype.Repository;
 
-alter table modelocontrato drop column dados;
-alter table modelocontrato drop column tamanhoarquivo;
-alter table modelocontrato drop column arquivo;
+import br.com.hslife.imobiliaria.model.Contrato;
+import br.com.hslife.imobiliaria.model.ModeloContrato;
 
-alter table modelocontrato add column modelo text null;
+@Repository
+public class ContratoRepository extends AbstractCRUDRepository<Contrato>{
 
-update modelocontrato set modelo = '<p>Entre aqui com seu modelo de contrato</p>';
-
-alter table modelocontrato alter column modelo set not null;
-
-
-
-*
-select * from modelocontrato;
-insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 1', '<p>Entre aqui com seu modelo de contrato</p>');
-insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 2', '<p>Entre aqui com seu modelo de contrato</p>');
-insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 3', '<p>Entre aqui com seu modelo de contrato</p>');
-
-*/
+	public ContratoRepository() {
+		super(new Contrato());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Contrato> findByModeloContrato(ModeloContrato modeloContrato) {
+		return getQuery("FROM Contrato contrato WHERE contrato.modeloContrato.id = :idModelo").setLong("idModelo", modeloContrato.getId()).list();
+	}
+}

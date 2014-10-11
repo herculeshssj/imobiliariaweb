@@ -123,9 +123,15 @@ public class ModeloContratoController extends GenericController {
 	@Override
 	public String add() {		
 		try {
-			logic.cadastrar(modeloContrato);
-			viewMessage("Registro cadastrado com sucesso!");
-			clearVariables();
+			if (modeloContrato.getModelo() == null || modeloContrato.getModelo().isEmpty()) {
+				viewMessage("Insira o modelo do contrato!");
+				return null;
+			}
+			if (modeloContrato.getId() != null && modeloContrato.getId() > 0) 
+				logic.alterar(modeloContrato);
+			else 
+				logic.cadastrar(modeloContrato);
+			viewMessage("Registro salvo com sucesso!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao salvar: " + be.getMessage(), "frmModeloContrato");			
 		}
@@ -144,25 +150,15 @@ public class ModeloContratoController extends GenericController {
 	} 
 	
 	@Override
-	public String edit() {
-		try {
-			logic.alterar(modeloContrato);
-			viewMessage("Registro editado com sucesso!");
-			clearVariables();			
-		} catch (BusinessException be) {
-			viewMessage("Erro ao editar: " + be.getMessage(), "frmModeloContrato");
-		}
-		return null;
-	}
-	
-	@Override
 	public String delete() {		
 		try {
-			logic.excluir(modeloContrato);
-			viewMessage("Registro excluído com sucesso!");			
-			clearVariables();
+			ModeloContrato c = (ModeloContrato) dadosModelo.getRowData();
+			ModeloContrato modelo = logic.buscarPorID(c.getId());
+			logic.excluir(modelo);
+			viewMessage("Registro excluído com sucesso!");
+			clearVariables();				
 		} catch (BusinessException be) {
-			viewMessage("Erro ao editar: " + be.getMessage(), "frmModeloContrato");
+			viewMessage("Erro ao excluir: " + be.getMessage(), "frmModeloContrato");
 		}
 		return null;
 	}
@@ -171,12 +167,12 @@ public class ModeloContratoController extends GenericController {
 	
 	public void habilitar() {		
 		try {
-			modeloContrato = logic.buscarPorID(idModeloContrato);
-			logic.habilitar(modeloContrato);
-			if (modeloContrato.isAtivo()) {
-				viewMessage("Registro desabilitado com sucesso!");
-			} else {
+			ModeloContrato modelo = logic.buscarPorID(idModeloContrato);
+			logic.habilitar(modelo);
+			if (modelo.isAtivo()) {
 				viewMessage("Registro habilitado com sucesso!");
+			} else {
+				viewMessage("Registro desabilitado com sucesso!");
 			}			
 			clearVariables();
 		} catch (BusinessException be) {

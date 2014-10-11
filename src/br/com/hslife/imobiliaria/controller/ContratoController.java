@@ -51,6 +51,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletOutputStream;
@@ -110,6 +111,9 @@ public class ContratoController extends GenericController {
 	
 	// Determina se os aluguéis serão gerados ou não
 	boolean gerarAlugueis;
+	
+	// Variável que armazena o contrato de locação para ser impresso na tela
+	String contratoLocacao;
 	
 	/*** Construtor ***/	
 	
@@ -421,6 +425,11 @@ public class ContratoController extends GenericController {
 		
 	}
 	
+	public String visualizarContrato() {
+		System.out.println("Passei por aqui.");
+		return "visualizarContrato";
+	}
+	
 	/*** Métodos Getters e Setters ***/
 
 	public Contrato getContrato() {
@@ -565,6 +574,14 @@ public class ContratoController extends GenericController {
 
 	public void setGerarAlugueis(boolean gerarAlugueis) {
 		this.gerarAlugueis = gerarAlugueis;
+	}
+
+	public String getContratoLocacao() {
+		return contratoLocacao;
+	}
+
+	public void setContratoLocacao(String contratoLocacao) {
+		this.contratoLocacao = contratoLocacao;
 	}
 
 	/*

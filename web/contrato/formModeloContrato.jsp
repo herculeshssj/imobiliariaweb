@@ -90,11 +90,9 @@
 			
 					</h:panelGrid>
 			<div id="modelo_contrato">
-				<rich:editor id="txtEditor" width="859" height="300" theme="advanced"/>		
+				<rich:editor id="txtEditor" value="#{modeloContratoMB.modeloContrato.modelo }" width="859" height="300" theme="advanced"/>		
 			</div>
-			
 			<br/>
-			
 			<rich:dataTable id="tableModeloContrato" width="100%" var="item" value="#{modeloContratoMB.dadosModelo }" rows="15">
 				
 				<rich:column>
@@ -117,8 +115,8 @@
 					<f:facet name="header">
 						<h:outputText value="Visualizar"></h:outputText>
 					</f:facet>
-					<h:commandLink value="Visualizar" action="#{modeloContratoMB.editView }" rendered="#{modeloContratoMB.canView }">
-						<f:setPropertyActionListener value="#{item.id }" target="#{modeloContratoMB.idModeloContrato }"/>
+					<h:commandLink value="Visualizar" action="#{contratoMB.visualizarContrato }" rendered="#{modeloContratoMB.canView }" target="_blank">
+						<f:setPropertyActionListener value="#{item.modelo}" target="#{contratoMB.contratoLocacao }"/>
 					</h:commandLink>
 				</rich:column>
 				

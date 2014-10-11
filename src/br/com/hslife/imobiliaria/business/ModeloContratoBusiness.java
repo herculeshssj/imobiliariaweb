@@ -51,7 +51,9 @@ import org.springframework.stereotype.Component;
 
 import br.com.hslife.imobiliaria.exception.BusinessException;
 import br.com.hslife.imobiliaria.facade.IModeloContratoBusiness;
+import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.ModeloContrato;
+import br.com.hslife.imobiliaria.repository.ContratoRepository;
 import br.com.hslife.imobiliaria.repository.ModeloContratoRepository;
 
 @Component
@@ -59,6 +61,9 @@ public class ModeloContratoBusiness extends AbstractCRUDBusiness<ModeloContrato>
 
 	@Autowired
 	private ModeloContratoRepository repository;
+	
+	@Autowired
+	private ContratoRepository contratoRepository;
 
 	public ModeloContratoRepository getRepository() {
 		return repository;
@@ -66,6 +71,10 @@ public class ModeloContratoBusiness extends AbstractCRUDBusiness<ModeloContrato>
 
 	public void setRepository(ModeloContratoRepository repository) {
 		this.repository = repository;
+	}
+
+	public void setContratoRepository(ContratoRepository contratoRepository) {
+		this.contratoRepository = contratoRepository;
 	}
 
 	@Override
@@ -81,5 +90,14 @@ public class ModeloContratoBusiness extends AbstractCRUDBusiness<ModeloContrato>
 			modeloContrato.setAtivo(true);
 		}
 		getRepository().update(modeloContrato);
+	}
+	
+	@Override
+	public void excluir(ModeloContrato entity) throws BusinessException {
+		List<Contrato> resultado = contratoRepository.findByModeloContrato(entity);
+		if (resultado == null || resultado.isEmpty())
+			super.excluir(entity);
+		else
+			throw new BusinessException("Existem contratos vinculados ao modelo!");
 	}
 }

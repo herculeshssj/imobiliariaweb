@@ -758,6 +758,15 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>visualizarContrato</from-outcome>
+            <to-view-id>/contrato/visualizarContrato.jsp</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+	
 	<!-- Módulo Contrato -->
 
 	
