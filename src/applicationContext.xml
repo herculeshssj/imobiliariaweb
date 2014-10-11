@@ -75,11 +75,7 @@
         <property name="annotatedClasses">
         	<list>
         		<value>br.com.hslife.imobiliaria.model.FormaPagamento</value>
-        	</list>
-        </property>
-        <property name="annotatedPackages">
-        	<list>
-        		<value>br.com.hslife.imobiliaria.model</value>
+        		<value>br.com.hslife.imobiliaria.model.ModeloContrato</value>
         	</list>
         </property>
         <property name="hibernateProperties">

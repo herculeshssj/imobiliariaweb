@@ -59,7 +59,7 @@
 			overflow: auto; overflow-y: hidden; overflow-x: auto;
 		} 
 	</style>
-	<h:form>
+	<h:form id="frmModeloContrato">
 		<div id="content">
 			
 			<h2>Modelos de Contrato</h2>
@@ -77,20 +77,23 @@
 			</h:panelGroup>
 			<br/><br/>
 			
-					<h:panelGrid columns="2" cellspacing="10"
-						style="padding: 10px 10px 10px 10px;">
+					<h:panelGrid id="pnlFormulario" columns="2">
 						<f:facet name="header">
 							<h:outputText value="Cadastrar/Editar"></h:outputText>
 						</f:facet>
 						
 						* Descrição:
 						<h:inputText value="#{modeloContratoMB.modeloContrato.descricao }" size="50" maxlength="100" disabled="#{!modeloContratoMB.modeloContrato.ativo }"/>
-						
-																			
-						<h:outputText />												
+									
+						<h:outputText />									
 						<h:commandButton value="Salvar" style="padding: 3px 10px;" action="#{modeloContratoMB.add }" disabled="#{!modeloContratoMB.modeloContrato.ativo }" rendered="#{modeloContratoMB.canAdd || modeloContratoMB.canEdit }"/>
 			
 					</h:panelGrid>
+			<div id="modelo_contrato">
+				<rich:editor id="txtEditor" width="859" height="300" theme="advanced"/>		
+			</div>
+			
+			<br/>
 			
 			<rich:dataTable id="tableModeloContrato" width="100%" var="item" value="#{modeloContratoMB.dadosModelo }" rows="15">
 				
