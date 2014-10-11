@@ -98,3 +98,14 @@ alter table Relatorio owner to imobiliaria;
 alter table Socio owner to imobiliaria;
 alter table Telefone owner to imobiliaria;
 alter table Usuario owner to imobiliaria;
+
+-- Mudanças na tabela modelocontrato - Tarefa #1159
+alter table modelocontrato drop column dados;
+alter table modelocontrato drop column tamanhoarquivo;
+alter table modelocontrato drop column arquivo;
+
+alter table modelocontrato add column modelo text null;
+
+update modelocontrato set modelo = '<p>Entre aqui com seu modelo de contrato</p>';
+
+alter table modelocontrato alter column modelo set not null;

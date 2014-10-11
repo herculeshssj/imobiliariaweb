@@ -1,11 +1,11 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -32,9 +32,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -46,14 +46,11 @@ package br.com.hslife.imobiliaria.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -77,18 +74,10 @@ public class ModeloContrato implements Serializable{
 	@Column(nullable=false)
 	String descricao;
 	
-	@Column(nullable=false)
-	String arquivo;
+	@Column(columnDefinition="text", nullable=false)
+	String modelo;
 	
-	@Column
-	Integer tamanhoArquivo;
-	
-	@Lob
-	@Basic(fetch = FetchType.EAGER)
-	@Column(length=1048657)
-	byte[] dados;
-	
-	Boolean ativo;
+	boolean ativo;
 	
 	public ModeloContrato() {
 		ativo = true;
@@ -110,36 +99,19 @@ public class ModeloContrato implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public String getArquivo() {
-		return arquivo;
+	public String getModelo() {
+		return modelo;
 	}
 
-	public void setArquivo(String arquivo) {
-		this.arquivo = arquivo;
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 
-	public byte[] getDados() {
-		return dados;
-	}
-
-	public void setDados(byte[] dados) {
-		this.dados = dados;
-	}
-
-	public Boolean getAtivo() {
+	public boolean isAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(Boolean ativo) {
+	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-
-	public Integer getTamanhoArquivo() {
-		return tamanhoArquivo;
-	}
-
-	public void setTamanhoArquivo(Integer tamanhoArquivo) {
-		this.tamanhoArquivo = tamanhoArquivo;
-	}
-	
 }

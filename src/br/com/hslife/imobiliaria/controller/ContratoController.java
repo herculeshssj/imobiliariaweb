@@ -349,7 +349,7 @@ public class ContratoController extends GenericController {
 				indices.add(new SelectItem(i.getId(), i.getDescricao(), i.getDescricao(), !i.getAtivo()));
 			}
 			for (ModeloContrato m : LogicFactory.createModeloContratoLogic().buscarTodos()) {
-				modelos.add(new SelectItem(m.getId(), m.getDescricao(), m.getDescricao(), !m.getAtivo()));
+				modelos.add(new SelectItem(m.getId(), m.getDescricao(), m.getDescricao(), !m.isAtivo()));
 			}
 		} catch (BusinessException be) {
 			viewMessage(be.getMessage(), componente);
@@ -372,7 +372,7 @@ public class ContratoController extends GenericController {
 			Map<String, Object> params = RelParams.popular(contrato);
 			
 			// Passa os dados para o relatório e realiza a impressão do mesmo.
-			InputStream inputBytes = new ByteArrayInputStream(contrato.getModeloContrato().getDados());
+			InputStream inputBytes = new ByteArrayInputStream(contrato.getModeloContrato().getModelo().getBytes());
 			//ByteArrayOutputStream outputBytes =  new ByteArrayOutputStream();
 			
 			JasperPrint impressao = JasperFillManager.fillReport(inputBytes, params, new JREmptyDataSource());
