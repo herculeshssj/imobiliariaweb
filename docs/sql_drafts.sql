@@ -70,3 +70,4 @@ insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 2', 
 insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 3', '<p>Entre aqui com seu modelo de contrato</p>');
 
 */
+

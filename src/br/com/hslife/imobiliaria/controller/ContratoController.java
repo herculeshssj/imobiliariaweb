@@ -363,7 +363,18 @@ public class ContratoController extends GenericController {
 		
 	}
 	
-	public void gerarContrato() {
+	public String gerarContrato() {
+		try {
+			Contrato c = (Contrato)dadosModelo.getRowData();
+			contrato = logic.buscar(c.getId());
+			contratoLocacao = RelParams.popular(c);
+			viewMessage("Contrato gerado com sucesso!");
+			return "visualizarContrato";
+		} catch (BusinessException be) {
+			viewMessage("Erro ao gerar contrato: " + be.getMessage(), componente);
+		}
+		return null;
+		/*
 		// Obtem a resposta da requisição
 		HttpServletResponse response = (HttpServletResponse) getContext().getExternalContext().getResponse();
 				
@@ -406,7 +417,7 @@ public class ContratoController extends GenericController {
 			 *  http://jodconverter.sourceforge.net/api/
 			 *  
 			 *  O código para auxiliar encontra-se no final do arquivo
-			 */
+			 *
 			// Faz a conversão para PDF
 			byte[] dadosSaida = JasperExportManager.exportReportToPdf(impressao);
 			
@@ -422,11 +433,10 @@ public class ContratoController extends GenericController {
 			viewMessage("Erro ao gerar contrato: " + e.getMessage(), componente);
 			e.printStackTrace();
 		}
-		
+		*/
 	}
 	
 	public String visualizarContrato() {
-		System.out.println("Passei por aqui.");
 		return "visualizarContrato";
 	}
 	
