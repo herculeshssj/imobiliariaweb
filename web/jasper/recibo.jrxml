@@ -2,37 +2,33 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recibo" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="42" bottomMargin="42">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="528"/>
 	<parameter name="valorpagoextenso" class="java.lang.String"/>
 	<parameter name="id" class="java.lang.Long"/>
+	<parameter name="observacao" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select
 a.id,
 a.valorpago,
-a.valorservico,
 cl.nome,
 i.tipoimovel,
 e.tipologradouro || ' ' || e.logradouro || ' ' || e.numero || ' ' || e.complemento || ' ' || e.bairro || ',  ' || e.cidade || ' - ' || e.uf as endereco,
-a.periodo || ' / ' || a.ano as periodo,
-s.descricao as servico
+a.periodo || ' / ' || a.ano as periodo
 from
 aluguel a
 inner join contrato c on c.id = a.idcontrato
 inner join cliente cl on cl.id = c.idlocatario
 inner join imovel i on i.id = c.idimovel
 inner join endereco e on e.id = i.idendereco
-left join servicomanutencao s on s.id = a.idservico
 where
 a.id = $P{id};]]>
 	</queryString>
 	<field name="id" class="java.lang.Long"/>
 	<field name="valorpago" class="java.lang.Double"/>
-	<field name="valorservico" class="java.lang.Double"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="tipoimovel" class="java.lang.String"/>
 	<field name="endereco" class="java.lang.String"/>
 	<field name="periodo" class="java.lang.String"/>
-	<field name="servico" class="java.lang.String"/>
 	<detail>
 		<band height="758" splitType="Stretch">
 			<rectangle radius="10">
@@ -401,7 +397,7 @@ a.id = $P{id};]]>
 			<textField>
 				<reportElement x="276" y="159" width="215" height="55"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{servico} == null ? "" : "Serviço de manutenção realizado: " + $F{servico} + "\nValor do serviço: R$ " + $F{valorservico}.toString()]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{observacao}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="245" y="509" width="28" height="15"/>
@@ -417,7 +413,7 @@ a.id = $P{id};]]>
 			<textField>
 				<reportElement x="276" y="510" width="215" height="55"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{servico} == null ? "" : "Serviço de manutenção realizado: " + $F{servico} + "\nValor do serviço: R$ " + $F{valorservico}.toString()]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{observacao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

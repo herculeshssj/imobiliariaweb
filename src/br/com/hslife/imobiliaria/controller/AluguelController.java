@@ -131,6 +131,7 @@ public class AluguelController extends GenericController {
 		listaAluguel = new ArrayList<Aluguel>();
 		idAluguel = null;
 		idContrato = null;
+		idServicoManutencao = null;
 		ano = null;
 		periodo = null;
 		numContrato = null;
@@ -256,7 +257,8 @@ public class AluguelController extends GenericController {
 			// Determina o valor dos juros e a multa por atraso
 			if (aluguel.getVencimento().before(new Date())) {
 				aluguel.setMulta((aluguel.getValor() * aluguel.getContrato().getMulta()) / 100);
-				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);				
+				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);
+				aluguel.setPagamento(new Date());
 			}
 			aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
 		} catch (BusinessException be) {
@@ -294,6 +296,21 @@ public class AluguelController extends GenericController {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("id", a.getId());
 			params.put("valorpagoextenso", extenso.write(new BigDecimal(a.getValorPago())));
+			
+			// Define o texto para o parâmetro de observação
+			StringBuilder sb = new StringBuilder();
+			if (a.getDesconto() > 0.0) {
+				sb.append("Desconto: R$ ");
+				sb.append(Double.toString(a.getDesconto()));
+				sb.append("\n");
+			}
+			if (a.getServico() != null) {
+				sb.append("Serviço de manutenção realizado: ");
+				sb.append(a.getServico().getDescricao());
+				sb.append("\nValor do serviço: R$ ");
+				sb.append(Double.toString(a.getValorServico()));
+			}
+			params.put("observacao", sb.toString());
 			
 			// Obtém o caminho para o relatório
 			ServletContext servletContexto = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -410,7 +427,7 @@ public class AluguelController extends GenericController {
 	 * do aluguel para calcular a multa e juros correspondentes.
 	 */
 	public void atualizaValorAluguel() {
-		aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta() + aluguel.getValorServico());
+		aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta() + aluguel.getValorServico() - aluguel.getDesconto());
 	}
 	
 	/*** Métodos Getters e Setters ***/

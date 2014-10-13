@@ -94,6 +94,7 @@ alter table aluguel alter column valorServico set default 0.0;
 
 update aluguel set valorServico = 0.0;
 
+alter table aluguel add column desconto double precision default 0.0;
 
 select
 a.id,

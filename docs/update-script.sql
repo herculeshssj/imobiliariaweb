@@ -122,3 +122,6 @@ alter table aluguel add column idServico bigint null;
 alter table aluguel add column valorServico double precision default 0.0;
 
 alter table aluguel add constraint fk_servicomanutencao_aluguel foreign key (idServico) references servicomanutencao(id);
+
+-- Inclusão de um campo para desconto - Tarefa #1169
+alter table aluguel add column desconto double precision default 0.0;

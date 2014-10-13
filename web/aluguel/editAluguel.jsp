@@ -115,6 +115,11 @@
 								<f:convertNumber type="currency" pattern="###.##"/>
 							</h:outputText>
 							
+							Desconto:
+							<h:outputText value="#{aluguelMB.aluguel.desconto }">
+								<f:convertNumber type="currency" pattern="###.##"/>
+							</h:outputText>
+							
 							Serviço de manutenção:
 							<h:outputText value="#{aluguelMB.aluguel.servico == null ? 'Nenhum serviço solicitado' : aluguelMB.aluguel.servico.descricao} "/>
 							
