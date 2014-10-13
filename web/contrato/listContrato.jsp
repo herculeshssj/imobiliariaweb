@@ -123,7 +123,7 @@
 					<f:facet name="header">
 						<h:outputText value="Contrato"></h:outputText>
 					</f:facet>
-					<h:commandLink value="Gerar" action="#{contratoMB.gerarContrato }" rendered="#{contratoMB.canView }">
+					<h:commandLink value="Gerar" action="#{contratoMB.gerarContrato }" rendered="#{contratoMB.canView }" target="_blank">
 						<f:setPropertyActionListener value="#{item.id }" target="#{contratoMB.idContrato }"/>
 					</h:commandLink>
 					

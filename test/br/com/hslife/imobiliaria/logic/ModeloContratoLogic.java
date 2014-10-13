@@ -1,11 +1,11 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
-    Este arquivo é parte do programa Imobiliária Web.
+    Este arquivo é parte do programa ImobiliáriaWeb.
 
-    Imobiliária Web é um software livre; você pode redistribui-lo e/ou 
+    ImobiliáriaWeb é um software livre; você pode redistribui-lo e/ou 
 
     modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
 
@@ -32,9 +32,9 @@
     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
-    Para mais informações sobre o programa Imobiliária Web e seus autores acesso o 
+    Para mais informações sobre o programa ImobiliáriaWeb e seus autores acesso o 
 
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
+    endereço hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
 
     Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
 
@@ -63,9 +63,9 @@ public class ModeloContratoLogic {
 		ModeloContrato m = new ModeloContrato();
 		IModeloContrato logic = LogicFactory.createModeloContratoLogic();
 		m.setDescricao("Modelo de teste");
-		m.setArquivo("arquivoteste.jasper");
-		m.setTamanhoArquivo("QWERTYUIOPASDFGHJKLZXCVBNM".length());
-		m.setDados("QWERTYUIOPASDFGHJKLZXCVBNM".getBytes());
+		//m.setArquivo("arquivoteste.jasper");
+		//m.setTamanhoArquivo("QWERTYUIOPASDFGHJKLZXCVBNM".length());
+		//m.setDados("QWERTYUIOPASDFGHJKLZXCVBNM".getBytes());
 		try {
 			logic.cadastrar(m);
 			System.out.println("Registro salvo com sucesso!");

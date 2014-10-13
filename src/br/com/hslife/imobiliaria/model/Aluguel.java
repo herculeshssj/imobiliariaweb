@@ -104,6 +104,9 @@ public class Aluguel implements Serializable {
 	@Column
 	private double multa;
 	
+	@Column
+	private double desconto;
+	
 	@ManyToOne
 	@JoinColumn(name="idContrato")
 	private Contrato contrato;
@@ -111,6 +114,13 @@ public class Aluguel implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idFormaPagamento")
 	private FormaPagamento formaPagamento;
+	
+	@ManyToOne
+	@JoinColumn(name="idServico")
+	private ServicoManutencao servico;
+	
+	@Column
+	private double valorServico;
 	
 	@Transient
 	private String situacaoAluguel;
@@ -255,5 +265,29 @@ public class Aluguel implements Serializable {
 
 	public void setNomeLocatario(String nomeLocatario) {
 		this.nomeLocatario = nomeLocatario;
+	}
+
+	public ServicoManutencao getServico() {
+		return servico;
+	}
+
+	public void setServico(ServicoManutencao servico) {
+		this.servico = servico;
+	}
+
+	public double getValorServico() {
+		return valorServico;
+	}
+
+	public void setValorServico(double valorServico) {
+		this.valorServico = valorServico;
+	}
+
+	public double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
 	}
 }

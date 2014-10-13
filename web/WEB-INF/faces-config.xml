@@ -110,12 +110,6 @@
 	</managed-bean>
 	
 	<managed-bean>
-		<managed-bean-name>modeloContratoMB</managed-bean-name>
-		<managed-bean-class>br.com.hslife.imobiliaria.controller.ModeloContratoController</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
-	<managed-bean>
 		<managed-bean-name>corretorMB</managed-bean-name>
 		<managed-bean-class>br.com.hslife.imobiliaria.controller.CorretorController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
@@ -138,14 +132,6 @@
 		<managed-bean-class>br.com.hslife.imobiliaria.controller.RelatorioController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
-	<!-- 
-	<managed-bean>
-		<managed-bean-name>formaPagamentoMB</managed-bean-name>
-		<managed-bean-class>br.com.hslife.imobiliaria.controller.FormaPagamentoController</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	-->
 	
 	<managed-bean>
 		<managed-bean-name>aluguelMB</managed-bean-name>
@@ -758,6 +744,15 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>visualizarContrato</from-outcome>
+            <to-view-id>/contrato/visualizarContrato.jsp</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+	
 	<!-- Módulo Contrato -->
 
 	
@@ -1068,6 +1063,10 @@
         <navigation-case>
             <from-outcome>formFormaPagamento</from-outcome>
             <to-view-id>/aluguel/formFormaPagamento.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>formServicoManutencao</from-outcome>
+            <to-view-id>/aluguel/formServicoManutencao.jsp</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>formModeloContrato</from-outcome>

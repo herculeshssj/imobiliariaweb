@@ -81,7 +81,7 @@ public class ViewUtil {
 			"18", "19", "20", "21", "22", "23" };
 	
 	// Lista de módulos existentes no sistema
-	private static String[] modulos = {"aluguel","agenda","cliente","clientepj","conta","contrato","corretor","formapagamento","funcionario","grupo","imovel","indiceReajuste","lancamento","modeloContrato","relatorio","usuario"};
+	private static String[] modulos = {"aluguel","agenda","cliente","clientepj","conta","contrato","corretor","formapagamento","funcionario","grupo","imovel","indiceReajuste","lancamento","modeloContrato","relatorio","servicomanutencao","usuario"};
 
 	private ViewUtil() {
 

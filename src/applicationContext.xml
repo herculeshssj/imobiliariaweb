@@ -74,12 +74,18 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
         	<list>
+        		<value>br.com.hslife.imobiliaria.model.ClientePJ</value>
+        		<value>br.com.hslife.imobiliaria.model.Contrato</value>
+        		<value>br.com.hslife.imobiliaria.model.Corretor</value>
+        		<value>br.com.hslife.imobiliaria.model.Endereco</value>
         		<value>br.com.hslife.imobiliaria.model.FormaPagamento</value>
-        	</list>
-        </property>
-        <property name="annotatedPackages">
-        	<list>
-        		<value>br.com.hslife.imobiliaria.model</value>
+        		<value>br.com.hslife.imobiliaria.model.Foto</value>
+        		<value>br.com.hslife.imobiliaria.model.Imovel</value>
+        		<value>br.com.hslife.imobiliaria.model.IndiceReajuste</value>
+        		<value>br.com.hslife.imobiliaria.model.ModeloContrato</value>
+        		<value>br.com.hslife.imobiliaria.model.ServicoManutencao</value>
+        		<value>br.com.hslife.imobiliaria.model.Socio</value>
+        		<value>br.com.hslife.imobiliaria.model.Telefone</value>
         	</list>
         </property>
         <property name="hibernateProperties">

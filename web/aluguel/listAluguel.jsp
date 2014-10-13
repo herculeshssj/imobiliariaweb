@@ -90,55 +90,55 @@
 					<f:facet name="header">
 						<h:outputText value="Período"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.periodo}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
-					<h:outputText value="#{item.periodo}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
-					<h:outputText value="#{item.periodo}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
-					<h:outputText value="#{item.periodo}" rendered="#{item.diasAtrasados <= 10}"/>
+					<h:outputText value="#{item.periodo}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20 and item.pagamento == null}"/>
+					<h:outputText value="#{item.periodo}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.periodo}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.periodo}" rendered="#{item.diasAtrasados <= 10 or item.pagamento != null}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Ano"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.ano}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
-					<h:outputText value="#{item.ano}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
-					<h:outputText value="#{item.ano}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
-					<h:outputText value="#{item.ano}" rendered="#{item.diasAtrasados <= 10}"/>
+					<h:outputText value="#{item.ano}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20 and item.pagamento == null}"/>
+					<h:outputText value="#{item.ano}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.ano}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.ano}" rendered="#{item.diasAtrasados <= 10 or item.pagamento != null}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Valor"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.valor}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
-					<h:outputText value="#{item.valor}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
-					<h:outputText value="#{item.valor}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
-					<h:outputText value="#{item.valor}" rendered="#{item.diasAtrasados <= 10}"/>
+					<h:outputText value="#{item.valor}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20 and item.pagamento == null}"/>
+					<h:outputText value="#{item.valor}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.valor}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.valor}" rendered="#{item.diasAtrasados <= 10 or item.pagamento != null}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Vencimento"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.vencimento}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
-					<h:outputText value="#{item.vencimento}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
-					<h:outputText value="#{item.vencimento}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
-					<h:outputText value="#{item.vencimento}" rendered="#{item.diasAtrasados <= 10}"/>
+					<h:outputText value="#{item.vencimento}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20 and item.pagamento == null}"/>
+					<h:outputText value="#{item.vencimento}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.vencimento}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.vencimento}" rendered="#{item.diasAtrasados <= 10 or item.pagamento != null}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Pagamento"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.pagamento}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
-					<h:outputText value="#{item.pagamento}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
-					<h:outputText value="#{item.pagamento}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
-					<h:outputText value="#{item.pagamento}" rendered="#{item.diasAtrasados <= 10}"/>
+					<h:outputText value="#{item.pagamento}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20 and item.pagamento == null}"/>
+					<h:outputText value="#{item.pagamento}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.pagamento}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.pagamento}" rendered="#{item.diasAtrasados <= 10 or item.pagamento != null}"/>
 				</rich:column>
 				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Valor pago"></h:outputText>
 					</f:facet>
-					<h:outputText value="#{item.valorPago}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20}"/>
-					<h:outputText value="#{item.valorPago}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30}"/>
-					<h:outputText value="#{item.valorPago}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30}"/>
-					<h:outputText value="#{item.valorPago}" rendered="#{item.diasAtrasados <= 10}"/>
+					<h:outputText value="#{item.valorPago}" style="color: #0000FF;" rendered="#{item.diasAtrasados > 10 and item.diasAtrasados <= 20 and item.pagamento == null}"/>
+					<h:outputText value="#{item.valorPago}" style="color: #00AA00;" rendered="#{item.diasAtrasados > 20 and item.diasAtrasados <= 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.valorPago}" style="color: #FF0000;" rendered="#{item.diasAtrasados > 30 and item.pagamento == null}"/>
+					<h:outputText value="#{item.valorPago}" rendered="#{item.diasAtrasados <= 10 or item.pagamento != null}"/>
 				</rich:column>
 				<rich:column  style="text-align: center">
 					<f:facet name="header">

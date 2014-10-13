@@ -94,7 +94,8 @@
 		<mapping class="br.com.hslife.imobiliaria.model.IndiceReajuste" />
 		<mapping class="br.com.hslife.imobiliaria.model.ModeloContrato" />
 		<mapping class="br.com.hslife.imobiliaria.model.Relatorio" />		
-		<mapping class="br.com.hslife.imobiliaria.model.Permissao" />				
+		<mapping class="br.com.hslife.imobiliaria.model.Permissao" />
+		<mapping class="br.com.hslife.imobiliaria.model.ServicoManutencao" />				
 		<mapping class="br.com.hslife.imobiliaria.model.Socio" />		
 		<mapping class="br.com.hslife.imobiliaria.model.Telefone" />
 		<mapping class="br.com.hslife.imobiliaria.model.Usuario" />		

@@ -58,20 +58,28 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import br.com.hslife.imobiliaria.db.HibernateUtility;
 import br.com.hslife.imobiliaria.exception.BusinessException;
+import br.com.hslife.imobiliaria.facade.IServicoManutencaoBusiness;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IAluguel;
 import br.com.hslife.imobiliaria.model.Aluguel;
 import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.FormaPagamento;
 import br.com.hslife.imobiliaria.model.HistoricoAluguel;
+import br.com.hslife.imobiliaria.model.ServicoManutencao;
 import br.com.hslife.imobiliaria.util.CurrencyWriter;
 
+@Component("aluguelMB")
+@Scope("session")
 public class AluguelController extends GenericController {
 	
 	/*** Atributos da classe ***/
@@ -82,6 +90,9 @@ public class AluguelController extends GenericController {
 	// Lógica de negócio
 	IAluguel logic;
 	
+	@Autowired
+	IServicoManutencaoBusiness servicoManutencaoBusiness;
+	
 	// Listas
 	List<Aluguel> listaAluguel;
 	
@@ -89,6 +100,7 @@ public class AluguelController extends GenericController {
 	Long idAluguel;
 	Long idContrato;
 	Long idFormaPagamento;
+	Long idServicoManutencao;
 	
 	// Armazena a situação do aluguel para a pesquisa
 	String situacaoAluguel;
@@ -119,6 +131,7 @@ public class AluguelController extends GenericController {
 		listaAluguel = new ArrayList<Aluguel>();
 		idAluguel = null;
 		idContrato = null;
+		idServicoManutencao = null;
 		ano = null;
 		periodo = null;
 		numContrato = null;
@@ -244,7 +257,8 @@ public class AluguelController extends GenericController {
 			// Determina o valor dos juros e a multa por atraso
 			if (aluguel.getVencimento().before(new Date())) {
 				aluguel.setMulta((aluguel.getValor() * aluguel.getContrato().getMulta()) / 100);
-				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);				
+				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);
+				aluguel.setPagamento(new Date());
 			}
 			aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
 		} catch (BusinessException be) {
@@ -257,6 +271,8 @@ public class AluguelController extends GenericController {
 		try {
 			aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
 			aluguel.setFormaPagamento(LogicFactory.createFormaPagamentoLogic().buscar(idFormaPagamento));
+			if (idServicoManutencao != null)
+				aluguel.setServico(servicoManutencaoBusiness.buscarPorID(idServicoManutencao));
 			logic.editar(aluguel);
 			viewMessage("Pagamento registrado com sucesso!");
 			clearVariables();
@@ -280,6 +296,21 @@ public class AluguelController extends GenericController {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("id", a.getId());
 			params.put("valorpagoextenso", extenso.write(new BigDecimal(a.getValorPago())));
+			
+			// Define o texto para o parâmetro de observação
+			StringBuilder sb = new StringBuilder();
+			if (a.getDesconto() > 0.0) {
+				sb.append("Desconto: R$ ");
+				sb.append(Double.toString(a.getDesconto()));
+				sb.append("\n");
+			}
+			if (a.getServico() != null) {
+				sb.append("Serviço de manutenção realizado: ");
+				sb.append(a.getServico().getDescricao());
+				sb.append("\nValor do serviço: R$ ");
+				sb.append(Double.toString(a.getValorServico()));
+			}
+			params.put("observacao", sb.toString());
 			
 			// Obtém o caminho para o relatório
 			ServletContext servletContexto = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -377,12 +408,26 @@ public class AluguelController extends GenericController {
 		return lista;
 	}
 	
+	public List<SelectItem> getListaServicoManutencao() {
+		List<SelectItem> lista = new ArrayList<SelectItem>();
+		try {
+			for (ServicoManutencao s : servicoManutencaoBusiness.buscarTodos()) {
+				lista.add(new SelectItem(s.getId(), s.getDescricao()));
+			}
+		} catch (BusinessException be) {
+			viewMessage("Erro ao carregar: " + be.getMessage(), "frmAluguel");
+		} catch (Exception e) {
+			viewMessage("Erro ao carregar: " + e.getMessage(), "frmAluguel");
+		}
+		return lista;
+	}
+	
 	/**
 	 * Obtém as informações de vigência do contrato e data de vencimento
 	 * do aluguel para calcular a multa e juros correspondentes.
 	 */
 	public void atualizaValorAluguel() {
-		aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
+		aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta() + aluguel.getValorServico() - aluguel.getDesconto());
 	}
 	
 	/*** Métodos Getters e Setters ***/
@@ -465,5 +510,18 @@ public class AluguelController extends GenericController {
 
 	public void setNumContrato(String numContrato) {
 		this.numContrato = numContrato;
+	}
+
+	public Long getIdServicoManutencao() {
+		return idServicoManutencao;
+	}
+
+	public void setIdServicoManutencao(Long idServicoManutencao) {
+		this.idServicoManutencao = idServicoManutencao;
+	}
+
+	public void setServicoManutencaoBusiness(
+			IServicoManutencaoBusiness servicoManutencaoBusiness) {
+		this.servicoManutencaoBusiness = servicoManutencaoBusiness;
 	}
 }

@@ -103,6 +103,25 @@
 						</h:inputText>
 						<rich:message for="txtMulta" style="color: #ff0000; font-weight: bold;"></rich:message>
 						
+						Desconto (R$):
+						<h:inputText id="txtDesconto" value="#{aluguelMB.aluguel.desconto }" size="10">
+							<f:convertNumber type="currency" pattern="###.##"/>
+						</h:inputText>
+						<rich:message for="txtDesconto" style="color: #ff0000; font-weight: bold;"></rich:message>
+						
+						Serviço de manutenção:
+						<h:selectOneMenu id="txtServicoManutencao" value="#{aluguelMB.idServicoManutencao}">
+							<f:selectItem itemLabel="Selecione um serviço de manutenção" />
+							<f:selectItems value="#{aluguelMB.listaServicoManutencao}" />
+						</h:selectOneMenu>
+						<h:outputText />
+						
+						Valor do serviço (R$):
+						<h:inputText id="txtValorServico" value="#{aluguelMB.aluguel.valorServico }" size="10">
+							<f:convertNumber type="currency" pattern="###.##"/>
+						</h:inputText>
+						<h:outputText />
+						
 						* Pagamento:
 						<h:panelGroup>
 							<h:inputText id="txtPagamento" value="#{aluguelMB.aluguel.pagamento }" size="12" required="true" requiredMessage="Informe a data de pagamento!">
@@ -112,7 +131,7 @@
 						</h:panelGroup>
 						<rich:message for="txtPagamento" style="color: #ff0000; font-weight: bold;"></rich:message>
 						
-						* Valor pago:
+						* Valor pago (R$):
 						<h:panelGroup>
 							<h:inputText id="txtValorPago" value="#{aluguelMB.aluguel.valorPago }" size="10" required="true" requiredMessage="Informe o valor pago!">
 								<f:convertNumber type="currency" pattern="###.##"/>

@@ -1,6 +1,6 @@
 <!-- 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
     Este arquivo é parte do programa Imobiliária Web.
@@ -59,7 +59,7 @@
 			overflow: auto; overflow-y: hidden; overflow-x: auto;
 		} 
 	</style>
-	<h:form>
+	<h:form id="frmModeloContrato">
 		<div id="content">
 			
 			<h2>Modelos de Contrato</h2>
@@ -77,22 +77,22 @@
 			</h:panelGroup>
 			<br/><br/>
 			
-					<h:panelGrid columns="2" cellspacing="10"
-						style="padding: 10px 10px 10px 10px;">
+					<h:panelGrid id="pnlFormulario" columns="2">
 						<f:facet name="header">
 							<h:outputText value="Cadastrar/Editar"></h:outputText>
 						</f:facet>
 						
 						* Descrição:
 						<h:inputText value="#{modeloContratoMB.modeloContrato.descricao }" size="50" maxlength="100" disabled="#{!modeloContratoMB.modeloContrato.ativo }"/>
-						
-						* Upload do modelo:
-						<rich:fileUpload id="txtUploadModelo" disabled="#{!modeloContratoMB.modeloContrato.ativo }" listWidth="500" listHeight="90" fileUploadListener="#{modeloContratoMB.carregaModelo }" acceptedTypes="jasper" maxFilesQuantity="1"/>													
-																		
+									
+						<h:outputText />									
 						<h:commandButton value="Salvar" style="padding: 3px 10px;" action="#{modeloContratoMB.add }" disabled="#{!modeloContratoMB.modeloContrato.ativo }" rendered="#{modeloContratoMB.canAdd || modeloContratoMB.canEdit }"/>
 			
 					</h:panelGrid>
-			
+			<div id="modelo_contrato">
+				<rich:editor id="txtEditor" value="#{modeloContratoMB.modeloContrato.modelo }" width="859" height="300" theme="advanced"/>		
+			</div>
+			<br/>
 			<rich:dataTable id="tableModeloContrato" width="100%" var="item" value="#{modeloContratoMB.dadosModelo }" rows="15">
 				
 				<rich:column>
@@ -102,23 +102,9 @@
 					<h:outputText value="#{item.descricao}"></h:outputText>
 				</rich:column>
 				
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Arquivo"></h:outputText>
-					</f:facet>
-					<h:outputText value="#{item.arquivo}"></h:outputText>
-				</rich:column>
-				
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Tamanho"></h:outputText>
-					</f:facet>
-					<h:outputText value="#{item.tamanhoArquivo}"></h:outputText> bytes
-				</rich:column>
-				
 				<rich:column style="text-align: center">
 					<f:facet name="header">
-						<h:outputText value="Ativo no sistema"></h:outputText>
+						<h:outputText value="Ativo"></h:outputText>
 					</f:facet>
 					<h:outputText value="#{item.ativo }">
 						<f:converter converterId="simnaoconverter"/> 
@@ -127,26 +113,44 @@
 				
 				<rich:column style="text-align: center">
 					<f:facet name="header">
+						<h:outputText value="Visualizar"></h:outputText>
+					</f:facet>
+					<h:commandLink value="Visualizar" action="#{contratoMB.visualizarContrato }" rendered="#{modeloContratoMB.canView }" target="_blank">
+						<f:setPropertyActionListener value="#{item.modelo}" target="#{contratoMB.contratoLocacao }"/>
+					</h:commandLink>
+				</rich:column>
+				
+				<rich:column style="text-align: center">
+					<f:facet name="header">
 						<h:outputText value="Ver/Editar"></h:outputText>
 					</f:facet>
-					<h:commandLink value="Editar" action="#{modeloContratoMB.editView }" rendered="#{modeloContratoMB.canView }">
+					<h:commandLink value="Editar" action="#{modeloContratoMB.editView }" rendered="#{modeloContratoMB.canEdit }">
 						<f:setPropertyActionListener value="#{item.id }" target="#{modeloContratoMB.idModeloContrato }"/>
 					</h:commandLink>						
 				</rich:column>
 				
-				<rich:column  style="text-align: center">
+				<rich:column style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="Ativar/Desativar"></h:outputText>
 					</f:facet>
-					<h:panelGroup rendered="#{modeloContratoMB.canDelete }">
-					<h:commandLink value="Ativar" rendered="#{!item.ativo }" action="#{modeloContratoMB.delete }" onclick="javascript:return(confirm('Tem certeza que deseja ativar esta modeloContrato?'))">
-						<f:setPropertyActionListener value="#{item.id }" target="#{modeloContratoMB.idModeloContrato }"/>
-					</h:commandLink>						
-					<h:commandLink value="Desativar" rendered="#{item.ativo }" action="#{modeloContratoMB.delete }" onclick="javascript:return(confirm('Tem certeza que deseja desativar esta modeloContrato?'))">
+					<h:panelGroup rendered="#{modeloContratoMB.canEdit }">
+						<h:commandLink value="Ativar" rendered="#{!item.ativo }" action="#{modeloContratoMB.habilitar }">
+							<f:setPropertyActionListener value="#{item.id }" target="#{modeloContratoMB.idModeloContrato }"/>
+						</h:commandLink>						
+						<h:commandLink value="Desativar" rendered="#{item.ativo }" action="#{modeloContratoMB.habilitar }">
+							<f:setPropertyActionListener value="#{item.id }" target="#{modeloContratoMB.idModeloContrato }"/>
+						</h:commandLink>					
+					</h:panelGroup>						
+				</rich:column>
+				
+				<rich:column  style="text-align: center">
+					<f:facet name="header">
+						<h:outputText value="Excluir"></h:outputText>
+					</f:facet>
+					<h:commandLink rendered="#{modeloContratoMB.canDelete }" value="Excluir" action="#{modeloContratoMB.delete }" onclick="javascript:return(confirm('Tem certeza que deseja excluir esta modelo de contrato?'))">
 						<f:setPropertyActionListener value="#{item.id }" target="#{modeloContratoMB.idModeloContrato }"/>
 					</h:commandLink>					
-					</h:panelGroup>
-				</rich:column>		
+				</rich:column>			
 			</rich:dataTable>
 			
 			<rich:datascroller id="dsModeloContrato" for="tableModeloContrato"></rich:datascroller>

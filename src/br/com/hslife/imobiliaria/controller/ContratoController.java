@@ -51,6 +51,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletOutputStream;
@@ -110,6 +111,9 @@ public class ContratoController extends GenericController {
 	
 	// Determina se os aluguéis serão gerados ou não
 	boolean gerarAlugueis;
+	
+	// Variável que armazena o contrato de locação para ser impresso na tela
+	String contratoLocacao;
 	
 	/*** Construtor ***/	
 	
@@ -349,7 +353,7 @@ public class ContratoController extends GenericController {
 				indices.add(new SelectItem(i.getId(), i.getDescricao(), i.getDescricao(), !i.getAtivo()));
 			}
 			for (ModeloContrato m : LogicFactory.createModeloContratoLogic().buscarTodos()) {
-				modelos.add(new SelectItem(m.getId(), m.getDescricao(), m.getDescricao(), !m.getAtivo()));
+				modelos.add(new SelectItem(m.getId(), m.getDescricao(), m.getDescricao(), !m.isAtivo()));
 			}
 		} catch (BusinessException be) {
 			viewMessage(be.getMessage(), componente);
@@ -359,7 +363,18 @@ public class ContratoController extends GenericController {
 		
 	}
 	
-	public void gerarContrato() {
+	public String gerarContrato() {
+		try {
+			Contrato c = (Contrato)dadosModelo.getRowData();
+			contrato = logic.buscar(c.getId());
+			contratoLocacao = RelParams.popular(c);
+			viewMessage("Contrato gerado com sucesso!");
+			return "visualizarContrato";
+		} catch (BusinessException be) {
+			viewMessage("Erro ao gerar contrato: " + be.getMessage(), componente);
+		}
+		return null;
+		/*
 		// Obtem a resposta da requisição
 		HttpServletResponse response = (HttpServletResponse) getContext().getExternalContext().getResponse();
 				
@@ -372,7 +387,7 @@ public class ContratoController extends GenericController {
 			Map<String, Object> params = RelParams.popular(contrato);
 			
 			// Passa os dados para o relatório e realiza a impressão do mesmo.
-			InputStream inputBytes = new ByteArrayInputStream(contrato.getModeloContrato().getDados());
+			InputStream inputBytes = new ByteArrayInputStream(contrato.getModeloContrato().getModelo().getBytes());
 			//ByteArrayOutputStream outputBytes =  new ByteArrayOutputStream();
 			
 			JasperPrint impressao = JasperFillManager.fillReport(inputBytes, params, new JREmptyDataSource());
@@ -402,7 +417,7 @@ public class ContratoController extends GenericController {
 			 *  http://jodconverter.sourceforge.net/api/
 			 *  
 			 *  O código para auxiliar encontra-se no final do arquivo
-			 */
+			 *
 			// Faz a conversão para PDF
 			byte[] dadosSaida = JasperExportManager.exportReportToPdf(impressao);
 			
@@ -418,7 +433,11 @@ public class ContratoController extends GenericController {
 			viewMessage("Erro ao gerar contrato: " + e.getMessage(), componente);
 			e.printStackTrace();
 		}
-		
+		*/
+	}
+	
+	public String visualizarContrato() {
+		return "visualizarContrato";
 	}
 	
 	/*** Métodos Getters e Setters ***/
@@ -565,6 +584,14 @@ public class ContratoController extends GenericController {
 
 	public void setGerarAlugueis(boolean gerarAlugueis) {
 		this.gerarAlugueis = gerarAlugueis;
+	}
+
+	public String getContratoLocacao() {
+		return contratoLocacao;
+	}
+
+	public void setContratoLocacao(String contratoLocacao) {
+		this.contratoLocacao = contratoLocacao;
 	}
 
 	/*
