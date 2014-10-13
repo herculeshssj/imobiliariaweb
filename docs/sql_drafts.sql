@@ -69,5 +69,46 @@ insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 1', 
 insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 2', '<p>Entre aqui com seu modelo de contrato</p>');
 insert into modelocontrato (ativo, descricao, modelo) values (true, 'Modelo 3', '<p>Entre aqui com seu modelo de contrato</p>');
 
+/
+
+select * from formapagamento;
+select * from servicomanutencao;
+
+create table servicomanutencao (
+id bigserial not null,
+descricao varchar(50) not null,
+primary key(id)
+);
 */
 
+select * from permissao;
+
+select * from aluguel order by id desc ;
+
+alter table aluguel add column idServico bigint null;
+alter table aluguel add column valorServico double precision;
+
+alter table aluguel add constraint fk_servicomanutencao_aluguel foreign key (idServico) references servicomanutencao(id);
+
+alter table aluguel alter column valorServico set default 0.0;
+
+update aluguel set valorServico = 0.0;
+
+
+select
+a.id,
+a.valorpago,
+cl.nome,
+i.tipoimovel,
+e.tipologradouro || ' ' || e.logradouro || ' ' || e.numero || ' ' || e.complemento || ' ' || e.bairro || ',  ' || e.cidade || ' - ' || e.uf as endereco,
+a.periodo || ' / ' || a.ano as periodo,
+s.descricao as servico
+from
+aluguel a
+inner join contrato c on c.id = a.idcontrato
+inner join cliente cl on cl.id = c.idlocatario
+inner join imovel i on i.id = c.idimovel
+inner join endereco e on e.id = i.idendereco
+left join servicomanutencao s on s.id = a.idservico
+where
+a.id = 1;

@@ -65,13 +65,17 @@
 					<img src="../images/icon_aluguel.png" height="32" width="32"/>
 					<h:commandLink value="Aluguéis" action="listAluguel"></h:commandLink>
 					&nbsp;	
+										
+					<img src="../images/icon_historicoaluguel.png" height="32" width="32"/>
+					<h:commandLink value="Histórico" action="listHistoricoAluguel"></h:commandLink>
+					&nbsp;
 					
 					<img src="../images/icon_formapagamento.png" height="32" width="32"/>
 					<h:commandLink value="Formas de Pagamento" action="formFormaPagamento"></h:commandLink>
 					&nbsp;
 					
-					<img src="../images/icon_historicoaluguel.png" height="32" width="32"/>
-					<h:commandLink value="Histórico" action="listHistoricoAluguel"></h:commandLink>
+					<img src="../images/icon_servicomanutencao.png" height="32" width="32"/>
+					<h:commandLink value="Serviços de Manutenção" action="formServicoManutencao"></h:commandLink>
 					&nbsp;							
 											
 			</h3>	

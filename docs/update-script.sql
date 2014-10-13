@@ -109,3 +109,16 @@ alter table modelocontrato add column modelo text null;
 update modelocontrato set modelo = '<p>Entre aqui com seu modelo de contrato</p>';
 
 alter table modelocontrato alter column modelo set not null;
+
+-- Tabela servicomanutencao - Tarefa #1165
+create table servicomanutencao (
+id bigserial not null,
+descricao varchar(50) not null,
+primary key(id)
+);
+
+-- Mudanças na tabela de aluguel para registrar serviços de manutenção - Tarefa #1167
+alter table aluguel add column idServico bigint null;
+alter table aluguel add column valorServico double precision default 0.0;
+
+alter table aluguel add constraint fk_servicomanutencao_aluguel foreign key (idServico) references servicomanutencao(id);

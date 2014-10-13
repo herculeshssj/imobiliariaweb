@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recibo" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="42" bottomMargin="42">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="valorpagoextenso" class="java.lang.String"/>
@@ -9,25 +9,30 @@
 		<![CDATA[select
 a.id,
 a.valorpago,
+a.valorservico,
 cl.nome,
 i.tipoimovel,
 e.tipologradouro || ' ' || e.logradouro || ' ' || e.numero || ' ' || e.complemento || ' ' || e.bairro || ',  ' || e.cidade || ' - ' || e.uf as endereco,
-a.periodo || ' / ' || a.ano as periodo
+a.periodo || ' / ' || a.ano as periodo,
+s.descricao as servico
 from
 aluguel a
 inner join contrato c on c.id = a.idcontrato
 inner join cliente cl on cl.id = c.idlocatario
 inner join imovel i on i.id = c.idimovel
 inner join endereco e on e.id = i.idendereco
+left join servicomanutencao s on s.id = a.idservico
 where
 a.id = $P{id};]]>
 	</queryString>
 	<field name="id" class="java.lang.Long"/>
 	<field name="valorpago" class="java.lang.Double"/>
+	<field name="valorservico" class="java.lang.Double"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="tipoimovel" class="java.lang.String"/>
 	<field name="endereco" class="java.lang.String"/>
 	<field name="periodo" class="java.lang.String"/>
+	<field name="servico" class="java.lang.String"/>
 	<detail>
 		<band height="758" splitType="Stretch">
 			<rectangle radius="10">
@@ -382,6 +387,38 @@ a.id = $P{id};]]>
 				<textElement/>
 				<text><![CDATA[VIA DO CLIENTE]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="245" y="158" width="28" height="15"/>
+				<textElement/>
+				<text><![CDATA[Obs:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="273" y="159" width="221" height="55"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="276" y="159" width="215" height="55"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{servico} == null ? "" : "Serviço de manutenção realizado: " + $F{servico} + "\nValor do serviço: R$ " + $F{valorservico}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="245" y="509" width="28" height="15"/>
+				<textElement/>
+				<text><![CDATA[Obs:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="273" y="510" width="221" height="55"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="276" y="510" width="215" height="55"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{servico} == null ? "" : "Serviço de manutenção realizado: " + $F{servico} + "\nValor do serviço: R$ " + $F{valorservico}.toString()]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

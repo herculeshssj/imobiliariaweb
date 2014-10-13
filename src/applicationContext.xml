@@ -83,6 +83,7 @@
         		<value>br.com.hslife.imobiliaria.model.Imovel</value>
         		<value>br.com.hslife.imobiliaria.model.IndiceReajuste</value>
         		<value>br.com.hslife.imobiliaria.model.ModeloContrato</value>
+        		<value>br.com.hslife.imobiliaria.model.ServicoManutencao</value>
         		<value>br.com.hslife.imobiliaria.model.Socio</value>
         		<value>br.com.hslife.imobiliaria.model.Telefone</value>
         	</list>
