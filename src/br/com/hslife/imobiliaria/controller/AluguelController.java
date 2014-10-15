@@ -337,10 +337,17 @@ public class AluguelController extends GenericController {
 	}
 	
 	public void imprimir() {
+		if (idContrato == null) {
+			viewMessage("Selecione um contrato!", componente);
+			return;
+		}
+		
 		// Obtem a resposta da requisição
 		HttpServletResponse response = (HttpServletResponse) getContext().getExternalContext().getResponse();
 		
 		try {
+			aluguel.setContrato(LogicFactory.createContratoLogic().buscar(idContrato));
+			
 			List<HistoricoAluguel> historicos = new ArrayList<HistoricoAluguel>();
 			HistoricoAluguel ha;
 			for (Aluguel a : logic.buscarPorExemplo(aluguel)) {
@@ -355,6 +362,7 @@ public class AluguelController extends GenericController {
 			
 			// Definição dos valores para passar para o relatório			
 			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("locatario", aluguel.getContrato().getLocatario().getNome());
 			
 			// Obtém o caminho para o relatório
 			ServletContext servletContexto = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();

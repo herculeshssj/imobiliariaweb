@@ -66,7 +66,6 @@
 			&nbsp; 
 			Contrato:
 			<h:selectOneMenu value="#{aluguelMB.idContrato}">
-				<f:selectItem itemLabel="Selecione ..." />
 				<f:selectItems value="#{aluguelMB.listaContrato}" />
 			</h:selectOneMenu>	
 			&nbsp;
