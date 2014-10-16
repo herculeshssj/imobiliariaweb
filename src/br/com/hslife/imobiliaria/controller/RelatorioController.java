@@ -119,7 +119,10 @@ public class RelatorioController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscar(relatorio));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 			relatorio.setDescricao("");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());

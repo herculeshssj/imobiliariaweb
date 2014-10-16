@@ -148,7 +148,10 @@ public class AluguelController extends GenericController {
 			aluguel.setPeriodo(null);
 			aluguel.setAno(null);
 			dadosModelo = new ListDataModel(logic.buscarPorExemplo(aluguel));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
 		}
@@ -239,7 +242,10 @@ public class AluguelController extends GenericController {
 			aluguel.setPeriodo(aluguel.getPeriodo() == 0 ? null : aluguel.getPeriodo());
 			aluguel.setAno(aluguel.getAno() == 0 ? null : aluguel.getAno());
 			dadosModelo = new ListDataModel(logic.buscarPorExemplo(aluguel));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), componente);
 		} catch (IndexOutOfBoundsException in) {

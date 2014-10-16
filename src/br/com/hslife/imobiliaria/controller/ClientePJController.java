@@ -134,7 +134,10 @@ public class ClientePJController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscarPorCNPJ(findValue));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
 		}
@@ -152,7 +155,10 @@ public class ClientePJController extends GenericController {
 	public String search() {
 		try {
 			dadosModelo = new ListDataModel(logic.buscar(clientePJ));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), "frmClientePJ");
 		}

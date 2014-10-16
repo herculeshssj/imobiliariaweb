@@ -122,7 +122,10 @@ public class AgendaController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscar(agenda));
 			}
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
 		}
@@ -147,7 +150,10 @@ public class AgendaController extends GenericController {
 				agenda.setCorretor(LogicFactory.createCorretorLogic().buscar(idCorretor));
 			}
 			dadosModelo = new ListDataModel(logic.buscar(agenda));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), "frmCliente");
 		}

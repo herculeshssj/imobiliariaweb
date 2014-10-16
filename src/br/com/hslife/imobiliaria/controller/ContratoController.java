@@ -155,7 +155,10 @@ public class ContratoController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscarPorNumContrato(findValue));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
 		}
@@ -175,7 +178,10 @@ public class ContratoController extends GenericController {
 		try {
 			contrato.setImovel(LogicFactory.createImovelLogic().buscar(idImovel));
 			dadosModelo = new ListDataModel(logic.buscar(contrato));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), componente);
 		}

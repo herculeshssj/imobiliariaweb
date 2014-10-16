@@ -116,7 +116,10 @@ public class GrupoController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscarPorDescricao(grupo.getDescricao()));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 			grupo.setDescricao("");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
