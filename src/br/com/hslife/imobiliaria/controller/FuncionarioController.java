@@ -125,7 +125,10 @@ public class FuncionarioController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscarPorCPF(findValue));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
 		}
@@ -143,7 +146,10 @@ public class FuncionarioController extends GenericController {
 	public String search() {
 		try {
 			dadosModelo = new ListDataModel(logic.buscar(funcionario));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), "frmFuncionario");
 		}

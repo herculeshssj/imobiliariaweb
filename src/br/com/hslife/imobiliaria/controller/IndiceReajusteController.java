@@ -105,7 +105,10 @@ public class IndiceReajusteController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscar(indiceReajuste));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 			indiceReajuste.setDescricao("");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());

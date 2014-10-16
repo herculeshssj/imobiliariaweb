@@ -138,7 +138,10 @@ public class ImovelController extends GenericController {
 			} else {
 				dadosModelo = new ListDataModel(logic.buscarPorNumRegistro(findValue));
 			}							
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage());
 		}
@@ -159,7 +162,10 @@ public class ImovelController extends GenericController {
 			if (idLocador != null && idLocador > 0)
 				imovel.setLocador(LogicFactory.createClienteLogic().buscar(idLocador));
 			dadosModelo = new ListDataModel(logic.buscar(imovel));
-			viewMessage("Busca realizada com sucesso!");
+			if (dadosModelo.isRowAvailable())
+				viewMessage("Busca realizada com sucesso!");
+			else
+				viewMessage("Nenhum registro encontrado!");
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " +  be.getMessage(), componente);
 		}

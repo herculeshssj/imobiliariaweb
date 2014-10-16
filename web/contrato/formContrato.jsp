@@ -115,7 +115,9 @@
 						<rich:message for="txtInicioContrato" style="color: #ff0000; font-weight: bold;"/>
 						
 						* Prazo do contrato (meses):
-						<h:inputText id="txtPrazo" required="true" requiredMessage="Informe o prazo do contrato!" value="#{contratoMB.contrato.prazo }" size="10"/>						
+						<h:inputText id="txtPrazo" required="true" requiredMessage="Informe o prazo do contrato!" value="#{contratoMB.contrato.prazo }" size="10" converterMessage="O campo só aceita números!">
+							<f:converter converterId="numeroconverter"/>
+						</h:inputText>											
 						<rich:message for="txtPrazo" style="color: #ff0000; font-weight: bold;"/>
 						
 						Depósito (R$):
