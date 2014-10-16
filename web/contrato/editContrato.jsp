@@ -117,9 +117,11 @@
 						<h:inputHidden/>
 						
 						* Prazo do contrato (meses):
-						<h:inputText id="txtPrazo" required="true" requiredMessage="Informe o prazo do contrato!" value="#{contratoMB.contrato.prazo }" size="10" disabled="#{contratoMB.contrato.situacao == 2 || contratoMB.contrato.situacao == 4 }"/>						
+						<h:inputText id="txtPrazo" required="true" requiredMessage="Informe o prazo do contrato!" value="#{contratoMB.contrato.prazo }" size="10" converterMessage="O campo só aceita números!" disabled="#{contratoMB.contrato.situacao == 2 || contratoMB.contrato.situacao == 4 }">
+							<f:converter converterId="numeroconverter"/>
+						</h:inputText>											
 						<rich:message for="txtPrazo" style="color: #ff0000; font-weight: bold;"/>
-						
+												
 						Depósito (R$):
 						<h:inputText id="txtDeposito" value="#{contratoMB.contrato.deposito }" size="10" disabled="#{contratoMB.contrato.situacao == 2 || contratoMB.contrato.situacao == 4 }">
 							<f:convertNumber type="currency" pattern="###.##"/>

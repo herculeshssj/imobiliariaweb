@@ -163,6 +163,10 @@
 		<converter-id>situacaocontratoconverter</converter-id>
 		<converter-class>br.com.hslife.imobiliaria.controller.converter.SituacaoContratoConverter</converter-class>
 	</converter>
+	<converter>
+		<converter-id>numeroconverter</converter-id>
+		<converter-class>br.com.hslife.imobiliaria.controller.converter.NumeroConverter</converter-class>
+	</converter>
 	
 	<!-- Converters -->
 	
