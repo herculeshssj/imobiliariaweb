@@ -1,6 +1,6 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
     Este arquivo é parte do programa Imobiliária Web.
@@ -41,6 +41,7 @@
     Marco II - Nova Iguaçu, RJ, Brasil.
 
  ***/
+
 package br.com.hslife.imobiliaria.controller.validator;
 
 

@@ -48,7 +48,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.hslife.imobiliaria.model.FormaPagamento;
 import br.com.hslife.imobiliaria.model.ServicoManutencao;
 
 @Repository

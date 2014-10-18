@@ -1,6 +1,6 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
     Este arquivo é parte do programa Imobiliária Web.
@@ -61,7 +61,6 @@ import br.com.hslife.imobiliaria.exception.ServiceException;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IImovel;
 import br.com.hslife.imobiliaria.model.Cliente;
-import br.com.hslife.imobiliaria.model.Contrato;
 import br.com.hslife.imobiliaria.model.Endereco;
 import br.com.hslife.imobiliaria.model.Foto;
 import br.com.hslife.imobiliaria.model.Imovel;
