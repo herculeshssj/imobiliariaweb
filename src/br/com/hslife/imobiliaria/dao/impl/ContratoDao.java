@@ -1,6 +1,6 @@
 /*** 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
     Este arquivo é parte do programa Imobiliária Web.
@@ -56,7 +56,6 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.hslife.imobiliaria.dao.IContratoDao;
 import br.com.hslife.imobiliaria.model.Contrato;
-import br.com.hslife.imobiliaria.model.Funcionario;
 
 public class ContratoDao extends HibernateGenericDao implements IContratoDao {
 	

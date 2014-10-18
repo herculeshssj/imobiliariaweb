@@ -1,6 +1,6 @@
 <!-- 
 
-    Copyright (c) 2011 Hércules S. S. José
+    Copyright (c) 2011, 2014 Hércules S. S. José
     
 
     Este arquivo é parte do programa Imobiliária Web.
@@ -59,7 +59,7 @@
 
 
 			<div id="site-info">
-				Copyright &copy; 2011 - Todos os direitos reservados a <a href="http://hslife.com.br/">HSlife Serviços de TI</a>.
+				Copyright &copy; 2011, 2014 - Todos os direitos reservados a <a href="http://hslife.com.br/">HSlife Serviços de TI</a>.
 			</div><!-- #site-info -->
 
 			<div id="site-generator">
