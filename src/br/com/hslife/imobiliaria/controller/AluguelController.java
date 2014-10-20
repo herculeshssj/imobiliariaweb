@@ -264,8 +264,8 @@ public class AluguelController extends GenericController {
 			if (aluguel.getVencimento().before(new Date())) {
 				aluguel.setMulta((aluguel.getValor() * aluguel.getContrato().getMulta()) / 100);
 				aluguel.setJuros((aluguel.getValor() * aluguel.getContrato().getJuros()) / 100);
-				aluguel.setPagamento(new Date());
 			}
+			aluguel.setPagamento(new Date());
 			aluguel.setValorPago(aluguel.getValor() + aluguel.getJuros() + aluguel.getMulta());
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
