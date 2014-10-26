@@ -46,6 +46,9 @@ package br.com.hslife.imobiliaria.repository;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.hslife.imobiliaria.model.ServicoManutencao;
@@ -64,6 +67,8 @@ public class ServicoManutencaoRepository extends AbstractCRUDRepository<ServicoM
 	
 	@SuppressWarnings("unchecked")
 	public List<ServicoManutencao> findByDescricao(String descricao) {
-		return getQuery("FROM ServicoManutencao servico WHERE servico.descricao LIKE '%" + descricao.toLowerCase() + "%'").list();
+		Criteria criteria = getSession().createCriteria(ServicoManutencao.class);
+		criteria.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
+		return criteria.list();
 	}
 }
