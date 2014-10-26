@@ -231,9 +231,9 @@ public class UsuarioController extends GenericController {
 		try {
 			logic.habilitar(usuario.getId());
 			if (usuario.getAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");
 			}
 			clearVariables();
 			retorno = super.delete();

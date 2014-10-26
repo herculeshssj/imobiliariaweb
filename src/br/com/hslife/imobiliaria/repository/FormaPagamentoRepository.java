@@ -46,6 +46,9 @@ package br.com.hslife.imobiliaria.repository;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.hslife.imobiliaria.model.FormaPagamento;
@@ -64,6 +67,8 @@ public class FormaPagamentoRepository extends AbstractCRUDRepository<FormaPagame
 	
 	@SuppressWarnings("unchecked")
 	public List<FormaPagamento> findByDescricao(String descricao) {
-		return getQuery("FROM FormaPagamento forma WHERE forma.descricao LIKE '%" + descricao.toLowerCase() + "%'").list();
+		Criteria criteria = getSession().createCriteria(FormaPagamento.class);
+		criteria.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
+		return criteria.list();
 	}
 }

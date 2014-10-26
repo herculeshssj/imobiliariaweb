@@ -46,6 +46,9 @@ package br.com.hslife.imobiliaria.repository;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.hslife.imobiliaria.model.ModeloContrato;
@@ -59,6 +62,8 @@ public class ModeloContratoRepository extends AbstractCRUDRepository<ModeloContr
 	
 	@SuppressWarnings("unchecked")
 	public List<ModeloContrato> findByDescricao(String descricao) {
-		return getQuery("FROM ModeloContrato modelo WHERE modelo.descricao LIKE '%" + descricao.toLowerCase() + "%'").list();
+		Criteria criteria = getSession().createCriteria(ModeloContrato.class);
+		criteria.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
+		return criteria.list();
 	}
 }

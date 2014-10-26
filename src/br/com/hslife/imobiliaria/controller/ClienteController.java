@@ -239,9 +239,9 @@ public class ClienteController extends GenericController {
 			setaTipoCliente();
 			logic.habilitar(cliente.getId());
 			if (cliente.isAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");				
 			}			
 			clearVariables();
 		} catch (BusinessException be) {

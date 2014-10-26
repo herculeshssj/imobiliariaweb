@@ -247,10 +247,10 @@ public class ImovelController extends GenericController {
 	public String delete() {		
 		try {
 			logic.habilitar(imovel.getId());
-			if (imovel.getAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
+			if (imovel.getAtivo()) {				
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");
 			}			
 			clearVariables();
 		} catch (BusinessException be) {
