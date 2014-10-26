@@ -166,9 +166,9 @@ public class IndiceReajusteController extends GenericController {
 		try {
 			logic.habilitar(idIndiceReajuste);
 			if (indiceReajuste.getAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");
 			}			
 			clearVariables();
 		} catch (BusinessException be) {

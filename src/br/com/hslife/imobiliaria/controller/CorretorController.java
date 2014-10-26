@@ -230,9 +230,9 @@ public class CorretorController extends GenericController {
 		try {
 			logic.habilitar(corretor.getId());
 			if (corretor.isAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");
 			}			
 			clearVariables();
 		} catch (BusinessException be) {

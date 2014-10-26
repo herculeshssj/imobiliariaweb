@@ -170,9 +170,9 @@ public class ModeloContratoController extends GenericController {
 			ModeloContrato modelo = logic.buscarPorID(idModeloContrato);
 			logic.habilitar(modelo);
 			if (modelo.isAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");
 			}			
 			clearVariables();
 		} catch (BusinessException be) {

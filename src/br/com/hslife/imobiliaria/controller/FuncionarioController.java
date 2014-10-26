@@ -231,9 +231,9 @@ public class FuncionarioController extends GenericController {
 		try {
 			logic.habilitar(funcionario.getId());
 			if (funcionario.isAtivo()) {
-				viewMessage("Registro habilitado com sucesso!");
-			} else {
 				viewMessage("Registro desabilitado com sucesso!");
+			} else {
+				viewMessage("Registro habilitado com sucesso!");
 			}			
 			clearVariables();
 		} catch (BusinessException be) {
