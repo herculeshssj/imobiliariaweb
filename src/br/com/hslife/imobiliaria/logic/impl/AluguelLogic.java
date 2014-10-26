@@ -66,6 +66,12 @@ public class AluguelLogic implements IAluguel {
 	@Override
 	public void cadastrar(Aluguel aluguel) throws BusinessException {
 		try {
+			
+			// Verifica se o aluguel já existe
+			if (dao.listByExample(aluguel) != null && !dao.listByExample(aluguel).isEmpty()) {
+				throw new BusinessException("Já existe aluguel cadastrado com estas informações!");
+			}
+			
 			HibernateUtility.beginTransaction();
 			dao.save(aluguel);
 			HibernateUtility.commitTransaction();
@@ -79,6 +85,17 @@ public class AluguelLogic implements IAluguel {
 	@Override
 	public void editar(Aluguel aluguel) throws BusinessException {
 		try {
+			
+			// Verifica se o aluguel está com os mesmos dados de um já cadastrado
+			List<Aluguel> alugueis = dao.listByExample(aluguel);
+			for (Aluguel a : alugueis) {
+				if (!a.equals(aluguel)) {
+					if (a.getPeriodo().equals(aluguel.getPeriodo()) && a.getAno().equals(aluguel.getAno()) && a.getContrato().equals(aluguel.getContrato())) {
+						throw new BusinessException("Já existe aluguel cadastrado com estas informações!");
+					}
+				}
+			}
+			
 			HibernateUtility.beginTransaction();
 			dao.update(aluguel);
 			HibernateUtility.commitTransaction();

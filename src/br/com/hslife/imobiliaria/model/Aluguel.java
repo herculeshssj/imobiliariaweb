@@ -162,6 +162,26 @@ public class Aluguel implements Serializable {
 		}
 		return 0;
 	}
+	
+	/* Sobrescrita dos métodos equals e hashCode */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Long.signum(getId() == null ? 0 : getId() ^ (getId() == null ? 1 : getId() >>> 32));
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getId() == null) return false;
+		if (getClass() != obj.getClass()) return false;
+
+		Aluguel other = (Aluguel) obj;
+		if (!getId().equals(other.getId())) return false;
+		return true;
+	}
 
 	public Long getId() {
 		return id;
