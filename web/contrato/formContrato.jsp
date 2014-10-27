@@ -127,8 +127,10 @@
 						<h:inputHidden/>
 						
 						Seguradora:
-						<h:inputText id="txtSeguradora" value="#{contratoMB.contrato.seguradora }" size="30"/>						
-						<h:inputHidden/>
+						<h:selectOneMenu id="txtSeguradora" value="#{contratoMB.idSeguradora }">							
+							<f:selectItems value="#{contratoMB.listaSeguradora }"/>
+						</h:selectOneMenu>						
+						<rich:message for="txtSeguradora" style="color: #ff0000; font-weight: bold;"></rich:message>
 						
 						Foro:
 						<h:inputText id="txtForo" value="#{contratoMB.contrato.foro }" size="30"/>						

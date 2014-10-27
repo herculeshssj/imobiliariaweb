@@ -67,12 +67,12 @@
 						</f:facet>
 						
 						* Tipo de Cliente:
-						<h:selectManyCheckbox id="txtTipoCliente" value="#{clienteMB.tipoCliente }" required="true" requiredMessage="Selecione pelo menos um tipo de cliente!">							
+						<h:selectOneMenu id="txtTipoCliente" value="#{clienteMB.tipoCliente }" required="true" requiredMessage="Selecione um tipo de cliente!">							
 							<f:selectItem itemValue="locador" itemLabel="Locador"/>
 							<f:selectItem itemValue="locatario" itemLabel="Locatario"/>
 							<f:selectItem itemValue="fiador" itemLabel="Fiador"/>	
 							<f:selectItem itemValue="socio" itemLabel="Sócio"/>											
-						</h:selectManyCheckbox>
+						</h:selectOneMenu>
 						<rich:message for="txtTipoCliente" style="color: #ff0000; font-weight: bold;"></rich:message>
 						
 						* Nome:

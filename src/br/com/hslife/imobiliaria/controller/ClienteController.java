@@ -45,6 +45,7 @@
 package br.com.hslife.imobiliaria.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.model.ListDataModel;
@@ -86,7 +87,8 @@ public class ClienteController extends GenericController {
 	String dddTelefone;
 	
 	// Armazena a lista de tipos de clientes selecionados
-	List<String> tipoCliente;
+	//List<String> tipoCliente;
+	String tipoCliente;
 	
 	/*** Construtor ***/	
 	
@@ -97,7 +99,7 @@ public class ClienteController extends GenericController {
 		listaTelefone = new ArrayList<Telefone>();
 		logic = LogicFactory.createClienteLogic();
 		service = new CEPService();
-		tipoCliente = new ArrayList<String>();
+		//tipoCliente = new ArrayList<String>();
 		
 		// Define as permissões para este controller
 		canAdd = isAuthorized("cliente", "add");
@@ -116,7 +118,7 @@ public class ClienteController extends GenericController {
 		idCliente = null;
 		listaCliente = new ArrayList<Cliente>();
 		listaTelefone = new ArrayList<Telefone>();
-		tipoCliente = new ArrayList<String>();
+		//tipoCliente = new ArrayList<String>();
 		dadosModelo = new ListDataModel(listaCliente);
 	}
 
@@ -302,16 +304,22 @@ public class ClienteController extends GenericController {
 	
 	private void setaTipoCliente() {
 		cliente.setTipoCliente("cliente");
-		for (String s : tipoCliente) {
+		cliente.setTipoCliente(cliente.getTipoCliente() + "," + tipoCliente);
+		/*for (String s : tipoCliente) {
 			cliente.setTipoCliente(cliente.getTipoCliente() + "," + s);			
-		}
+		}*/
 	}
 	
 	private void resgataTipoCliente() {
-		String[] lista = cliente.getTipoCliente().split(",");
+		List<String> lista = new ArrayList<String>();
+		lista.addAll(Arrays.asList(cliente.getTipoCliente().split(",")));
+		lista.remove("cliente");
+		tipoCliente = lista.get(0);
+		
+		/*String[] lista = cliente.getTipoCliente().split(",");
 		for (String s : lista) {
 			tipoCliente.add(s);
-		}
+		}*/
 	}
 	
 	/*** Métodos Getters e Setters ***/
@@ -380,11 +388,11 @@ public class ClienteController extends GenericController {
 		this.dddTelefone = dddTelefone;
 	}
 
-	public List<String> getTipoCliente() {
+	public String getTipoCliente() {
 		return tipoCliente;
 	}
 
-	public void setTipoCliente(List<String> tipoCliente) {
+	public void setTipoCliente(String tipoCliente) {
 		this.tipoCliente = tipoCliente;
 	}
 }

@@ -137,9 +137,6 @@ public class Contrato implements Serializable{
 	Double comissaoImobiliaria;
 	
 	@Column
-	String seguradora;
-	
-	@Column
 	String foro;
 	
 	@Column(nullable=false)
@@ -172,6 +169,10 @@ public class Contrato implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idModelo")
 	ModeloContrato modeloContrato;
+	
+	@ManyToOne
+	@JoinColumn(name="idSeguradora", nullable=true)
+	Seguradora seguradora;
 	
 	public Contrato() {
 		situacao = 1;
@@ -358,14 +359,6 @@ public class Contrato implements Serializable{
 		this.comissaoImobiliaria = comissaoImobiliaria;
 	}
 
-	public String getSeguradora() {
-		return seguradora;
-	}
-
-	public void setSeguradora(String seguradora) {
-		this.seguradora = seguradora;
-	}
-
 	public String getForo() {
 		return foro;
 	}
@@ -436,5 +429,13 @@ public class Contrato implements Serializable{
 
 	public void setSituacao(Integer situacao) {
 		this.situacao = situacao;
+	}
+
+	public Seguradora getSeguradora() {
+		return seguradora;
+	}
+
+	public void setSeguradora(Seguradora seguradora) {
+		this.seguradora = seguradora;
 	}
 }

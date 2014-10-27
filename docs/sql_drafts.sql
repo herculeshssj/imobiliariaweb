@@ -1,4 +1,4 @@
-/*** 
+﻿/*** 
 
     Copyright (c) 2011, 2014 Hércules S. S. José
     
@@ -113,3 +113,23 @@ inner join endereco e on e.id = i.idendereco
 left join servicomanutencao s on s.id = a.idservico
 where
 a.id = 1;
+
+
+
+select * from contrato;
+
+create table seguradora(
+	id bigserial,
+	descricao varchar(50) not null,
+	primary key(id)
+);
+
+alter table contrato add column idseguradora bigint null;
+alter table contrato add constraint fk_seguradora_contrato foreign key (idseguradora) references seguradora(id);
+
+insert into seguradora (descricao)
+	select distinct seguradora from contrato;
+
+update contrato c set idseguradora = (select id from seguradora where descricao = c.seguradora);
+
+alter table contrato drop column seguradora;

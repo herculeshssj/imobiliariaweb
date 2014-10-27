@@ -73,7 +73,10 @@
 					<img src="../images/icon_indicereajuste.png" height="32" width="32"/>
 					<h:commandLink value="Índices de Reajuste" action="formIndiceReajuste"></h:commandLink>
 					&nbsp;
-											
+						
+					<img src="../images/icon_seguradora.png" height="32" width="32"/>
+					<h:commandLink value="Seguradoras" action="formSeguradora"></h:commandLink>
+					&nbsp;					
 			</h3>	
 		
 		</h:form>
