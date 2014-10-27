@@ -125,3 +125,20 @@ alter table aluguel add constraint fk_servicomanutencao_aluguel foreign key (idS
 
 -- Inclusão de um campo para desconto - Tarefa #1169
 alter table aluguel add column desconto double precision default 0.0;
+
+-- Inclusão da tabela para seguradora e mudanças na tabela de contratos - Tarefa #1195
+create table seguradora(
+	id bigserial,
+	descricao varchar(50) not null,
+	primary key(id)
+);
+
+alter table contrato add column idseguradora bigint null;
+alter table contrato add constraint fk_seguradora_contrato foreign key (idseguradora) references seguradora(id);
+
+insert into seguradora (descricao)
+	select distinct seguradora from contrato;
+
+update contrato c set idseguradora = (select id from seguradora where descricao = c.seguradora);
+
+alter table contrato drop column seguradora;

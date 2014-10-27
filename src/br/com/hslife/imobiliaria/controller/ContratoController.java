@@ -51,7 +51,12 @@ import java.util.List;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import br.com.hslife.imobiliaria.exception.BusinessException;
+import br.com.hslife.imobiliaria.facade.ISeguradoraBusiness;
 import br.com.hslife.imobiliaria.factory.LogicFactory;
 import br.com.hslife.imobiliaria.logic.IContrato;
 import br.com.hslife.imobiliaria.model.Aluguel;
@@ -62,8 +67,11 @@ import br.com.hslife.imobiliaria.model.Corretor;
 import br.com.hslife.imobiliaria.model.Imovel;
 import br.com.hslife.imobiliaria.model.IndiceReajuste;
 import br.com.hslife.imobiliaria.model.ModeloContrato;
+import br.com.hslife.imobiliaria.model.Seguradora;
 import br.com.hslife.imobiliaria.util.RelParams;
 
+@Component("contratoMB")
+@Scope("session")
 public class ContratoController extends GenericController {
 	
 	/*** Atributos da classe ***/
@@ -77,6 +85,9 @@ public class ContratoController extends GenericController {
 	// Listas
 	List<Contrato> listaContrato;
 	
+	@Autowired
+	ISeguradoraBusiness seguradoraBusiness;
+	
 	// Armazena o id do objeto de modelo
 	Long idImovel;
 	Long idLocatario;
@@ -86,6 +97,7 @@ public class ContratoController extends GenericController {
 	Long idIndiceReajuste;
 	Long idModeloContrato;
 	Long idContrato;
+	Long idSeguradora;
 	
 	// SelectItems dos combos
 	private List<SelectItem> imoveis;
@@ -135,6 +147,7 @@ public class ContratoController extends GenericController {
 		idLocatario = null;
 		idLocatarioPJ = null;
 		idModeloContrato = null;
+		idSeguradora = null;
 	}
 
 	@Override
@@ -207,6 +220,9 @@ public class ContratoController extends GenericController {
 			if (idLocatarioPJ != null && idLocatarioPJ > 0) {
 				contrato.setLocatarioPJ(LogicFactory.createClientePJLogic().buscar(idLocatarioPJ));
 			}
+			if (idSeguradora != null && idSeguradora > 0) {
+				contrato.setSeguradora(seguradoraBusiness.buscarPorID(idSeguradora));
+			}
 			
 			contrato.setImovel(LogicFactory.createImovelLogic().buscar(idImovel));
 			contrato.setIndiceReajuste(LogicFactory.createIndiceReajusteLogic().buscar(idIndiceReajuste));
@@ -245,6 +261,9 @@ public class ContratoController extends GenericController {
 			if (contrato.getLocatarioPJ() != null) {
 				idLocatarioPJ = contrato.getLocatarioPJ().getId();
 			}
+			if (contrato.getSeguradora() != null) {
+				idSeguradora = contrato.getSeguradora().getId();
+			}
 		} catch (BusinessException be) {
 			viewMessage("Erro ao buscar: " + be.getMessage());
 		}
@@ -257,6 +276,7 @@ public class ContratoController extends GenericController {
 		try {
 			contrato.setIndiceReajuste(LogicFactory.createIndiceReajusteLogic().buscar(idIndiceReajuste));
 			contrato.setModeloContrato(LogicFactory.createModeloContratoLogic().buscar(idModeloContrato));
+			contrato.setSeguradora(seguradoraBusiness.buscarPorID(idSeguradora));
 			
 			logic.editar(contrato);
 			viewMessage("Registro editado com sucesso!");
@@ -370,66 +390,20 @@ public class ContratoController extends GenericController {
 			viewMessage("Erro ao gerar contrato: " + be.getMessage(), componente);
 		}
 		return null;
-		/*
-		// Obtem a resposta da requisição
-		HttpServletResponse response = (HttpServletResponse) getContext().getExternalContext().getResponse();
-				
-		try {
-			// Obtém o contrato que será gerado
-			Contrato c = (Contrato) dadosModelo.getRowData();
-			contrato = logic.buscar(c.getId());
-			
-			// Definição dos valores para passar para o relatório
-			Map<String, Object> params = RelParams.popular(contrato);
-			
-			// Passa os dados para o relatório e realiza a impressão do mesmo.
-			InputStream inputBytes = new ByteArrayInputStream(contrato.getModeloContrato().getModelo().getBytes());
-			//ByteArrayOutputStream outputBytes =  new ByteArrayOutputStream();
-			
-			JasperPrint impressao = JasperFillManager.fillReport(inputBytes, params, new JREmptyDataSource());
-			
-			/*
-			 * Código para realizar a substituição dos campos
-			 * 
-			 * 
-	/**
-	 * @param args
-	 *
-	public static void main(String[] args) throws DocumentTemplateException, FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		DocumentTemplateFactory documentTemplateFactory = new DocumentTemplateFactory();
-		DocumentTemplate template = documentTemplateFactory.getTemplate(new File("helloworld.odt"));
-		Map model = new HashMap(); 
-		model.put("nome", "Mundo");
-		template.createDocument(model, new FileOutputStream("hello-gerado.odt"));
-
 	}
-			 */
-			
-			
-			/*
-			 *  Links para acessar:
-			 *  http://jodreports.sourceforge.net/docs/apidocs/index.html
-			 *  http://jodconverter.sourceforge.net/api/
-			 *  
-			 *  O código para auxiliar encontra-se no final do arquivo
-			 *
-			// Faz a conversão para PDF
-			byte[] dadosSaida = JasperExportManager.exportReportToPdf(impressao);
-			
-			// Complementa a resposta para exibir o relatório gerado
-			response.setHeader("Content-Disposition","attachment; filename=\"contrato.pdf\";");
-			response.setContentLength(dadosSaida.length);
-			ServletOutputStream output = response.getOutputStream();
-			output.write(dadosSaida, 0, dadosSaida.length);
-			getContext().responseComplete();
-
-			viewMessage("Contrato gerado com sucesso!", componente);
+	
+	public List<SelectItem> getListaSeguradora() {
+		List<SelectItem> lista = new ArrayList<SelectItem>();
+		try {
+			for (Seguradora s : seguradoraBusiness.buscarTodos()) {
+				lista.add(new SelectItem(s.getId(), s.getDescricao()));
+			}
+		} catch (BusinessException be) {
+			viewMessage("Erro ao carregar: " + be.getMessage(), componente);
 		} catch (Exception e) {
-			viewMessage("Erro ao gerar contrato: " + e.getMessage(), componente);
-			e.printStackTrace();
+			viewMessage("Erro ao carregar: " + e.getMessage(), componente);
 		}
-		*/
+		return lista;
 	}
 	
 	public String visualizarContrato() {
@@ -590,112 +564,15 @@ public class ContratoController extends GenericController {
 		this.contratoLocacao = contratoLocacao;
 	}
 
-	/*
-	 * //
-// JOOReports - The Open Source Java/OpenOffice Report Engine
-// Copyright (C) 2004-2006 - Mirko Nasato <mirko@artofsolving.com>
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-// Lesser General Public License for more details.
-// http://www.gnu.org/copyleft/lesser.html
-//
-package net.sf.jooreports.web.spring.controller;
+	public Long getIdSeguradora() {
+		return idSeguradora;
+	}
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
+	public void setIdSeguradora(Long idSeguradora) {
+		this.idSeguradora = idSeguradora;
+	}
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.artofsolving.jodconverter.DocumentConverter;
-import com.artofsolving.jodconverter.DocumentFormat;
-import com.artofsolving.jodconverter.DocumentFormatRegistry;
-import net.sf.jooreports.templates.DocumentTemplate;
-import net.sf.jooreports.templates.DocumentTemplateException;
-import net.sf.jooreports.templates.DocumentTemplateFactory;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.springframework.core.io.Resource;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
-
-/**
-* Base class for predefined document generators.
-*
-* Predefined generators load a template with the same name as the request URI,
-* build a model from the request and generate the response document.
-*
-public abstract class AbstractDocumentGenerator extends AbstractController {
-
-    protected abstract Object getModel(HttpServletRequest request) throws Exception;
-    
-protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-request.setCharacterEncoding("UTF-8");
-        renderDocument(getModel(request), request, response);
-        return null;
-}
-
-    private Resource getTemplateDirectory(String documentName) throws IOException {
-        String directoryName = "WEB-INF/templates/"+ documentName +"-template";
-        return getApplicationContext().getResource(directoryName);
-    }
-
-    private Resource getTemplateFile(String documentName) throws IOException {
-        String templateName = "WEB-INF/templates/"+ documentName +"-template.odt";
-        return getApplicationContext().getResource(templateName);
-    }
-
-    private void renderDocument(Object model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        DocumentConverter converter = (DocumentConverter) getApplicationContext().getBean("documentConverter");
-        DocumentFormatRegistry formatRegistry = (DocumentFormatRegistry) getApplicationContext().getBean("documentFormatRegistry");
-        String outputExtension = FilenameUtils.getExtension(request.getRequestURI());
-DocumentFormat outputFormat = formatRegistry.getFormatByFileExtension(outputExtension);
-        if (outputFormat == null) {
-         throw new ServletException("unsupported output format: "+ outputExtension);
-        }
-        File templateFile = null;
-        String documentName = FilenameUtils.getBaseName(request.getRequestURI());
-        Resource templateDirectory = getTemplateDirectory(documentName);
-        if (templateDirectory.exists()) {
-            templateFile = templateDirectory.getFile();
-        } else {
-            templateFile = getTemplateFile(documentName).getFile();
-            if (!templateFile.exists()) {
-                throw new ServletException("template not found: "+ documentName);
-            }
-        }
-        
-        DocumentTemplateFactory documentTemplateFactory = new DocumentTemplateFactory();
-        DocumentTemplate template = documentTemplateFactory.getTemplate(templateFile);
-        
-        ByteArrayOutputStream odtOutputStream = new ByteArrayOutputStream();
-        try {
-template.createDocument(model, odtOutputStream);
-} catch (DocumentTemplateException exception) {
-throw new ServletException(exception);
-}
-        response.setContentType(outputFormat.getMimeType());
-        response.setHeader("Content-Disposition", "inline; filename="+ documentName +"."+ outputFormat.getFileExtension());
-        
-        if ("odt".equals(outputFormat.getFileExtension())) {
-         // no need to convert
-response.getOutputStream().write(odtOutputStream.toByteArray());
-        } else {
-ByteArrayInputStream odtInputStream = new ByteArrayInputStream(odtOutputStream.toByteArray());
-DocumentFormat inputFormat = formatRegistry.getFormatByFileExtension("odt");
-converter.convert(odtInputStream, inputFormat, response.getOutputStream(), outputFormat);
-        }
-    }
-*/
-
+	public void setSeguradoraBusiness(ISeguradoraBusiness seguradoraBusiness) {
+		this.seguradoraBusiness = seguradoraBusiness;
+	}
 }

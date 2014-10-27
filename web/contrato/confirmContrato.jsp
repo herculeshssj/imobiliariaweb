@@ -110,7 +110,7 @@
 						<h:outputText id="txtDeposito" value="#{contratoMB.contrato.deposito }"/>						
 												
 						Seguradora:
-						<h:outputText id="txtSeguradora" value="#{contratoMB.contrato.seguradora }"/>						
+						<h:outputText id="txtSeguradora" value="#{contratoMB.contrato.seguradora.descricao }"/>						
 												
 						Foro:
 						<h:outputText id="txtForo" value="#{contratoMB.contrato.foro }"/>						
@@ -145,7 +145,7 @@
 						Modelo de contrato:
 						<h:outputText value="#{contratoMB.contrato.modeloContrato.descricao }"></h:outputText>
 						
-						<h:selectBooleanCheckbox value="#{contratoMB.gerarAlugueis }" />
+						<h:selectBooleanCheckbox value="#{contratoMB.gerarAlugueis }" disabled="#{contratoMB.contrato.situacao == 2 || contratoMB.contrato.situacao == 4 }"/>
 						Gerar aluguéis														
 						
 					</h:panelGrid>
@@ -154,7 +154,7 @@
 				action="#{contratoMB.delete }"></h:commandButton>
 			&nbsp;&nbsp;
 			<h:commandButton value="Cancelar" style="padding: 3px 10px;"
-				immediate="true" action="#{contratoMB.cancelConfirm }"></h:commandButton>
+				immediate="true" action="#{contratoMB.cancelAction }"></h:commandButton>
 				
 			<div style="clear: both;"></div>
 

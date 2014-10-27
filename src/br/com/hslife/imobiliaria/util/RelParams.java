@@ -266,7 +266,7 @@ public class RelParams {
 		contratoGerado = contratoGerado.replace("{CONTRATO_JUROS_EXTENSO}", extenso.writeNoCurrency(BigDecimal.valueOf(c.getJuros())));
 		contratoGerado = contratoGerado.replace("{CONTRATO_MULTA}", c.getMulta().toString());
 		contratoGerado = contratoGerado.replace("{CONTRATO_MULTA_EXTENSO}", extenso.writeNoCurrency(BigDecimal.valueOf(c.getMulta())));
-		contratoGerado = contratoGerado.replace("{CONTRATO_SEGURADORA}", c.getSeguradora());
+		contratoGerado = contratoGerado.replace("{CONTRATO_SEGURADORA}", c.getSeguradora().getDescricao());
 		contratoGerado = contratoGerado.replace("{CONTRATO_FORO}", c.getForo());
 		
 		return contratoGerado;
