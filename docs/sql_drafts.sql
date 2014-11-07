@@ -79,7 +79,7 @@ id bigserial not null,
 descricao varchar(50) not null,
 primary key(id)
 );
-*/
+*
 
 select * from permissao;
 
@@ -133,3 +133,54 @@ insert into seguradora (descricao)
 update contrato c set idseguradora = (select id from seguradora where descricao = c.seguradora);
 
 alter table contrato drop column seguradora;
+
+
+select * from contrato;
+select * from imovel;
+select * from cliente;
+
+select distinct
+cl_lo.nome as nome_locador,
+cl_lc.nome as nome_locatario,
+i.tipoimovel,
+(select count(id) from aluguel where pagamento is null and idcontrato = a.idcontrato) as alugueis_pendentes,
+(select count(id) from aluguel where pagamento is not null and idcontrato = a.idcontrato) as alugueis_pagos
+from
+aluguel a
+inner join contrato c on c.id = a.idcontrato
+inner join cliente cl_lc on cl_lc.id = c.idlocatario
+inner join imovel i on i.id = c.idimovel
+inner join cliente cl_lo on cl_lo.id = i.idlocador
+where a.pagamento is null
+order by cl_lc.nome asc;
+*
+
+select * from imovel;
+select * from agenda;
+
+/* Relatorio de disponibilidade de imoveis */
+
+-- Imoveis disponiveis para locacão
+select * from contrato;
+select
+i.numregistro,
+i.tipoimovel,
+i.valor,
+l.nome,
+c.situacao
+from
+imovel i
+inner join cliente l on l.id = i.idlocador
+left join contrato c on c.idimovel = i.id;
+
+
+-- Relatorio de visita de imoveis
+select * from agenda
+select
+a.nomecliente,
+a.data,	
+i.tipoimovel,
+a.observacao
+from
+agenda a
+inner join imovel i on i.id = a.idimovel;
