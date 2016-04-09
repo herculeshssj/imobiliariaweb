@@ -158,4 +158,4 @@ insert into endereco (bairro, cep, cidade, logradouro, numero, tipoLogradouro, u
 insert into cliente (cpf, dataNascimento, tipoCliente, genero, nome, idEndereco, ativo) values ('00000000000','2011-10-01','funcionario','M','Administrador do sistema',1, false);
 insert into funcionario (cargo, matricula, idPessoaFisica) values ('ADMIN','00000',1);
 insert into grupo (dataCriacao, descricao, padrao) values ('2011-10-01 00:00:00', 'DEFAULT', true);
-insert into usuario (admin, ativo, dataCriacao, login, senha, ultimoLogin, idFuncionario, idGrupo) values (true, true, '2011-10-01 00:00:00','admin','d033e22ae348aeb5660fc2140aec35850c4da997',null,1,1);
+insert into usuario (admin, ativo, dataCriacao, login, senha, ultimoLogin, idFuncionario, idGrupo) values (true, true, '2011-10-01 00:00:00','admin','d033e22ae348aeb5660fc2140aec35850c4da997',null,1,1); -- senha: admin
